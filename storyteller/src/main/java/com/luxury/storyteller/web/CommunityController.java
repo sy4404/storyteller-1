@@ -18,9 +18,11 @@ public class CommunityController {
     private final CommunityService communityService;
 
     @GetMapping("/")
-    public void retrieveSiteList() {
+    public String retrieveSiteList() {
 
         List<CommunityResponseDto> list = communityService.findCommunityListAll();
         System.out.println("=============== : "+list.size());
+
+        return "login";
     }
 }
