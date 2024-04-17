@@ -3,10 +3,39 @@
 <mapper namespace="com.luxury.storyteller.mapper.CommunityMapper">
 
 
-    <select id="findCommunityListAll" resultType="com.luxury.storyteller.dto.CommunityResponseDto">
-        /* CommunityMapper.findCommunityListAll */
-        SELECT * FROM community;
+    <select id="findCommunityListAll" resultType="com.luxury.storyteller.dto.CommunityDto">
+        SELECT * FROM community WHERE deleted = 0;
     </select>
 
+    <select id="findCommunityByCommunityIdx" parameterType="int" resultType="com.luxury.storyteller.dto.CommunityDto">
+        SELECT * FROM community WHERE community_idx = #{communityIdx} AND deleted = 0;
+    </select>
+
+    <insert id="createCommunity" parameterType="com.luxury.storyteller.dto.CommunityDto">
+        INSERT INTO community (
+            title, content, writer
+        ) VALUES (
+            #{title}, #{content}, #{writer}
+        )
+    </insert>
+
+    <update id="modifyCommunity" parameterType="com.luxury.storyteller.dto.CommunityDto">
+        UPDATE
+            community
+        SET
+            title = #{title},
+            content = #{content}
+        WHERE
+            communityIdx = #{communityIdx}
+    </update>
+
+    <update id="deleteCommunity" parameterType="int">
+        UPDATE
+            community
+        SET
+            deleted = 1
+        WHERE
+            communityIdx = #{communityIdx}
+    </update>
 
 </mapper>

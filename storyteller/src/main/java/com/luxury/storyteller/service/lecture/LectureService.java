@@ -25,4 +25,10 @@ public interface LectureService {
      */
     int modifyLecture(LectureDto lectureDto);
 
+    /**
+     * 강의 삭제
+     */
+    int deleteLecture(int lectureIdx);
+
+
 }

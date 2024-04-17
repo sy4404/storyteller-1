@@ -11,5 +11,18 @@
         )
     </insert>
 
+    <update id="modifyUser" parameterType="com.luxury.storyteller.dto.UserDto">
+        UPDATE
+            user
+        SET
+            password = #{password},
+            phone_number = #{phoneNumber}
+        WHERE
+            user_idx = #{userIdx}
+    </update>
+
+    <select id="findUserByUserIdx" parameterType="int" resultType="com.luxury.storyteller.dto.UserDto">
+        SELECT * FROM user WHERE user_idx = #{userIdx};
+    </select>
 
 </mapper>
