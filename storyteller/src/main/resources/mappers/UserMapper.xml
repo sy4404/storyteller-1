@@ -3,7 +3,7 @@
 <mapper namespace="com.luxury.storyteller.mapper.UserMapper">
 
 
-    <insert id="createUser" parameterType="com.luxury.storyteller.dto.user.JoinRequestDto">
+    <insert id="createUser" parameterType="com.luxury.storyteller.dto.user.UserRequestDto">
         INSERT INTO user (
             id, password, name, phone_number
         ) VALUES (
