@@ -3,7 +3,7 @@
 <mapper namespace="com.luxury.storyteller.mapper.UserMapper">
 
 
-    <insert id="createUser" parameterType="com.luxury.storyteller.dto.user.UserRequestDto">
+    <insert id="createUser" parameterType="com.luxury.storyteller.dto.UserDto">
         INSERT INTO user (
             id, password, name, phone_number
         ) VALUES (
@@ -16,13 +16,18 @@
             user
         SET
             password = #{password},
-            phone_number = #{phoneNumber}
+            phone_number = #{phoneNumber},
+            profile_url = #{profileUrl}
         WHERE
             user_idx = #{userIdx}
     </update>
 
     <select id="findUserByUserIdx" parameterType="int" resultType="com.luxury.storyteller.dto.UserDto">
         SELECT * FROM user WHERE user_idx = #{userIdx};
+    </select>
+
+    <select id="findUserByIdAndPhoneNumber" parameterType="com.luxury.storyteller.dto.UserDto" resultType="com.luxury.storyteller.dto.UserDto">
+        SELECT * FROM user WHERE id = #{id} AND phone_number = #{phoneNumber};
     </select>
 
 </mapper>

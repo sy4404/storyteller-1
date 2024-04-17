@@ -1,7 +1,6 @@
 package com.luxury.storyteller.service.user;
 
 import com.luxury.storyteller.dto.UserDto;
-import com.luxury.storyteller.dto.user.UserRequestDto;
 import com.luxury.storyteller.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,9 +14,9 @@ public class UserServiceImpl implements UserService{
     private final BCryptPasswordEncoder passwordEncoder;
 
     @Override
-    public int createUser(UserRequestDto joinRequestDto) {
-        joinRequestDto.setPassword(passwordEncoder.encode(joinRequestDto.getPassword()));
-        userMapper.createUser(joinRequestDto);
+    public int createUser(UserDto userDto) {
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        userMapper.createUser(userDto);
         return 0;
     }
 
@@ -30,5 +29,10 @@ public class UserServiceImpl implements UserService{
     public int modifyUser(UserDto userDto) {
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userMapper.modifyUser(userDto);
+    }
+
+    @Override
+    public UserDto findUserByIdAndPhoneNumber(UserDto userDto) {
+        return userMapper.findUserByIdAndPhoneNumber(userDto);
     }
 }
