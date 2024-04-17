@@ -17,4 +17,6 @@ public interface CommunityMapper {
     int modifyCommunity(CommunityDto communityDto);
 
     int deleteCommunity(int communityIdx);
+
+    CommunityDto lastCommunity();
 }

@@ -29,4 +29,11 @@ public interface CommunityService {
      * 커뮤니티 삭제
      */
     int deleteCommunity(int communityIdx);
+
+    /**
+     * 최신 커뮤니티 1개
+     */
+    CommunityDto lastCommunity();
+
+
 }

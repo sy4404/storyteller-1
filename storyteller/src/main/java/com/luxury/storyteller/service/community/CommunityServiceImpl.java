@@ -37,4 +37,9 @@ public class CommunityServiceImpl implements CommunityService{
     public int deleteCommunity(int communityIdx) {
         return communityMapper.deleteCommunity(communityIdx);
     }
+
+    @Override
+    public CommunityDto lastCommunity() {
+        return communityMapper.lastCommunity();
+    }
 }
