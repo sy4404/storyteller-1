@@ -20,9 +20,6 @@ public class UserController {
     @GetMapping("")
     public String mainPage(UserDto userDto) {
 
-        int result = userService.createUser(userDto);
-        System.out.println("=============== : "+result);
-
         return "index";
     }
 
