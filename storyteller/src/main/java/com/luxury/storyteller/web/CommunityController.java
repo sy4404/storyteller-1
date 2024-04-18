@@ -16,7 +16,7 @@ public class CommunityController {
 
     private final CommunityService communityService;
 
-    @GetMapping("/")
+    @GetMapping("")
     public String retrieveSiteList() {
 
         List<CommunityDto> list = communityService.findCommunityListAll();
