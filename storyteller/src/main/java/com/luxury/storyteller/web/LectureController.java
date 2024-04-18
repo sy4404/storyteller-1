@@ -2,9 +2,11 @@ package com.luxury.storyteller.web;
 
 import com.luxury.storyteller.dto.CommunityDto;
 import com.luxury.storyteller.service.community.CommunityService;
+import com.luxury.storyteller.service.lecture.LectureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -14,14 +16,23 @@ import java.util.List;
 @RequestMapping("/lecture")
 public class LectureController {
 
-    private final CommunityService communityService;
+    private final LectureService lectureService;
 
+    /**
+     * 동영상 강의 목록 페이지
+     */
     @GetMapping("")
-    public String retrieveSiteList() {
+    public String lectureListPage() {
 
-        List<CommunityDto> list = communityService.findCommunityListAll();
-        System.out.println("=============== : "+list.size());
+        return "lecture/list";
+    }
 
-        return "login";
+    /**
+     * 동영상 강의 상세 페이지
+     */
+    @GetMapping("{lectureIdx}")
+    public String lectureInfoPage(@PathVariable int lectureIdx) {
+
+        return "lecture/info";
     }
 }
