@@ -1,0 +1,87 @@
+.mainPageBody{
+    background-image: url("../img/main_bg@2x.png");
+    background-size: cover;
+}
+
+.logoImg{
+    width: 147.47px;
+}
+
+.noticeWrap{
+    margin-top: 17.12px;
+}
+
+.noticeBox{
+    background-color: #fff;
+    padding: 19px 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.noticeBox p{
+    margin: 0px;
+    font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+
+.mainArrow{
+    width: 30px;
+}
+
+.studyListWrap{
+    margin-top: 32px;
+}
+
+.studyListBox{
+    background-image: url("../img/main_edustep_bg@2x.png");
+    background-size: cover;
+    background-position: right;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 5px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px;
+}
+
+.studyListTitle{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 7px;
+}
+
+.studyListSubTitle{
+    font-size: 13px;
+    margin-bottom: 27px;
+}
+
+.studyIconListWrap{
+    margin-top: 32px;
+}
+
+.studyIconListWrap h2{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.studyIconList img{
+    width: 83px;
+}
+
+.studyIconList p{
+    font-size: 15px;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 14px;
+}
+
+.settingIconListWrap{
+    margin-top: 52px;
+}
+
+.settingIconListWrap h2{
+    font-size: 24px;
+    font-weight: bold;
+}
