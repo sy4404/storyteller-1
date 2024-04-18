@@ -1,0 +1,67 @@
+.mainPageBody{
+    background-color: #fff;
+    background-size: cover;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.allCheckWrap{
+    margin-top: 20px;
+    width: 100%;
+    background-color: #F5F5F5;
+    padding: 16px;
+    border-radius: 8px;
+}
+
+.allCheckTxt{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.allCheckTxt::before{
+    top: 0.35rem;
+}
+
+.allCheckTxt::after{
+    top: 0.35rem;
+}
+
+.agreeCheckWrap{
+    margin-top: 12px;
+    padding: 0px 16px;
+}
+
+.agreeCheckTxt{
+    font-size: 14px;
+}
+
+.agreeCheckTxt::before{
+    top: .15rem;
+}
+
+.agreeCheckTxt::after{
+    top: .15rem;
+}
+
+.agreeNextBtn{
+    width: 100%;
+    padding: 18px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    border: 0px;
+    border-radius: 8px;
+    background-color: #4B3F24;
+    color: #fff;
+
+}
+
+@media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
+
+    .mainPageBody{
+        height: 100%;
+    }
+
+}

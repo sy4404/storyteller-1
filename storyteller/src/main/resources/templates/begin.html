@@ -1,9 +1,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
-<body class="sb-nav-fixed">
-
-begin
-
+<link th:href="@{/css/agree.css}" rel="stylesheet" type="text/css" />
+<body>
+<div class="mainPageBody">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표">
+        </div>
+        <h1>회원가입</h1>
+    </div>
+    <div class="contentWrap">
+        <h2>회원 정보 입력</h2>
+    </div>
+</div>
 </body>
 
 </html>
