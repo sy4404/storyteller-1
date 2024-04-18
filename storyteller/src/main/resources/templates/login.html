@@ -1,16 +1,41 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
-<body class="sb-nav-fixed">
-
-    <div class="p-4">
-        <!-- 시큐리티는 x-www-form-url-encoded 타입만 인식 -->
-        <form action="/loginProc" method="post">
-            <input type="text" name="username" />
-            <input type="password" name="password" />
-            <button>로그인</button>
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css" />
+<body>
+<div class="mainPageBody px-4">
+    <div class="loginWrap">
+        <form>
+            <h2>회원 로그인</h2>
+            <div class="loginInputWrap">
+                <img th:src="@{/img/icon_id@2x.png}" class="inputIcon" alt="아이디">
+                <input type="text" class="loginInput" placeholder="아이디">
+            </div>
+            <div class="loginInputWrap mt-3">
+                <img th:src="@{/img/icon_password@2x.png}" class="inputIcon" alt="비밀번호">
+                <input type="password" class="loginInput" placeholder="비밀번호">
+            </div>
+            <div class="loginEtcWrap mt-3">
+                <div class="custom-control custom-checkbox customInputCheckWrap ">
+                    <input type="checkbox" class="custom-control-input" id="customCheck">
+                    <label class="custom-control-label loginstateLabel" for="customCheck">로그인 유지</label>
+                </div>
+                <div>
+                    <p class="idPwSearchBtn">
+                        <a href="">아이디·비밀번호 찾기</a>
+                    </p>
+                </div>
+            </div>
+            <div class="loginBtnWrap">
+                <input type="submit" class="loginBtn" value="로그인">
+            </div>
+            <div class="signupWrap">
+                <p class="subTxt">계정이 없으신가요?</p>
+                <p class="loginSighupBtn"><a href="/signup/agree">회원가입</a></p>
+            </div>
         </form>
     </div>
-
+    <img th:src="@{/img/login_logo@2x.png}" class="loginLogo" alt="logo">
+</div>
 </body>
 
 </html>

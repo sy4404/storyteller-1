@@ -1,0 +1,126 @@
+.mainPageBody{
+    background-image: url("../img/login_bg@2x.png");
+    background-size: cover;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100%;
+}
+.loginWrap{
+    background-color: #fff;
+    padding:72px 20px;
+    border-radius: 0px 0px 52px 52px;
+}
+
+.loginWrap h2{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.loginInputWrap{
+    position: relative;
+}
+
+.inputIcon{
+    position: absolute;
+    left: 14px;
+    width: 18px;
+    top:50%;
+    transform:translate(0%, -50%);
+}
+
+.loginInput{
+    border-radius: 8px;
+    background-color: #f5f5f5;
+    border: 0px;
+    padding: 15px 15px 15px 50px;
+    width: 100%;
+    font-size: 15px;
+}
+.customInputCheckWrap {
+    display: flex;
+    align-items: center;
+}
+
+.loginstateLabel {
+    font-size: 13px;
+    margin-left: 5px; /* 라벨과 입력(input) 사이의 여백 조절 */
+    margin-bottom: 0;
+}
+
+.custom-control-label::before{
+    top: 0.08rem !important;
+}
+
+.custom-control-label::after{
+    top: 0.08rem !important;
+}
+
+.idPwSearchBtn{
+    font-size: 13px;
+    text-decoration: underline;
+    text-decoration-color: #8B8B8B;
+    text-underline-offset: 2px;
+    margin-bottom: 0px;
+}
+
+.idPwSearchBtn a{
+    color: #8B8B8B !important;
+}
+.loginEtcWrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.loginBtnWrap{
+    margin-top: 25px;
+}
+
+.loginBtn{
+    padding: 13px 133px;
+    background-color: #4B3F24;
+    width: 100%;
+    color: #fff;
+    border-radius: 8px;
+    border: 0px;
+}
+
+.signupWrap{
+    margin-top: 33px;
+    text-align: center;
+}
+
+.signupWrap .subtxt{
+    margin-bottom: 0px;
+    font-size: 13px;
+    color: #ADADAD;
+}
+
+.loginSighupBtn{
+    margin-bottom: 0px;
+    margin-top: 8px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.loginSighupBtn a{
+    color: #4B3F24;
+}
+
+.loginLogo{
+    position: absolute;
+    bottom: 40px;
+    width: 51.79px;
+    left:50%;
+    transform:translate(-50%, 0%);
+}
+
+@media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
+
+    .mainPageBody{
+        height: 100%;
+    }
+
+}

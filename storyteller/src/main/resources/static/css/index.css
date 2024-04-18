@@ -1,6 +1,10 @@
 .mainPageBody{
     background-image: url("../img/main_bg@2x.png");
     background-size: cover;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100%;
 }
 
 .logoImg{
@@ -85,3 +89,13 @@
     font-size: 24px;
     font-weight: bold;
 }
+
+
+@media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
+
+    .mainPageBody{
+        height: auto;
+    }
+
+}
+
