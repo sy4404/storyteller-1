@@ -1,0 +1,44 @@
+.mainPageBody{
+    background-color: #fff;
+    background-size: cover;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.idPwSearchBtnBox{
+    display: flex;
+    align-items: center;
+}
+
+.idPwSearchBtnBox div{
+    width: 50%;
+    text-align: center;
+    border-bottom: 1px solid #999999;
+    padding: 10px 0px;
+}
+
+.idPwSearchBtnBox div a{
+    font-size: 15px;
+    font-weight: bold;
+    color: #999999 !important;
+}
+
+.idPwSearchBtnBox .active{
+    background-color: #fff;
+    border-bottom: 2px solid #333;
+}
+
+.idPwSearchBtnBox .active a{
+    color: #4B3F24 !important;
+}
+
+
+@media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
+
+    .mainPageBody{
+        height: 100%;
+    }
+
+}

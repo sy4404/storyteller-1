@@ -1,10 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/include/head.html :: fragment-head}"></head>
+<link th:href="@{/css/community/community.css}" rel="stylesheet" type="text/css" />
 <body>
-noticelist
+<div class="mainPageBody">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표">
+        </div>
+        <h1>커뮤니티</h1>
+    </div>
+    <div class="py-20 mt-2">
+        <div class="idPwSearchBtnBox">
+            <div class="active"><a href="/idinquiry">공지사항</a></div>
+            <div><a href="/pwinquiry">Q&A</a></div>
+        </div>
+    </div>
+    <div class="contentWrap mt-4">
+        <h2>공지사항</h2>
+        <p>중요한 공지사항을 전달드려요.</p>
+    </div>
+
+    <div class="formWrap">
+        <input type="text" class="" id="name" name="name" placeholder="검색">
+    </div>
+</div>
 </body>
+
 </html>
