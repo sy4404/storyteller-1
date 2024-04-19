@@ -1,9 +1,37 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
-<body class="sb-nav-fixed">
+<link th:href="@{/css/idInquiry.css}" rel="stylesheet" type="text/css" />
+<body>
+<div class="mainPageBody">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표">
+        </div>
+        <h1>아이디·비밀번호 찾기</h1>
+    </div>
+    <div class="contentWrap">
+        <h2>아이디·비밀번호 찾기</h2>
+        <p>회원가입 시 등록한 정보를 입력해 주세요.</p>
+    </div>
+    <div class="py-20">
+        <div class="idPwSearchBtnBox">
+            <div><a href="/idinquiry">아이디 찾기</a></div>
+            <div class="active"><a href="/pwinquiry">비밀번호 찾기</a></div>
+        </div>
+    </div>
+    <div class="formWrap mt-3">
+        <label class="mt-3" for="id">아이디*</label><br>
+        <input type="text" class="" id="id" name="id" placeholder="아이디">
 
-pwInquiry
+        <label class="mt-3" for="name">이름*</label><br>
+        <input type="text" class="" id="name" name="name" placeholder="이름">
 
+        <label class="mt-3" for="phoneNumber">휴대폰번호*</label><br>
+        <input type="text" class="" id="phoneNumber" name="phoneNumber" placeholder="‘-‘(하이픈) 제외 입력">
+
+        <input type="submit" class="submitBtn" value="확인">
+    </div>
+</div>
 </body>
 
 </html>

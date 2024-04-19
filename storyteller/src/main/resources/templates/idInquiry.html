@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
-<link th:href="@{/css/begin.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/css/idInquiry.css}" rel="stylesheet" type="text/css" />
 <body>
 <div class="mainPageBody">
     <div class="header">
@@ -15,10 +15,11 @@
     </div>
     <div class="py-20">
         <div class="idPwSearchBtnBox">
-
+            <div class="active"><a href="/idinquiry">아이디 찾기</a></div>
+            <div><a href="/pwinquiry">비밀번호 찾기</a></div>
         </div>
     </div>
-    <div class="formWrap">
+    <div class="formWrap mt-3">
         <label class="mt-3" for="name">이름*</label><br>
         <input type="text" class="" id="name" name="name" placeholder="이름">
 
