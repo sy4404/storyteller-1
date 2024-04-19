@@ -157,6 +157,11 @@ textarea::placeholder {
     font-size: 15px;
 }
 
+input::placeholder {
+    color: #ADADAD;
+    font-size: 15px;
+}
+
 .header{
     padding: 20px 18px;
     background-color: #fff;
@@ -182,6 +187,45 @@ textarea::placeholder {
 .contentWrap h2{
     font-size: 24px;
     font-weight: bold;
+}
+
+.contentWrap p{
+    margin-bottom: 0px;
+    color:#999999;
+}
+
+.py-20{
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.submitBtn{
+    padding: 13px 133px;
+    background-color: #4B3F24;
+    width: 100%;
+    color: #fff;
+    border-radius: 8px;
+    border: 0px;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.formWrap{
+    padding: 0px 20px;
+}
+
+.formWrap label{
+    font-size: 13px;
+    margin-bottom: 0px;
+}
+
+.formWrap input[type=text]{
+    width: 100%;
+    padding: 15px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    border: 0px;
 }
 
 input:focus {outline: 2px solid #ddd;}
