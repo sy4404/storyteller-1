@@ -1,10 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/include/head.html :: fragment-head}"></head>
+<link th:href="@{/css/community/community.css}" rel="stylesheet" type="text/css" />
 <body>
-qnaList
+<div class="mainPageBody">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표">
+        </div>
+        <h1>커뮤니티</h1>
+    </div>
+    <div class="py-20 mt-2">
+        <div class="idPwSearchBtnBox">
+            <div><a href="/community/notice">공지사항</a></div>
+            <div class="active"><a href="/community/qna">Q&A</a></div>
+        </div>
+    </div>
+    <div class="contentWrap mt-4">
+        <h2>Q&N</h2>
+        <p>자유롭게 질문이 가능한 문의 게시판이에요.</p>
+    </div>
+
+    <div class="formWrap pb-5">
+        <input type="text" class="" id="name" name="name" placeholder="검색">
+
+        <div class="communityWrap">
+            <div class="firstLineWrap">
+                <div>
+                    질문 드립니다.
+                </div>
+                <p>2024.04.01</p>
+            </div>
+            <p class="lastLine">
+                실기 시험 및 과제 시험의 점수 산정 기준이 어떻게 되나요?
+            </p>
+        </div>
+        <div class="communityWrap">
+            <div class="firstLineWrap">
+                <div>
+                    질문 드립니다.
+                </div>
+                <p>2024.04.01</p>
+            </div>
+            <p class="lastLine">
+                실기 시험 및 과제 시험의 점수 산정 기준이 어떻게 되나요?
+            </p>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>

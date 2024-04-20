@@ -50,6 +50,8 @@
 
 .firstLineWrap div{
     font-weight: bold;
+    display: flex;
+    align-items: center;
 }
 
 .noticeLabel{
@@ -66,17 +68,22 @@
 .firstLineWrap p{
     font-size: 14px;
     color: #999999;
+    margin-bottom: 0px;
 }
 
 .lastLine{
     margin-bottom: 0px;
     font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-top: 10px;
 }
 
 @media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
 
     .mainPageBody{
-        height: 100%;
+        height: auto;
     }
 
 }
