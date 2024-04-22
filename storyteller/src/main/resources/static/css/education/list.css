@@ -1,0 +1,46 @@
+.mainPageBody{
+    background-image: url("../../img/edu_step_bg@2x.png");
+    background-size: cover;
+    background-color: #fff;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    height: auto;
+    background-position: center;
+}
+
+.educationBoxWrap{
+    background-color: #F7F3EF;
+    border-radius: 36px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.numberRound{
+    width: 60px;
+    height: 60px;
+    background-color: #4B3F24;
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 60px;
+    border-radius: 50%;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+.educationBoxWrap p{
+    margin-bottom: 0px;
+    font-size: 16px;
+    font-weight: bold;
+    margin-left: 20px;
+    padding-right: 20px;
+}
+
+
+@media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
+    .mainPageBody{
+        height: auto;
+    }
+}

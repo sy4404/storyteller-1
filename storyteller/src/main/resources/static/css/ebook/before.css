@@ -1,0 +1,71 @@
+.mainPageBody{
+    background-color: #fff;
+    background-size: cover;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.ebookBeforeBox{
+    padding: 10px;
+    width: 100%;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    position: relative;
+}
+
+
+.ebookBeforeBox .imgWrap{
+    border-radius: 10px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.ebookBeforeBox .imgWrap img{
+    width: 120px;
+    height: 156px;
+    object-fit: cover;
+}
+
+.ebookTextWrap{
+    padding-left: 20px;
+    padding-top: 10px;
+}
+
+.ebookTextWrap h3{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.ebookTextWrap p{
+    font-size: 14px;
+    color: #999999;
+    margin-bottom: 0px;
+}
+
+.ebookDetailBtn{
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    font-weight: bold;
+}
+.ebookDetailBtnImg{
+    width: 21px;
+    margin-left: 8px;
+}
+
+.ebooKListDetailImg{
+    width: 30px;
+    margin-left: 20px;
+}
+@media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
+
+    .mainPageBody{
+        height: 100%;
+    }
+
+}
