@@ -1,0 +1,96 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/include/head.html :: fragment-head}"></head>
+<link th:href="@{/css/ebook/list.css}" rel="stylesheet" type="text/css" />
+<body>
+<div class="mainPageBody pb-4">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표">
+        </div>
+        <h1>모의고사</h1>
+    </div>
+    <div class="contentWrap">
+        <h2>이순신 교육 모의고사</h2>
+    </div>
+    <div class="py-20">
+        <div class="ebookBeforeBox">
+            <div class="d-flex justify-content-between">
+                <div class="ebookTextWrap">
+                    <h3>이순신 교육 1강 모의고사</h3>
+                </div>
+                <div>
+                    <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
+                </div>
+            </div>
+        </div>
+        <div class="ebookBeforeBox mt-3 ">
+            <div class="d-flex justify-content-between">
+                <div class="ebookTextWrap">
+                    <h3>이순신 교육 2강 모의고사</h3>
+                </div>
+                <div>
+                    <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="radio-option">
+        <input type="radio" id="option1" name="options">
+        <label for="option1">
+            <img class="radio-img" src="../../img/icon_check_off.png" alt="라디오 버튼 이미지">
+            옵션1
+        </label>
+    </div>
+
+    <div class="radio-option">
+        <input type="radio" id="option2" name="options">
+        <label for="option2">
+            <img class="radio-img" src="../../img/icon_check_off.png" alt="라디오 버튼 이미지">
+            옵션2
+        </label>
+    </div>
+
+    <div class="radio-option">
+        <input type="radio" id="option3" name="options">
+        <label for="option3">
+            <img class="radio-img" src="../../img/icon_check_off.png" alt="라디오 버튼 이미지">
+            옵션3
+        </label>
+    </div>
+
+    <div class="radio-option">
+        <input type="radio" id="option4" name="options">
+        <label for="option4">
+            <img class="radio-img" src="../../img/icon_check_off.png" alt="라디오 버튼 이미지">
+            옵션4
+        </label>
+    </div>
+
+</div>
+<script>
+    // 모든 라디오 버튼 요소를 가져옵니다.
+    var radioBtns = document.querySelectorAll('.radio-option input[type="radio"]');
+
+    // 각 라디오 버튼에 대해 이벤트 리스너를 등록합니다.
+    radioBtns.forEach(function(btn) {
+        btn.addEventListener('change', function() {
+            // 모든 라디오 이미지를 가져옵니다.
+            var radioImgs = document.querySelectorAll('.radio-option .radio-img');
+
+            // 모든 라디오 이미지를 기본 이미지로 설정합니다.
+            radioImgs.forEach(function(img) {
+                img.src = '../../img/icon_check_off.png';
+            });
+
+            // 선택된 라디오 버튼의 이미지를 변경합니다.
+            var radioImg = this.parentNode.querySelector('.radio-img');
+            if (this.checked) {
+                radioImg.src = '../../img/icon_check_on.png';
+            }
+        });
+    });
+</script>
+</body>
+
+</html>
