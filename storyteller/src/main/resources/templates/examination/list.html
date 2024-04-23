@@ -69,25 +69,42 @@
 
 </div>
 <script>
-    // 모든 라디오 버튼 요소를 가져옵니다.
-    var radioBtns = document.querySelectorAll('.radio-option input[type="radio"]');
+    // 모든 라디오 옵션 컨테이너
+    let radioContainers = document.querySelectorAll('.radio-option');
 
-    // 각 라디오 버튼에 대해 이벤트 리스너를 등록합니다.
-    radioBtns.forEach(function(btn) {
-        btn.addEventListener('change', function() {
-            // 모든 라디오 이미지를 가져옵니다.
-            var radioImgs = document.querySelectorAll('.radio-option .radio-img');
+    // 각 라디오 옵션 컨테이너에 대해 이벤트 리스너 등록
+    radioContainers.forEach(function(container) {
+        container.addEventListener('click', function() {
+            // 클릭된 라디오 버튼을 가져옴
+            let radioBtn = this.querySelector('input[type="radio"]');
 
-            // 모든 라디오 이미지를 기본 이미지로 설정합니다.
-            radioImgs.forEach(function(img) {
-                img.src = '../../img/icon_check_off.png';
-            });
+            // 현재 라디오 버튼이 이미 선택된 상태 확인
+            let isChecked = radioBtn.checked;
 
-            // 선택된 라디오 버튼의 이미지를 변경합니다.
-            var radioImg = this.parentNode.querySelector('.radio-img');
-            if (this.checked) {
+            // 클릭된 라디오 버튼이 이미 선택된 경우에는 아무 동작x
+            if (!isChecked) {
+                // 모든 라디오 버튼 이미지를 기본 이미지로 설정
+                let radioImgs = document.querySelectorAll('.radio-option .radio-img');
+                radioImgs.forEach(function(img) {
+                    img.src = '../../img/icon_check_off.png';
+                });
+
+                // 선택된 라디오 버튼의 이미지 변경
+                let radioImg = this.querySelector('.radio-img');
                 radioImg.src = '../../img/icon_check_on.png';
+
+                // 모든 라디오 버튼의 체크 상태 해제
+                let allRadioBtns = document.querySelectorAll('.radio-option input[type="radio"]');
+                allRadioBtns.forEach(function(btn) {
+                    btn.checked = false;
+                });
+
+                // 클릭된 라디오 버튼의 체크 상태 설정
+                radioBtn.checked = true;
             }
+
+            // 이미지가 작아지는 동작을 막음
+            return false;
         });
     });
 </script>

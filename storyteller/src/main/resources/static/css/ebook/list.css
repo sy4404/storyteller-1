@@ -71,7 +71,7 @@
 
 
 
-
+/*  라디오 css (옮겨가야함) */
 
 /* 라디오 옵션 컨테이너 */
 .radio-option {
@@ -95,17 +95,17 @@
 
 /* 라디오 버튼 이미지 스타일 */
 .radio-option label .radio-img {
-    width: 20px; /* 이미지 너비를 조정합니다. */
-    height: 20px; /* 이미지 높이를 조정합니다. */
+    width: 28px; /* 이미지 너비를 조정합니다. */
+    height: 28px; /* 이미지 높이를 조정합니다. */
     margin-right: 10px; /* 이미지와 텍스트 사이의 간격을 설정합니다. */
     border: 1px solid transparent; /* 초기에는 테두리가 없습니다. */
     border-radius: 50%; /* 이미지를 둥글게 만듭니다. */
 }
 
+
 /* 라디오 버튼 이미지 선택 시 스타일 */
 .radio-option input[type="radio"]:checked + label .radio-img {
-    border: 2px solid #007bff; /* 선택된 경우 테두리를 추가합니다. */
-    padding: 2px; /* 선택된 옵션 주변에 여백을 추가합니다. */
+
 }
 
 /* 라디오 버튼 이미지 off 상태 */
