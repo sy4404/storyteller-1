@@ -1,0 +1,78 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/include/head.html :: fragment-head}"></head>
+<link th:href="@{/css/score/list.css}" rel="stylesheet" type="text/css" />
+<body>
+<div class="mainPageBody">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
+        </div>
+        <h1>성적•출결 확인</h1>
+    </div>
+    <div class="py-20 mt-4">
+        <div class="idPwSearchBtnBox">
+            <div class="active"><a href="/score">성적 확인</a></div>
+            <div><a href="/attendance">출결 확인</a></div>
+        </div>
+    </div>
+    <div class="scoreContentWrap py-20">
+        <h2>실기 및 과제 점수확인</h2>
+        <div class="scoreBoxWrap mt-3">
+            <div>
+                <p>100점</p>
+                <p class="mt-2">실기 점수</p>
+            </div>
+            <div>
+                <p>100점</p>
+                <p class="mt-2">과제 점수</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="scoreContentWrap py-20 mt-5 pb-4">
+        <h2>실기 및 과제 점수확인</h2>
+        <div class="mt-3">
+            <div class="listScoreBox">
+                <div>
+                    <img th:src="@{/img/exam_pass@2x.png}" alt="합격">
+                </div>
+                <div class="flex-grow-1 listScoreBoxTextWrap">
+                   <p class="listScoreTitle">이순신 교육 2강 모의고사</p>
+                   <div class="">
+                       <p class="score">100점</p>
+                       <p class="scoreDate">2024.04.01</p>
+                   </div>
+                </div>
+            </div>
+            <div class="listScoreBox">
+                <div>
+                    <img th:src="@{/img/exam_pass@2x.png}" alt="합격">
+                </div>
+                <div class="flex-grow-1 listScoreBoxTextWrap">
+                    <p class="listScoreTitle">이순신 교육 2강 모의고사</p>
+                    <div class="">
+                        <p class="score">100점</p>
+                        <p class="scoreDate">2024.04.01</p>
+                    </div>
+                </div>
+            </div>
+            <div class="listScoreBox">
+                <div>
+                    <img th:src="@{/img/exam_fail@2x.png}" alt="합격">
+                </div>
+                <div class="flex-grow-1 listScoreBoxTextWrap">
+                    <p class="listScoreTitle">이순신 교육 2강 모의고사</p>
+                    <div class="">
+                        <p class="score">100점</p>
+                        <p class="scoreDate">2024.04.01</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</body>
+
+</html>

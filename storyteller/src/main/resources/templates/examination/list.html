@@ -5,7 +5,7 @@
 <div class="mainPageBody pb-4">
     <div class="header">
         <div>
-            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표">
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
         </div>
         <h1>모의고사</h1>
     </div>
@@ -101,6 +101,15 @@
 
                 // 클릭된 라디오 버튼의 체크 상태 설정
                 radioBtn.checked = true;
+
+                // 체크된 라디오 버튼의 부모 요소인 .radio-option의 테두리 색상을 파란색으로 변경
+                radioContainers.forEach(function(radioContainer) {
+                    if (radioContainer.querySelector('input[type="radio"]').checked) {
+                        radioContainer.style.borderColor = 'blue';
+                    } else {
+                        radioContainer.style.borderColor = ''; // 다른 요소의 테두리 색상 초기화
+                    }
+                });
             }
 
             // 이미지가 작아지는 동작을 막음
