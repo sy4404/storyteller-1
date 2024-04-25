@@ -36,4 +36,10 @@ public interface CommunityService {
     CommunityDto lastCommunity();
 
 
+    /**
+     * qna 목록
+     */
+    List<CommunityDto> findCommunityQnAListAll();
+
+
 }

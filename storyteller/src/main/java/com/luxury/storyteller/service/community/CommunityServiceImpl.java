@@ -42,4 +42,9 @@ public class CommunityServiceImpl implements CommunityService{
     public CommunityDto lastCommunity() {
         return communityMapper.lastCommunity();
     }
+
+    @Override
+    public List<CommunityDto> findCommunityQnAListAll() {
+        return communityMapper.findCommunityQnAListAll();
+    }
 }

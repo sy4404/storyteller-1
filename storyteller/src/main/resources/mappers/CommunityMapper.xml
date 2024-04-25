@@ -4,7 +4,7 @@
 
 
     <select id="findCommunityListAll" resultType="com.luxury.storyteller.dto.CommunityDto">
-        SELECT * FROM community WHERE deleted = 0 ORDER BY created_at DESC;
+        SELECT * FROM community WHERE deleted = 0 AND division = 0 ORDER BY created_at DESC;
     </select>
 
     <select id="findCommunityByCommunityIdx" parameterType="int" resultType="com.luxury.storyteller.dto.CommunityDto">
@@ -40,5 +40,9 @@
 
     <select id="lastCommunity" resultType="com.luxury.storyteller.dto.CommunityDto">
         SELECT * FROM community WHERE deleted = 0 ORDER BY created_at DESC LIMIT 1;
+    </select>
+
+    <select id="findCommunityQnAListAll" resultType="com.luxury.storyteller.dto.CommunityDto">
+        SELECT * FROM community WHERE deleted = 0 AND division = 1 ORDER BY created_at DESC;
     </select>
 </mapper>

@@ -19,4 +19,6 @@ public interface CommunityMapper {
     int deleteCommunity(int communityIdx);
 
     CommunityDto lastCommunity();
+
+    List<CommunityDto> findCommunityQnAListAll();
 }
