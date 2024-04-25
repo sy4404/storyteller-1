@@ -14,4 +14,5 @@ public class UserDto {
     private int personalInfo;
     private int termsCondition;
     private String profileUrl;
+    private String role;
 }

@@ -30,4 +30,8 @@
         SELECT * FROM user WHERE name = #{name} AND phone_number = #{phoneNumber};
     </select>
 
+    <select id="findUserById" parameterType="String" resultType="com.luxury.storyteller.dto.UserDto">
+        SELECT * FROM user WHERE id = #{id};
+    </select>
+
 </mapper>

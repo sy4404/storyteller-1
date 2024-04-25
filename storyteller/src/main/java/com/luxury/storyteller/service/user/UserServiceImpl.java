@@ -35,4 +35,9 @@ public class UserServiceImpl implements UserService{
     public UserDto findUserByIdAndPhoneNumber(UserDto userDto) {
         return userMapper.findUserByIdAndPhoneNumber(userDto);
     }
+
+    @Override
+    public UserDto findUserById(String id) {
+        return userMapper.findUserById(id);
+    }
 }

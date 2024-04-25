@@ -22,4 +22,10 @@ public interface UserService {
      * 아이디, 휴대폰번호로 아이디찾기
      */
     UserDto findUserByIdAndPhoneNumber(UserDto userDto);
+
+    /**
+     * 아이디로 조회
+     */
+    UserDto findUserById(String id);
+
 }

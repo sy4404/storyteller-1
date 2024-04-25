@@ -8,7 +8,89 @@
 }
 
 .lectureListBox{
-    padding: 10px 0px;
+    padding: 20px 0px ;
+    display: flex;
+    border-bottom: 1px solid #ddd;
+}
+
+.lectureListBox:first-child{
+    padding-top: 0px;
+}
+
+.lectureListBox:last-child{
+    border-bottom: 0px;
+}
+
+.lectureImgBox{
+    width: 120px;
+    height: 120px;
+    position: relative;
+}
+
+.lectureThumbnail{
+    width: 120px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.lectureThumbnail img{
+    width: 100%;
+}
+
+.lecturePlayBtn{
+    position: absolute;
+    width: 43px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.lecturePlayBtn img{
+    width: 100%;
+}
+
+.lectureContentBox{
+    padding: 5px 0px 5px 20px;
+    flex-grow: 1;
+}
+
+.lectureContentBox h2{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.lectureContentBox p{
+    margin-bottom: 0px;
+    color: #999999;
+    font-size: 14px;
+}
+
+.lectureBottomContent{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.lectureBottomContent div{
+    display: flex;
+    align-items: center;
+}
+
+.lectureBottomContent div img{
+    width: 14px;
+    margin-right: 5px;
+}
+
+.lectureBottomContent div p{
+    font-size: 14px;
+    font-weight: bold;
+    color: #333333;
+}
+
+.lectureBottomContentTime{
+    font-size: 14px;
+    color: #999999;
 }
 
 @media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/

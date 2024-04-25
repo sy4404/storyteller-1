@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
-<link th:href="@{/css/ebook/list.css}" rel="stylesheet" type="text/css" />
+<link th:href="@{/css/lecture/list.css}" rel="stylesheet" type="text/css" />
 <body>
 <div class="mainPageBody pb-4">
     <div class="header">
@@ -15,18 +15,52 @@
     <div class="py-20">
         <div class="lectureListBox">
             <div class="lectureImgBox">
-                <img src="" alt="동영상 썸네일">
-                <img src="" alt="재생버튼">
+                <div class="lectureThumbnail"><img th:src="@{/img/qna_sample_image3@2x.png}" alt="동영상 썸네일" ></div>
+                <div class="lecturePlayBtn"><img th:src="@{/img/icon_video_play2@2x.png}" alt="재생버튼" ></div>
             </div>
             <div class="lectureContentBox">
                 <h2>이순신 교육 영상 -OT</h2>
                 <p>강의 Orientation</p>
                 <div class="lectureBottomContent">
                     <div>
-                        <img src="" alt="재생 화살표">
+                        <img th:src="@{/img/icon_video_play@2x.png}" alt="재생 화살표">
                         <p>수강하기</p>
                     </div>
-                    <p>00:32:00</p>
+                    <p class="lectureBottomContentTime">00:32:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="lectureListBox">
+            <div class="lectureImgBox">
+                <div class="lectureThumbnail"><img th:src="@{/img/qna_sample_image3@2x.png}" alt="동영상 썸네일" ></div>
+                <div class="lecturePlayBtn"><img th:src="@{/img/icon_video_play2@2x.png}" alt="재생버튼" ></div>
+            </div>
+            <div class="lectureContentBox">
+                <h2>이순신 교육 영상 -OT</h2>
+                <p>강의 Orientation</p>
+                <div class="lectureBottomContent">
+                    <div>
+                        <img th:src="@{/img/icon_video_play@2x.png}" alt="재생 화살표">
+                        <p>수강하기</p>
+                    </div>
+                    <p class="lectureBottomContentTime">00:32:00</p>
+                </div>
+            </div>
+        </div>
+        <div class="lectureListBox">
+            <div class="lectureImgBox">
+                <div class="lectureThumbnail"><img th:src="@{/img/qna_sample_image3@2x.png}" alt="동영상 썸네일" ></div>
+                <div class="lecturePlayBtn"><img th:src="@{/img/icon_video_play2@2x.png}" alt="재생버튼" ></div>
+            </div>
+            <div class="lectureContentBox">
+                <h2>이순신 교육 영상 -OT</h2>
+                <p>강의 Orientation</p>
+                <div class="lectureBottomContent">
+                    <div>
+                        <img th:src="@{/img/icon_video_play@2x.png}" alt="재생 화살표">
+                        <p>수강하기</p>
+                    </div>
+                    <p class="lectureBottomContentTime">00:32:00</p>
                 </div>
             </div>
         </div>

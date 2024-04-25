@@ -9,4 +9,5 @@ public interface UserMapper {
     UserDto findUserByUserIdx(int userIdx);
     int modifyUser(UserDto userDto);
     UserDto findUserByIdAndPhoneNumber(UserDto userDto);
+    UserDto findUserById(String id);
 }
