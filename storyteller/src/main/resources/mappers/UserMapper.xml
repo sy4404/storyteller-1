@@ -27,7 +27,7 @@
     </select>
 
     <select id="findUserByIdAndPhoneNumber" parameterType="com.luxury.storyteller.dto.UserDto" resultType="com.luxury.storyteller.dto.UserDto">
-        SELECT * FROM user WHERE id = #{id} AND phone_number = #{phoneNumber};
+        SELECT * FROM user WHERE name = #{name} AND phone_number = #{phoneNumber};
     </select>
 
 </mapper>

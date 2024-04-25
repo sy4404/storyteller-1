@@ -1,10 +1,12 @@
 package com.luxury.storyteller.web;
 
 import com.luxury.storyteller.dto.CommunityDto;
+import com.luxury.storyteller.dto.LectureDto;
 import com.luxury.storyteller.service.community.CommunityService;
 import com.luxury.storyteller.service.lecture.LectureService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +24,10 @@ public class LectureController {
      * 동영상 강의 목록 페이지
      */
     @GetMapping("")
-    public String lectureListPage() {
+    public String lectureListPage(Model model) {
+
+        List<LectureDto> list = lectureService.findLectureListAll();
+        model.addAttribute("list", list);
 
         return "lecture/list";
     }

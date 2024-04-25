@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/include/head.html :: fragment-head}"></head>
+<link th:href="@{/css/ebook/list.css}" rel="stylesheet" type="text/css" />
 <body>
-lectureList
+<div class="mainPageBody pb-4">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
+        </div>
+        <h1>동영상 강의</h1>
+    </div>
+    <div class="contentWrap">
+        <h2>강의 영상</h2>
+    </div>
+    <div class="py-20">
+        <div class="lectureListBox">
+            <div class="lectureImgBox">
+                <img src="" alt="동영상 썸네일">
+                <img src="" alt="재생버튼">
+            </div>
+            <div class="lectureContentBox">
+                <h2>이순신 교육 영상 -OT</h2>
+                <p>강의 Orientation</p>
+                <div class="lectureBottomContent">
+                    <div>
+                        <img src="" alt="재생 화살표">
+                        <p>수강하기</p>
+                    </div>
+                    <p>00:32:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>

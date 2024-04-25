@@ -4,6 +4,7 @@ import com.luxury.storyteller.dto.UserDto;
 import com.luxury.storyteller.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -44,15 +45,23 @@ public class UserController {
     /**
      * 회원가입 페이지(정보입력)
      */
+    @PostMapping("/signup")
+    public String signup(UserDto userDto) {
+
+        userService.createUser(userDto);
+
+        return "redirect:/login";
+    }
+
+    /**
+     * 회원가입 로직
+     */
+
     @GetMapping("/signup/begin")
     public String beginPage(UserDto userDto) {
 
         return "begin";
     }
-
-            /**
-             * 회원가입 로직
-             */
 
     /**
      * 아이디 찾기 페이지(정보입력)
@@ -66,8 +75,11 @@ public class UserController {
     /**
      * 아이디 찾기 완료 페이지
      */
-    @GetMapping("/idinquiry/result")
-    public String idInquiry_result(UserDto userDto) {
+    @PostMapping("/idinquiry/result")
+    public String idInquiry_result(UserDto userDto, Model model) {
+
+        UserDto detail = userService.findUserByIdAndPhoneNumber(userDto);
+        model.addAttribute("detail", detail);
 
         return "idResult";
     }
@@ -94,7 +106,10 @@ public class UserController {
      * 개인정보 설정 페이지
      */
     @GetMapping("/user/info")
-    public String userInfoPage(UserDto userDto) {
+    public String userInfoPage(UserDto userDto, Model model) {
+
+        UserDto detail = userService.findUserByUserIdx(7);
+        model.addAttribute("detail", detail);
 
         return "user/info";
     }
