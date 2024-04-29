@@ -1,8 +1,79 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
-<body class="sb-nav-fixed">
-
-userInfo
+<link th:href="@{/css/user/info.css}" rel="stylesheet" type="text/css" />
+<body>
+<div class="mainPageBody pb-4">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
+        </div>
+        <h1>개인 정보 설정</h1>
+    </div>
+    <div class="contentWrap">
+        <h2 style="font-size: 18px;">회원 정보</h2>
+    </div>
+    <div class="py-20">
+        <div class="infoBoxWrap">
+            <div class="infoBoxImgWrap">
+                <img th:src="@{/img/profile_img1@2x.png}" class="headerBackBtn" alt="프로필">
+            </div>
+            <div class="infoBoxContentWrap">
+                <h2>김요한</h2>
+                <p>yoyo1987</p>
+                <p>010-1234-5678</p>
+            </div>
+        </div>
+        <div class="infoEditBoxWrap">
+            <div class="ebookBeforeBox" onclick="location.href='/user/infomodify'">
+                <div class="d-flex justify-content-between">
+                    <div class="ebookTextWrap">
+                        <h3>개인 정보 수정</h3>
+                    </div>
+                    <div>
+                        <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="infoGoBoxWrap">
+        <div class="contentWrap">
+            <h2 style="font-size: 18px;">바로가기</h2>
+        </div>
+        <div class="py-20">
+            <div class="ebookBeforeBox">
+                <div class="d-flex justify-content-between">
+                    <div class="ebookTextWrap">
+                        <h3>성적확인</h3>
+                    </div>
+                    <div>
+                        <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
+                    </div>
+                </div>
+            </div>
+            <div class="ebookBeforeBox mt-3">
+                <div class="d-flex justify-content-between">
+                    <div class="ebookTextWrap">
+                        <h3>출결확인</h3>
+                    </div>
+                    <div>
+                        <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
+                    </div>
+                </div>
+            </div>
+            <div class="ebookBeforeBox mt-3">
+                <div class="d-flex justify-content-between">
+                    <div class="ebookTextWrap">
+                        <h3>모의고사</h3>
+                    </div>
+                    <div>
+                        <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </body>
 

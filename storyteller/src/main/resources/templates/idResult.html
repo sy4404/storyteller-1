@@ -1,9 +1,23 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
-<body class="sb-nav-fixed">
-
-idResult
-
+<link th:href="@{/css/idInquiry.css}" rel="stylesheet" type="text/css" />
+<body>
+<div class="mainPageBody">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
+        </div>
+        <h1>아이디·비밀번호 찾기</h1>
+    </div>
+    <div class="formWrap mt-3">
+        <div class="resultImgWrap">
+            <img th:src="@{/img/img_id-found@2x.png}" class="resultImg" alt="돋보기">
+        </div>
+        <p class="idResultText">아이디를 찾았어요!</p>
+        <p class="idResult" th:text="${detail.getId()}">honghong123</p>
+        <input type="button" class="submitBtn mt-5" value="로그인 하러 가기" onclick="location.href='/login'">
+    </div>
+</div>
 </body>
 
 </html>

@@ -37,6 +37,27 @@
     color: #4B3F24 !important;
 }
 
+.resultImg{
+    width: 163px;
+    margin: 0 auto;
+}
+
+.resultImgWrap{
+    text-align: center;
+    padding-top: 35px;
+}
+
+.idResultText{
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.idResult{
+    text-align: center;
+    font-size: 18px;
+}
+
 
 @media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
 
