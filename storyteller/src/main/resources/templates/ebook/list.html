@@ -7,33 +7,13 @@
         <div>
             <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
         </div>
-        <h1>이순신 강의 교재</h1>
+        <h1 th:text="${lists[0].ebookCategoryName}">이순신 강의 교재</h1>
     </div>
     <div class="py-20">
-        <div class="ebookBeforeBox mt-3">
+        <div class="ebookBeforeBox mt-3" th:each="list : ${lists}">
             <div class="d-flex justify-content-between">
                 <div class="ebookTextWrap">
-                    <h3>이순신 - 챕터 1</h3>
-                </div>
-                <div>
-                    <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
-                </div>
-            </div>
-        </div>
-        <div class="ebookBeforeBox mt-3 ">
-            <div class="d-flex justify-content-between">
-                <div class="ebookTextWrap">
-                    <h3>이순신 - 챕터 1</h3>
-                </div>
-                <div>
-                    <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
-                </div>
-            </div>
-        </div>
-        <div class="ebookBeforeBox mt-3 ">
-            <div class="d-flex justify-content-between">
-                <div class="ebookTextWrap">
-                    <h3>이순신 - 챕터 1</h3>
+                    <h3 th:text="${list.ebookTitle}">이순신 - 챕터 1</h3>
                 </div>
                 <div>
                     <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">

@@ -8,7 +8,7 @@
         </div>
         <div class="noticeWrap">
             <div class="noticeBox d-flex justify-content-between">
-                <p>[공지] 강의 동영상 시청시 딜레이 발생 문제</p>
+                <p th:text="'[공지] ' + ${lastCommunity.title}">[공지] 강의 동영상 시청시 딜레이 발생 문제</p>
                 <div>
                     <img th:src="@{/img/icon_go@2x.png}" class="mainArrow ml-2" alt="arrow">
                 </div>

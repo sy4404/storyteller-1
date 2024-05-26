@@ -25,7 +25,7 @@ public class CommunityController {
     public String communityNoticePage(Model model) {
 
         List<CommunityDto> list = communityService.findCommunityListAll();
-        model.addAttribute("list", list);
+        model.addAttribute("lists", list);
 
         return "community/noticeList";
     }
@@ -49,7 +49,7 @@ public class CommunityController {
     public String communityQnaPage(Model model) {
 
         List<CommunityDto> list = communityService.findCommunityQnAListAll();
-        model.addAttribute("list", list);
+        model.addAttribute("lists", list);
 
         return "community/qnaList";
     }

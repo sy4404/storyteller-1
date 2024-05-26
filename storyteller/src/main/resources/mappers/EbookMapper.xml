@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luxury.storyteller.mapper.EbookMapper">
+
+    <!-- 교제 대분류 -->
+    <select id="findEbookCategoryListAll" resultType="com.luxury.storyteller.dto.EbookDto">
+        SELECT * FROM ebook_category
+    </select>
+
+    <select id="findEbookByEbookCategoryIdx" parameterType="int" resultType="com.luxury.storyteller.dto.EbookDto">
+        SELECT * FROM luxury_storyteller.ebook
+        LEFT JOIN ebook_category ON ebook_category.ebook_category_idx = ebook.ebook_category_idx
+        WHERE ebook.ebook_category_idx = #{ebookCategoryIdx};
+    </select>
+
+    <select id="findEbookByEbookIdx" parameterType="int" resultType="com.luxury.storyteller.dto.EbookDto">
+        SELECT * FROM luxury_storyteller.ebook
+        LEFT JOIN ebook_category ON ebook_category.ebook_category_idx = ebook.ebook_category_idx
+        WHERE ebook.ebook_idx = #{ebookIdx};
+    </select>
+
+</mapper>

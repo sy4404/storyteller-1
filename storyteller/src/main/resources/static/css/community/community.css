@@ -48,10 +48,9 @@
     justify-content: space-between;
 }
 
-.firstLineWrap div{
+.communityTitle{
     font-weight: bold;
-    display: flex;
-    align-items: center;
+    margin-bottom: 0px;
 }
 
 .noticeLabel{
@@ -65,10 +64,11 @@
     font-size: 13px;
 }
 
-.firstLineWrap p{
+.communityDate{
     font-size: 14px;
     color: #999999;
     margin-bottom: 0px;
+    margin-left: 10px;
 }
 
 .lastLine{
@@ -79,6 +79,7 @@
     text-overflow: ellipsis;
     margin-top: 10px;
 }
+
 
 @media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
 

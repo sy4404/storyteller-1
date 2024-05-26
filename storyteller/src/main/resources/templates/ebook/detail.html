@@ -1,0 +1,20 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/include/head.html :: fragment-head}"></head>
+<link th:href="@{/css/ebook/list.css}" rel="stylesheet" type="text/css" />
+<body>
+<div class="mainPageBody pb-4">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
+        </div>
+        <h1 th:text="${lists.ebookTitle}">이순신 강의 교재</h1>
+    </div>
+    <div class="py-20">
+        <iframe th:src="'http://1.234.5.102:8080/'+ ${lists.ebookUrl} + '#toolbar=0&navpanes=0'" style="width: 100%; height: 100%"></iframe>
+
+
+    </div>
+</div>
+</body>
+
+</html>

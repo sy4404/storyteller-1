@@ -13,32 +13,19 @@
         <h2>강의 교재</h2>
     </div>
     <div class="py-20">
-        <div class="ebookBeforeBox">
+        <div class="ebookBeforeBox" th:each="list : ${lists}">
             <div class="d-flex">
                 <div class="imgWrap">
-                    <img th:src="@{/img/img_book1@2x.png}" class="" alt="화살표">
+                    <img th:src="'http://1.234.5.102:8080/'+ ${list.ebookCategoryImg}" class="" alt="화살표">
                 </div>
                 <div class="ebookTextWrap">
-                    <h3>이순신 강의 교재</h3>
-                    <p>이순신 장군의 생애 전반에 대한 교육 자료 입니다.</p>
+                    <h3 th:text="${list.ebookCategoryName}">이순신 강의 교재</h3>
+                    <p th:text="${list.ebookCategoryContent}">이순신 장군의 생애 전반에 대한 교육 자료 입니다.</p>
                 </div>
             </div>
-            <div class="ebookDetailBtn">
-                교재 보기<img th:src="@{/img/icon_showvideo@2x.png}" class="ebookDetailBtnImg" alt="화살표">
-            </div>
-        </div>
-        <div class="ebookBeforeBox mt-4">
-            <div class="d-flex">
-                <div class="imgWrap">
-                    <img th:src="@{/img/img_book2@2x.png}" class="" alt="화살표">
-                </div>
-                <div class="ebookTextWrap">
-                    <h3>이순신 강의 교재</h3>
-                    <p>이순신 장군의 생애 전반에 대한 교육 자료 입니다.</p>
-                </div>
-            </div>
-            <div class="ebookDetailBtn">
-                교재 보기<img th:src="@{/img/icon_showvideo@2x.png}" class="ebookDetailBtnImg" alt="화살표">
+<!--            ebookCategoryIdx-->
+                <div class="ebookDetailBtn" th:onclick="|location.href='/ebook/${list.ebookCategoryIdx}'|">
+            교재 보기<img th:src="@{/img/icon_showvideo@2x.png}" class="ebookDetailBtnImg" alt="화살표">
             </div>
         </div>
     </div>

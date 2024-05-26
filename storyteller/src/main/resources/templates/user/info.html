@@ -18,9 +18,9 @@
                 <img th:src="@{/img/profile_img1@2x.png}" class="headerBackBtn" alt="프로필">
             </div>
             <div class="infoBoxContentWrap">
-                <h2>김요한</h2>
-                <p>yoyo1987</p>
-                <p>010-1234-5678</p>
+                <h2 th:text="${detail.name}">김요한</h2>
+                <p th:text="${detail.id}">yoyo1987</p>
+                <p th:text="${detail.phoneNumber}">010-1234-5678</p>
             </div>
         </div>
         <div class="infoEditBoxWrap">

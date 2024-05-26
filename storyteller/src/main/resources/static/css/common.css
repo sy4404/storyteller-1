@@ -229,3 +229,11 @@ input::placeholder {
 }
 
 input:focus {outline: 2px solid #ddd;}
+
+.ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 100%; /* 원하는 너비 설정 */
+    display: block; /* 또는 inline-block, 필요한 경우 */
+}

@@ -39,7 +39,7 @@
     </update>
 
     <select id="lastCommunity" resultType="com.luxury.storyteller.dto.CommunityDto">
-        SELECT * FROM community WHERE deleted = 0 ORDER BY created_at DESC LIMIT 1;
+        SELECT * FROM community WHERE deleted = 0 AND division = 0 ORDER BY created_at DESC LIMIT 1;
     </select>
 
     <select id="findCommunityQnAListAll" resultType="com.luxury.storyteller.dto.CommunityDto">

@@ -15,6 +15,9 @@
     position: relative;
 }
 
+.ebookBeforeBox:not(:first-child){
+    margin-top: 20px;
+}
 
 .ebookBeforeBox .imgWrap{
     border-radius: 10px;

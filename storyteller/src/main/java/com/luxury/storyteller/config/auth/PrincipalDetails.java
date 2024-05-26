@@ -10,9 +10,12 @@ import java.util.Collection;
 public class PrincipalDetails implements UserDetails {
 
     private UserDto userDto;
+    private int userIdx;
+
 
     public PrincipalDetails(UserDto userDto){
         this.userDto = userDto;
+        this.userIdx = userDto.getUserIdx();
     }
 
     @Override
@@ -37,6 +40,9 @@ public class PrincipalDetails implements UserDetails {
         return userDto.getId();
     }
 
+    public int getUserIdx() {
+        return userIdx;
+    }
     @Override
     public boolean isAccountNonExpired() {
         return true;
