@@ -1,5 +1,6 @@
 package com.luxury.storyteller.mapper;
 
+import com.luxury.storyteller.dto.CommentDto;
 import com.luxury.storyteller.dto.CommunityDto;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,4 +22,9 @@ public interface CommunityMapper {
     CommunityDto lastCommunity();
 
     List<CommunityDto> findCommunityQnAListAll();
+
+    /**
+     * 댓글 목록
+     */
+    List<CommentDto> findCommunityCommentByCommunityIdx(int communityIdx);
 }

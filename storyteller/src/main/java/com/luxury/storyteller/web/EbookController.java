@@ -37,7 +37,6 @@ public class EbookController {
     public String ebookList(@PathVariable int communityIdx, Model model) {
 
         List<EbookDto> list = ebookService.findEbookByEbookCategoryIdx(communityIdx);
-        System.out.println(list.size()+"////");
         model.addAttribute("lists", list);
 
         return "ebook/list";

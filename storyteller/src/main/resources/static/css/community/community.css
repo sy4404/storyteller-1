@@ -97,13 +97,15 @@
 }
 
 .noticeInfoEditBtnWrap{
-    padding: 0 10px;
     background-color: #F0F0F0;
     height: 24px;
     border-radius: 8px;
+    margin-left: 10px;
 }
 
 .noticeInfoEditTxt{
+    width: 58px;
+    text-align: center;
     font-size: 14px;
 }
 .noticeInfoEditIcon{
@@ -131,7 +133,8 @@
 }
 
 .noticeInfoContent{
-    padding-top: 10px;
+    padding-top: 30px;
+    padding-bottom: 20px;
 }
 
 .noticeInfoCommentWrap{

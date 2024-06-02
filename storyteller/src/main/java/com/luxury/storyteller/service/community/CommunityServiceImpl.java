@@ -1,5 +1,6 @@
 package com.luxury.storyteller.service.community;
 
+import com.luxury.storyteller.dto.CommentDto;
 import com.luxury.storyteller.dto.CommunityDto;
 import com.luxury.storyteller.mapper.CommunityMapper;
 import lombok.RequiredArgsConstructor;
@@ -46,5 +47,10 @@ public class CommunityServiceImpl implements CommunityService{
     @Override
     public List<CommunityDto> findCommunityQnAListAll() {
         return communityMapper.findCommunityQnAListAll();
+    }
+
+    @Override
+    public List<CommentDto> findCommunityCommentByCommunityIdx(int communityIdx) {
+        return communityMapper.findCommunityCommentByCommunityIdx(communityIdx);
     }
 }

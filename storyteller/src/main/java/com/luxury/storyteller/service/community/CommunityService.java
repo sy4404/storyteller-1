@@ -1,5 +1,6 @@
 package com.luxury.storyteller.service.community;
 
+import com.luxury.storyteller.dto.CommentDto;
 import com.luxury.storyteller.dto.CommunityDto;
 
 import java.util.List;
@@ -41,5 +42,9 @@ public interface CommunityService {
      */
     List<CommunityDto> findCommunityQnAListAll();
 
+    /**
+     * 댓글 목록
+     */
+    List<CommentDto> findCommunityCommentByCommunityIdx(int communityIdx);
 
 }

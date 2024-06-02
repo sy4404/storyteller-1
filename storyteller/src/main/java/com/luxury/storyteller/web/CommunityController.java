@@ -1,5 +1,6 @@
 package com.luxury.storyteller.web;
 
+import com.luxury.storyteller.dto.CommentDto;
 import com.luxury.storyteller.dto.CommunityDto;
 import com.luxury.storyteller.service.community.CommunityService;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +39,10 @@ public class CommunityController {
 
         CommunityDto detail = communityService.findCommunityByCommunityIdx(communityIdx);
         model.addAttribute("dedail", detail);
+
+        List<CommentDto> list = communityService.findCommunityCommentByCommunityIdx(communityIdx);
+        model.addAttribute("lists", list);
+        model.addAttribute("commentCount", list.size());
 
         return "community/noticeInfo";
     }

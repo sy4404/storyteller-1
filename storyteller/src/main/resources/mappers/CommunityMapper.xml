@@ -45,4 +45,12 @@
     <select id="findCommunityQnAListAll" resultType="com.luxury.storyteller.dto.CommunityDto">
         SELECT * FROM community WHERE deleted = 0 AND division = 1 ORDER BY created_at DESC;
     </select>
+
+    <select id="findCommunityCommentByCommunityIdx" resultType="com.luxury.storyteller.dto.CommentDto"  parameterType="int">
+        SELECT * FROM community_comment
+        LEFT JOIN community ON community_comment.community_idx = community.community_idx
+        LEFT JOIN user ON community_comment.user_idx = user.user_idx
+        WHERE community_comment.community_idx = #{communityIdx} AND community_comment.deleted = 0
+        ORDER BY community_comment.created_at DESC
+    </select>
 </mapper>
