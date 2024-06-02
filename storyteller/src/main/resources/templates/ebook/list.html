@@ -10,7 +10,7 @@
         <h1 th:text="${lists[0].ebookCategoryName}">이순신 강의 교재</h1>
     </div>
     <div class="py-20">
-        <div class="ebookBeforeBox mt-3" th:each="list : ${lists}">
+        <div class="ebookBeforeBox mt-3" th:each="list : ${lists}" th:onclick="|location.href='/ebook/pdf/${list.ebookCategoryIdx}'|">
             <div class="d-flex justify-content-between">
                 <div class="ebookTextWrap">
                     <h3 th:text="${list.ebookTitle}">이순신 - 챕터 1</h3>

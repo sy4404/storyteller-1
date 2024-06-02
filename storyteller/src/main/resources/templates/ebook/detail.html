@@ -10,10 +10,11 @@
         <h1 th:text="${lists.ebookTitle}">이순신 강의 교재</h1>
     </div>
     <div class="py-20">
-        <iframe th:src="'http://1.234.5.102:8080/'+ ${lists.ebookUrl} + '#toolbar=0&navpanes=0'" style="width: 100%; height: 100%"></iframe>
-
-
+<!--        <iframe th:src="@{/pdfjs-4.3.136-dist/web/viewer.html?file=http://1.234.5.102:8080/img/storyteller/ebook/pdf/testpdf.pdf}"></iframe>-->
+        <iframe src="/pdfjs-4.3.136-dist/web/viewer.html?file=/img/testpdf1.pdf"></iframe>
     </div>
+
+    
 </div>
 </body>
 

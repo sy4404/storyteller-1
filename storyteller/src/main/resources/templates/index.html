@@ -6,7 +6,7 @@
         <div class="mt-2">
             <img th:src="@{/img/main_logo@2x.png}" class="logoImg" alt="logo">
         </div>
-        <div class="noticeWrap">
+        <div class="noticeWrap" th:onclick="|location.href='/community/notice/${lastCommunity.communityIdx}'|">
             <div class="noticeBox d-flex justify-content-between">
                 <p th:text="'[공지] ' + ${lastCommunity.title}">[공지] 강의 동영상 시청시 딜레이 발생 문제</p>
                 <div>

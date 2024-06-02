@@ -228,6 +228,23 @@ input::placeholder {
     border: 0px;
 }
 
+.formWrap input[type=password]{
+    width: 100%;
+    padding: 15px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    border: 0px;
+}
+
+.formWrap input[type=number]{
+    width: 100%;
+    padding: 15px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    border: 0px;
+}
+
+
 input:focus {outline: 2px solid #ddd;}
 
 .ellipsis {
