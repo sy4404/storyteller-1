@@ -80,6 +80,136 @@
     margin-top: 10px;
 }
 
+.noticeInfoTitle{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 0px;
+}
+
+.noticeInfoTitleWrap{
+    margin-top: 15px;
+}
+
+.noticeInfoTitleWrap{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.noticeInfoEditBtnWrap{
+    padding: 0 10px;
+    background-color: #F0F0F0;
+    height: 24px;
+    border-radius: 8px;
+}
+
+.noticeInfoEditTxt{
+    font-size: 14px;
+}
+.noticeInfoEditIcon{
+    width: 14px;
+    margin-top: -2px;
+}
+
+.noticeInfoWriteInfo{
+    margin-top: 16px;
+    font-size: 14px;
+    color: #999999;
+}
+
+.noticeInfoWriteInfo span{
+    color: #999999;
+}
+
+.noticeInfoWriter{
+    margin-right: 15px;
+}
+
+.noticeInfoBorderTop{
+    border-top: 1px solid #DFDFDF;
+    margin-top: 10px;
+}
+
+.noticeInfoContent{
+    padding-top: 10px;
+}
+
+.noticeInfoCommentWrap{
+    padding: 10px 0;
+}
+
+.noticeInfoCommentCount{
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.noticeInfoCommentContentWrap{
+    padding: 12px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    margin-top: 14px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.noticeInfoCommentContentWrap div{
+    overflow: hidden;
+}
+
+.noticeInfoCommentContentWrap div img{
+    width: 48px;
+    height: auto;
+}
+
+.noticeInfoCommentContentWrap2{
+    display: flex;
+}
+
+.noticeInfoCommentTxtWrap{
+    margin-left: 15px;
+}
+
+.noticeInfoCommentWrite{
+    margin-bottom: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.noticeInfoCommentContent{
+    font-size: 14px;
+    margin-bottom: 0px;
+}
+
+.commentDeleteIcon{
+    width: 11px;
+}
+
+.commentDeleteIconImg{
+    width: 100% !important;
+}
+
+.commentWriteInputWrap{
+    margin-top: 15px;
+    position: relative;
+}
+
+.commentWriteInput{
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #DFDFDF;
+    padding: 15px
+}
+
+.commentSubmitBtn{
+    width: 20px;
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    margin-top: -10px;
+}
+
+
+
 
 @media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
 

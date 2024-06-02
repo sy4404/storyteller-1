@@ -23,7 +23,7 @@
     <div class="formWrap pb-5">
         <input type="text" class="" id="name" name="name" placeholder="검색">
 
-        <div class="communityWrap" th:each="list : ${lists}">
+        <div class="communityWrap" th:each="list : ${lists}" th:onclick="|location.href='/community/notice/${list.communityIdx}'|">
             <div class="firstLineWrap">
                 <p th:utext="'<span class=&quot;noticeLabel&quot;>공지</span>' + ${list.title}" class="ellipsis communityTitle">
                     출석 오류에 관한 공지사항
