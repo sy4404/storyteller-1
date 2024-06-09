@@ -18,18 +18,27 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
+//                .antMatchers("/login","/admin/login").permitAll()
+//                .antMatchers("/admin/img/**","/admin/css/**", "/admin/js/**", "/admin/vendor/**").permitAll()
 //                .antMatchers("/user/**").authenticated()
 //                .antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')")
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
+            .formLogin()
                 .usernameParameter("id")
                 .passwordParameter("password")
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/");
-
-
+                .defaultSuccessUrl("/")
+                .failureUrl("/login?error");
+//                .and()
+//            .formLogin()
+//                .loginPage("/admin/login")
+//                .loginProcessingUrl("/admin/login")
+//                .usernameParameter("adminId")
+//                .passwordParameter("adminPassword")
+//                .defaultSuccessUrl("/admin")
+//                .failureUrl("/admin/login?error");
         return http.build();
     }
 }

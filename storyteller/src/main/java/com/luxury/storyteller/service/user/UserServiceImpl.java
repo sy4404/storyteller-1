@@ -6,6 +6,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
@@ -39,5 +41,10 @@ public class UserServiceImpl implements UserService{
     @Override
     public UserDto findUserById(String id) {
         return userMapper.findUserById(id);
+    }
+
+    @Override
+    public List<UserDto> findByUserAll() {
+        return userMapper.findByUserAll();
     }
 }

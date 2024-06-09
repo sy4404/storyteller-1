@@ -2,6 +2,8 @@ package com.luxury.storyteller.service.user;
 
 import com.luxury.storyteller.dto.UserDto;
 
+import java.util.List;
+
 public interface UserService {
     /**
      * 회원 등록
@@ -27,5 +29,10 @@ public interface UserService {
      * 아이디로 조회
      */
     UserDto findUserById(String id);
+
+    /**
+     * 회원 목록
+     */
+    List<UserDto> findByUserAll();
 
 }

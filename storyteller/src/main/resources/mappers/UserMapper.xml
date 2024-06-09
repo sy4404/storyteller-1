@@ -34,4 +34,8 @@
         SELECT * FROM user WHERE id = #{id};
     </select>
 
+    <select id="findByUserAll" resultType="com.luxury.storyteller.dto.UserDto">
+        SELECT * FROM user WHERE role = 'ROLE_USER' ORDER BY user_idx desc;
+    </select>
+
 </mapper>
