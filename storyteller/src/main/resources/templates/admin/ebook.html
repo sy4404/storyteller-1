@@ -34,17 +34,23 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>NO</th>
                                             <th>교재</th>
+                                            <th>교재 설명</th>
+                                            <th>챕터</th>
+                                            <th>삭제</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>System Architect</td>
+                                        <tr th:each="item ,list : ${lists}">
+                                            <td th:text="${list.count}" th:onclick="|location.href='/admin/ebook-edit/${item.ebookCategoryIdx}'|">1</td>
+                                            <td th:text="${item.ebookCategoryName}" th:onclick="|location.href='/admin/ebook-edit/${item.ebookCategoryIdx}'|">System Architect</td>
+                                            <td th:text="${item.ebookCategoryContent}" th:onclick="|location.href='/admin/ebook-edit/${item.ebookCategoryIdx}'|">System Architect</td>
+                                            <td><button type="button" class="btn btn-primary btn-sm" th:onclick="|location.href='/admin/chapter/${item.ebookCategoryIdx}'|">챕터관리</button></td>
+                                            <td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
                                         </tr>
                                     </tbody>
                                 </table>

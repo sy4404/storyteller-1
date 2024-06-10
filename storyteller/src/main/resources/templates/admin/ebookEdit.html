@@ -22,23 +22,25 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">교재이름</h1>
+                    <h1 class="h3 mb-2 text-gray-800">교재관리</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">챕터 등록</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">교재등록</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form action="/admin/chapter-write" method="POST">
+                                <form action="/admin/ebook-edit" method="POST">
                                     <div class="form-group">
-                                        <label for="uname">과목:</label>
-                                        <input type="text" class="form-control" id="uname" placeholder="과목명" name="ebookTitle" required>
-                                        <label for="file">첨부파일(PDF):</label>
-                                        <input type="file" class="form-control-file border" id="file" placeholder="">
+                                        <label for="uname">교재:</label>
+                                        <input type="text" class="form-control" id="uname" placeholder="교재명" name="ebookCategoryName" th:value="${detail.ebookCategoryName}" required>
+                                        <label for="uname2">교재 설명:</label>
+                                        <input type="text" class="form-control" id="uname2" placeholder="교재명" name="ebookCategoryContent" th:value="${detail.ebookCategoryContent}" required>
+                                        <label for="file" class="mt-3">썸네일 이미지:</label>
+                                        <input type="file" class="form-control-file border" id="file" placeholder="" name="uname" >
 
-                                        <input type="hidden" th:value="${ebookCategoryIdx}" name="ebookCategoryIdx">
+                                        <input type="hidden" name="ebookCategoryIdx" th:value="${detail.ebookCategoryIdx}">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

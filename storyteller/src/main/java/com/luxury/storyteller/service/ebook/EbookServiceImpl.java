@@ -29,4 +29,29 @@ public class EbookServiceImpl implements EbookService {
     public EbookDto findEbookByEbookIdx(int ebookIdx) {
         return ebookMapper.findEbookByEbookIdx(ebookIdx);
     }
+
+    @Override
+    public EbookDto findEbookCategoryListByebookCategoryIdx(int ebookCategoryIdx) {
+        return ebookMapper.findEbookCategoryListByebookCategoryIdx(ebookCategoryIdx);
+    }
+
+    @Override
+    public int createEbookCategory(EbookDto ebookDto) {
+        return ebookMapper.createEbookCategory(ebookDto);
+    }
+
+    @Override
+    public int modifyEbookCategory(EbookDto ebookDto) {
+        return ebookMapper.modifyEbookCategory(ebookDto);
+    }
+
+    @Override
+    public int createEbook(EbookDto ebookDto) {
+        return ebookMapper.createEbook(ebookDto);
+    }
+
+    @Override
+    public int modifyEbook(EbookDto ebookDto) {
+        return ebookMapper.modifyEbook(ebookDto);
+    }
 }

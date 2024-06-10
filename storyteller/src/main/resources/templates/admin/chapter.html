@@ -28,13 +28,13 @@
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">챕터</h6>
-                            <button class="btn btn-primary" onclick="location.href='/admin/chapter-write'">
+                            <button class="btn btn-primary" th:onclick="|location.href='/admin/chapter-write/${ebookCategoryIdx}'|">
                                 챕터등록
                             </button>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>NO</th>
@@ -42,9 +42,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>System Architect</td>
+                                        <tr th:each="item ,list : ${lists}">
+                                            <td th:text="${item.ebookIdx}" th:onclick="|location.href='/admin/chapter-edit/${item.ebookIdx}'|">1</td>
+                                            <td th:text="${item.ebookTitle}" th:onclick="|location.href='/admin/chapter-edit/${item.ebookIdx}'|">System Architect</td>
                                         </tr>
                                     </tbody>
                                 </table>

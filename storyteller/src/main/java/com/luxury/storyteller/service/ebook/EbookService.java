@@ -22,7 +22,14 @@ public interface EbookService {
     EbookDto findEbookByEbookIdx(int ebookIdx);
 
 
+    EbookDto findEbookCategoryListByebookCategoryIdx(int ebookCategoryIdx);
 
+    int createEbookCategory(EbookDto ebookDto);
+    int modifyEbookCategory(EbookDto ebookDto);
+
+    int createEbook(EbookDto ebookDto);
+
+    int modifyEbook(EbookDto ebookDto);
 
 
 }

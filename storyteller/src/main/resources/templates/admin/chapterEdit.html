@@ -27,18 +27,19 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">챕터 등록</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">챕터 수정</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form action="/admin/chapter-write" method="POST">
+                                <form action="/admin/chapter-edit" method="POST">
                                     <div class="form-group">
                                         <label for="uname">과목:</label>
-                                        <input type="text" class="form-control" id="uname" placeholder="과목명" name="ebookTitle" required>
+                                        <input type="text" class="form-control" id="uname" placeholder="과목명" name="ebookTitle" th:value="${detail.ebookTitle}" required>
                                         <label for="file">첨부파일(PDF):</label>
                                         <input type="file" class="form-control-file border" id="file" placeholder="">
 
-                                        <input type="hidden" th:value="${ebookCategoryIdx}" name="ebookCategoryIdx">
+                                        <input type="hidden" th:value="${detail.ebookIdx}" name="ebookIdx">
+                                        <input type="hidden" th:value="${detail.ebookCategoryIdx}" name="ebookCategoryIdx">
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

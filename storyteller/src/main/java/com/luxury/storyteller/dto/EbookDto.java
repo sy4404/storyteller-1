@@ -8,7 +8,7 @@ public class EbookDto {
     private String ebookCategoryName;
     private String ebookCategoryContent;
     private String ebookCategoryImg;
-    private String ebookIdx;
+    private int ebookIdx;
     private String ebookTitle;
     private String ebookUrl;
     private int ebookType;

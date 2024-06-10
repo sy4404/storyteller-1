@@ -19,4 +19,44 @@
         WHERE ebook.ebook_idx = #{ebookIdx};
     </select>
 
+    <select id="findEbookCategoryListByebookCategoryIdx" resultType="com.luxury.storyteller.dto.EbookDto">
+        SELECT * FROM ebook_category WHERE ebook_category_idx = #{ebookCategoryIdx}
+    </select>
+
+    <insert id="createEbookCategory" parameterType="com.luxury.storyteller.dto.EbookDto">
+        INSERT INTO ebook_category (
+        ebook_category_name, ebook_category_content
+        ) VALUES (
+        #{ebookCategoryName}, #{ebookCategoryContent}
+        )
+    </insert>
+
+    <update id="modifyEbookCategory" parameterType="com.luxury.storyteller.dto.EbookDto">
+        UPDATE
+            ebook_category
+        SET
+            ebook_category_name = #{ebookCategoryName},
+            ebook_category_content = #{ebookCategoryContent}
+        WHERE
+            ebook_category_idx = #{ebookCategoryIdx}
+    </update>
+
+    <insert id="createEbook" parameterType="com.luxury.storyteller.dto.EbookDto">
+        INSERT INTO ebook (
+        ebook_title, ebook_category_idx
+        ) VALUES (
+        #{ebookTitle}, #{ebookCategoryIdx}
+        )
+    </insert>
+
+    <update id="modifyEbook" parameterType="com.luxury.storyteller.dto.EbookDto">
+        UPDATE
+            ebook
+        SET
+            ebook_title = #{ebookTitle}
+        WHERE
+            ebook_idx = #{ebookIdx}
+    </update>
+
+
 </mapper>

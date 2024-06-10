@@ -1,8 +1,10 @@
 package com.luxury.storyteller.web;
 
 import com.luxury.storyteller.dto.CommunityDto;
+import com.luxury.storyteller.dto.EbookDto;
 import com.luxury.storyteller.dto.UserDto;
 import com.luxury.storyteller.service.community.CommunityService;
+import com.luxury.storyteller.service.ebook.EbookService;
 import com.luxury.storyteller.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -21,6 +23,7 @@ import java.util.List;
 public class AdminController {
     private final UserService userService;
     private final CommunityService communityService;
+    private final EbookService ebookService;
 
     /**
      * 메인페이지
@@ -118,8 +121,11 @@ public class AdminController {
      */
     @GetMapping("/ebook")
     public String adminEbook(Model model) {
+        List<EbookDto> list = ebookService.findEbookCategoryListAll();
+        model.addAttribute("lists", list);
         return "admin/ebook";
     }
+
 
     /**
      * 교재 등록
@@ -130,20 +136,83 @@ public class AdminController {
     }
 
     /**
+     * 교재 등록
+     */
+    @PostMapping("/ebook-write")
+    public String adminEbookPostWrite(EbookDto ebookDto,Model model) {
+        ebookService.createEbookCategory(ebookDto);
+        return "redirect:/admin/ebook";
+    }
+
+    /**
+     * 교재 수정 페이지
+     */
+    @GetMapping("/ebook-edit/{ebookCategoryIdx}")
+    public String adminEbookEdit(@PathVariable int ebookCategoryIdx, Model model) {
+        EbookDto detail = ebookService.findEbookCategoryListByebookCategoryIdx(ebookCategoryIdx);
+        model.addAttribute("detail", detail);
+        return "admin/ebookEdit";
+    }
+
+    /**
+     * 교재 수정 페이지
+     */
+    @PostMapping("/ebook-edit")
+    public String adminEbookEdit(EbookDto ebookDto, Model model) {
+        ebookService.modifyEbookCategory(ebookDto);
+        return "redirect:/admin/ebook";
+    }
+
+    /**
      * 교재관리
      */
-    @GetMapping("/chapter")
-    public String adminChapter(Model model) {
+    @GetMapping("/chapter/{ebookCategoryIdx}")
+    public String adminChapter(@PathVariable int ebookCategoryIdx, Model model) {
+        List<EbookDto> list = ebookService.findEbookByEbookCategoryIdx(ebookCategoryIdx);
+
+        model.addAttribute("lists", list);
+
+        model.addAttribute("ebookCategoryIdx", ebookCategoryIdx);
         return "admin/chapter";
     }
 
     /**
      * 교재관리
      */
-    @GetMapping("/chapter-write")
-    public String adminChapterWrite(Model model) {
+    @GetMapping("/chapter-write/{ebookCategoryIdx}")
+    public String adminChapterWrite(@PathVariable int ebookCategoryIdx, Model model) {
+        model.addAttribute("ebookCategoryIdx", ebookCategoryIdx);
         return "admin/chapterWrite";
     }
+
+    /**
+     * 교재관리
+     */
+    @PostMapping("/chapter-write")
+    public String adminChapterWrite(EbookDto ebookDto, Model model) {
+        ebookService.createEbook(ebookDto);
+        return "redirect:/admin/chapter/" + ebookDto.getEbookCategoryIdx();
+    }
+
+    /**
+     * 교재관리
+     */
+    @GetMapping("/chapter-edit/{ebookIdx}")
+    public String adminChapterEdit(@PathVariable int ebookIdx, Model model) {
+        EbookDto detail = ebookService.findEbookByEbookIdx(ebookIdx);
+        model.addAttribute("detail", detail);
+        return "admin/chapterEdit";
+    }
+
+    /**
+     * 교재관리
+     */
+    @PostMapping("/chapter-edit")
+    public String adminChapterEdit(EbookDto ebookDto, Model model) {
+        ebookService.modifyEbook(ebookDto);
+        return "redirect:/admin/chapter/" + ebookDto.getEbookCategoryIdx();
+    }
+
 
     /**
      * 교재관리
