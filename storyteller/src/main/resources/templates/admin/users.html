@@ -41,7 +41,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="item, list : ${lists}">
+                                        <tr th:each="item, list : ${lists}" th:onclick="|location.href='/admin/user-info/${item.userIdx}'|" style="cursor: pointer">
                                             <td th:text="${list.count}">Tiger Nixon</td>
                                             <td th:text="${item.name}">Tiger Nixon</td>
                                             <td th:text="${item.id}">System Architect</td>
