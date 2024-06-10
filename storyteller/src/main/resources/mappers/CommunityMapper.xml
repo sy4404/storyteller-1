@@ -13,9 +13,9 @@
 
     <insert id="createCommunity" parameterType="com.luxury.storyteller.dto.CommunityDto">
         INSERT INTO community (
-            title, content, writer
+            title, content, user_idx
         ) VALUES (
-            #{title}, #{content}, #{writer}
+            #{title}, #{content}, #{userIdx}
         )
     </insert>
 
@@ -26,7 +26,7 @@
             title = #{title},
             content = #{content}
         WHERE
-            communityIdx = #{communityIdx}
+            community_idx = #{communityIdx}
     </update>
 
     <update id="deleteCommunity" parameterType="int">

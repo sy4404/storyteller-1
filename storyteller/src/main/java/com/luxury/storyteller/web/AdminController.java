@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -77,6 +78,33 @@ public class AdminController {
         return "admin/noticeWrite";
     }
 
+    /**
+     * 공지사항 수정 페이지
+     */
+    @GetMapping("/notice-edit/{communityIdx}")
+    public String noticeEdit(@PathVariable int communityIdx, Model model) {
+        CommunityDto detail = communityService.findCommunityByCommunityIdx(communityIdx);
+        model.addAttribute("detail", detail);
+        return "admin/noticeEdit";
+    }
+
+    /**
+     * 공지사항 수정
+     */
+    @PostMapping("/notice-edit")
+    public String noticePostEdit(CommunityDto communityDto, Model model) {
+        communityService.modifyCommunity(communityDto);
+        return "redirect:/admin/notice";
+    }
+
+    /**
+     * 공지사항 등록
+     */
+    @PostMapping("/notice-write")
+    public String adminNoticePostWrite(CommunityDto communityDto) {
+        communityService.createCommunity(communityDto);
+        return "redirect:/admin/notice";
+    }
     /**
      * QnA
      */
