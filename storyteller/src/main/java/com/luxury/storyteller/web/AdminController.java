@@ -47,6 +47,14 @@ public class AdminController {
     }
 
     /**
+     * 회원관리
+     */
+    @GetMapping("/user-info")
+    public String adminUsersInfo(Model model) {
+        return "admin/usersInfo";
+    }
+
+    /**
      * 공지사항
      */
     @GetMapping("/notice")
@@ -81,11 +89,27 @@ public class AdminController {
     }
 
     /**
+     * 교재 등록
+     */
+    @GetMapping("/ebook-write")
+    public String adminEbookWrite(Model model) {
+        return "admin/ebookWrite";
+    }
+
+    /**
      * 교재관리
      */
     @GetMapping("/chapter")
     public String adminChapter(Model model) {
         return "admin/chapter";
+    }
+
+    /**
+     * 교재관리
+     */
+    @GetMapping("/chapter-write")
+    public String adminChapterWrite(Model model) {
+        return "admin/chapterWrite";
     }
 
     /**
@@ -97,11 +121,27 @@ public class AdminController {
     }
 
     /**
+     * 교재관리
+     */
+    @GetMapping("/lecture-write")
+    public String adminLectureWrite(Model model) {
+        return "admin/lectureWrite";
+    }
+
+    /**
      * 모의고사
      */
     @GetMapping("/examination")
     public String adminExamination(Model model) {
         return "admin/examination";
+    }
+
+    /**
+     * 모의고사examination-write
+     */
+    @GetMapping("/examination-write")
+    public String adminExaminationWrite(Model model) {
+        return "admin/examinationWrite";
     }
 
     /**
