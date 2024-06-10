@@ -25,7 +25,7 @@
                 <span th:text="${#temporals.format(#temporals.createDate(dedail.createdAt, 'yyyy-MM-dd HH:mm:ss'), 'yyyy.MM.dd')}">24.04.01</span>
             </div>
             <div class="noticeInfoBorderTop"></div>
-            <div class="noticeInfoContent" th:text="${dedail.content}">
+            <div class="noticeInfoContent" th:utext="${dedail.content}">
                 sdkfjlskdjf
             </div>
             <div class="noticeInfoBorderTop"></div>
