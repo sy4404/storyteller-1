@@ -22,14 +22,14 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">이순신 교육 모의고사</h1>
+                    <h1 class="h3 mb-2 text-gray-800">모의고사</h1>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">모의고사 챕터 목록</h6>
-                            <button class="btn btn-primary" th:onclick="|location.href='/admin/examination2-write/${lists[0].examinationMajorIdx}'|">
-                                모의고사 챕터 등록
+                            <h6 class="m-0 font-weight-bold text-primary">모의고사 문제 목록</h6>
+                            <button class="btn btn-primary" th:onclick="|location.href='/admin/question-write/${examinationChapterIdx}'|">
+                                문제등록
                             </button>
                         </div>
                         <div class="card-body">
@@ -37,19 +37,17 @@
                                 <table class="table table-hover" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th width="10%">NO</th>
-                                            <th>교재</th>
-                                            <th width="10%">문제관리</th>
-                                            <th width="10%">문제등록</th>
-                                            <th width="10%">삭제</th>
+                                            <th>NO</th>
+                                            <th>질문</th>
+                                            <th>정답</th>
+                                            <th>삭제</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr th:each="item ,list : ${lists}">
-                                            <td th:text="${list.count}" th:onclick="|location.href='/admin/examination2-edit/${item.examinationChapterIdx}'|">1</td>
-                                            <td th:text="${item.name}" th:onclick="|location.href='/admin/examination2-edit/${item.examinationChapterIdx}'|">이순시 교육 1강 모의고사</td>
-                                            <td><button type="button" class="btn btn-primary btn-sm" th:onclick="|location.href='/admin/question/${item.examinationChapterIdx}'|">문제관리</button></td>
-                                            <td><button type="button" class="btn btn-primary btn-sm" th:onclick="|location.href='/admin/examination2/${item.examinationChapterIdx}'|">문제등록</button></td>
+                                            <td th:text="${item.questionNumber}+'번문제'">1</td>
+                                            <td th:text="${item.question}">System Architect</td>
+                                            <td th:text="${item.answer}+'번'"></td>
                                             <td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
                                         </tr>
                                     </tbody>

@@ -27,14 +27,14 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3 d-flex align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">과목 등록</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">모의고사 과목 등록</h6>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form action="/action_page.php">
+                                <form action="/admin/examination-write" method="POST">
                                     <div class="form-group">
                                         <label for="uname">과목:</label>
-                                        <input type="text" class="form-control" id="uname" placeholder="과목명" name="uname" required>
+                                        <input type="text" class="form-control" id="uname" placeholder="과목명" name="examinationMajorTitle" required>
                                     </div>
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>

@@ -11,10 +11,7 @@ import com.luxury.storyteller.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -252,6 +249,15 @@ public class AdminController {
     }
 
     /**
+     * 모의고사 과목 등록
+     */
+    @PostMapping("/examination-write")
+    public String adminExaminationPostWrite(ExaminationDto examinationDto, Model model) {
+        examinationService.createExaminationMajor(examinationDto);
+        return "redirect:/admin/examination";
+    }
+
+    /**
      * 모의고사 과목 수정
      */
     @GetMapping("/examination-edit/{examinationMajorIdx}")
@@ -290,6 +296,15 @@ public class AdminController {
     }
 
     /**
+     * 모의고사 챕터 등록
+     */
+    @PostMapping("/examination2-write")
+    public String adminExamination2PostWrite(ExaminationDto examinationDto, Model model) {
+        examinationService.createExaminationChapter(examinationDto);
+        return "redirect:/admin/examination2/" + examinationDto.getExaminationMajorIdx();
+    }
+
+    /**
      * 모의고사 챕터 수정
      */
     @GetMapping("/examination2-edit/{examinationChapterIdx}")
@@ -306,6 +321,41 @@ public class AdminController {
     public String adminExamination2PostEdit(ExaminationDto examinationDto, Model model) {
         examinationService.modifyExaminationChapter(examinationDto);
         return "redirect:/admin/examination2/" + examinationDto.getExaminationMajorIdx();
+    }
+
+    /**
+     * 문제목록
+     */
+    @GetMapping("/question-write/{examinationChapterIdx}")
+    public String adminQuestionWrite(@PathVariable int examinationChapterIdx, Model model) {
+        model.addAttribute("examinationChapterIdx", examinationChapterIdx);
+        return "admin/questionWrite";
+    }
+
+    /**
+     * 문제목록
+     */
+    @PostMapping("/question-write")
+    public String adminQuestionPostWrite(@RequestParam("selectTitle") String[] titles, ExaminationDto examinationDto, Model model) {
+        examinationService.createExamination(examinationDto);
+
+        for(int i = 0; i < titles.length; i++){
+            examinationDto.setExaminationSelectTitle(titles[i]);
+            examinationDto.setExaminationSelectNum(i+1);
+            examinationDto.setExaminationIdx(examinationDto.getExaminationIdx());
+            examinationService.createExaminationSelect(examinationDto);
+        }
+        return "redirect:/admin/question/" + examinationDto.getExaminationChapterIdx();
+    }
+
+    /**
+     * 문제목록
+     */
+    @GetMapping("/question/{examinationChapterIdx}")
+    public String adminQuestion(@PathVariable int examinationChapterIdx, Model model) {
+        List<ExaminationDto> list = examinationService.findExaminationByChapter(examinationChapterIdx);
+        model.addAttribute("lists", list);
+        return "admin/question";
     }
 
     /**

@@ -8,11 +8,14 @@ import lombok.ToString;
 public class ExaminationDto {
     private int examinationIdx;
     private String question;
+    private int answer;
+    private int questionNumber;
 
     private int examinationAnswerIdx;
     private int isAnswer;
 
     private int examinationChapterIdx;
+    private int examination_chapter_idx;
     private String name;
 
     private int examinationMajorIdx;

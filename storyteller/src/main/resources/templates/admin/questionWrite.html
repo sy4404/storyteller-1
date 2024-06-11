@@ -1,0 +1,197 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/admin/include/head.html :: fragment-head}">
+</head>
+<style>
+    .btn-group {
+        display: flex;
+        width: 400px;
+        padding: 3px;
+        margin-bottom: 50px;
+    }
+
+    .btn-group input[type="radio"] {
+        display: none;
+    }
+
+    .btn-group label.btn {
+        padding: 5px 20px;
+        border: 1px solid #ccc;
+        cursor: pointer;
+        background-color: #f0f0f0;
+        margin: 0;
+        transition: background-color 0.3s;
+    }
+
+    .btn-group label.btn:hover {
+        background-color: #ddd;
+    }
+
+    .btn-group input[type="radio"]:checked + label.btn {
+        background-color: #007bff;
+        color: white;
+        border-color: #007bff;
+    }
+
+    .btn-group label.btn:first-of-type {
+        border-radius: 5px 0 0 5px;
+    }
+
+    .btn-group label.btn:last-of-type {
+        border-radius: 0 5px 5px 0;
+    }
+
+    .btn-group label.btn + label.btn {
+        border-left: 0;
+    }
+</style>
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <ul th:replace="~{/admin/include/nav.html :: fragment-nav}"> </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                <nav th:replace="~{/admin/include/topnav.html :: fragment-topnav}"></nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">모의고사</h1>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">모의고사 문제 등록</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive p-1">
+                                <form action="/admin/question-write" method="POST">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">질문</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="ex)임진왜란이 발발한 년도는?" name="question" required>
+                                    </div>
+                                    <hr>
+                                    <p style="margin-bottom: 5px; font-weight: bold;">객관식 항목 입력</p>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">항목 1번</span>
+                                        </div>
+                                        <input type="text" class="form-control" placeholder="ex)1900년" name="selectTitle" required>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">항목 2번</span>
+                                        </div>
+                                        <input type="text" class="form-control"  placeholder="ex)2000년" name="selectTitle" required>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">항목 3번</span>
+                                        </div>
+                                        <input type="text" class="form-control"  placeholder="ex)1762년" name="selectTitle" required>
+                                    </div>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">항목 4번</span>
+                                        </div>
+                                        <input type="text" class="form-control"  placeholder="ex)1592년" name="selectTitle" required>
+                                    </div>
+                                    <hr>
+                                    <p style="margin-bottom: 5px; font-weight: bold;">객관식 답안 입력</p>
+                                    <div class="btn-group">
+                                        <input type="radio" id="option1" name="answer" value="1" checked>
+                                        <label for="option1" class="btn" >1번</label>
+
+                                        <input type="radio" id="option2" name="answer" value="2">
+                                        <label for="option2" class="btn">2번</label>
+
+                                        <input type="radio" id="option3" name="answer" value="3">
+                                        <label for="option3" class="btn">3번</label>
+
+                                        <input type="radio" id="option4" name="answer" value="4">
+                                        <label for="option4" class="btn">4번</label>
+                                    </div>
+                                    <input type="hidden" name="examinationChapterIdx" th:value="${examinationChapterIdx}">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script th:src="@{vendor/jquery/jquery.min.js}"></script>
+    <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script th:src="@{js/sb-admin-2.min.js}"></script>
+
+    <!-- Page level plugins -->
+    <script th:src="@{vendor/datatables/jquery.dataTables.min.js}"></script>
+    <script th:src="@{vendor/datatables/dataTables.bootstrap4.min.js}"></script>
+
+    <!-- Page level custom scripts -->
+    <script th:src="@{js/demo/datatables-demo.js}"></script>
+
+</body>
+
+</html>

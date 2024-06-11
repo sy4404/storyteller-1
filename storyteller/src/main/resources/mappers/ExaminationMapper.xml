@@ -56,6 +56,45 @@
         SELECT *
             , ROW_NUMBER() OVER () AS question_number
         FROM luxury_storyteller.examination
-        WHERE examination_chapter_idx = 1;
+        WHERE examination_chapter_idx = #{examinationChapterIdx};
     </select>
+
+    <!--과목 등록-->
+    <insert id="createExaminationMajor" parameterType="com.luxury.storyteller.dto.ExaminationDto">
+        INSERT INTO examination_major (
+            examination_major_title
+        ) VALUES (
+            #{examinationMajorTitle}
+        )
+    </insert>
+
+    <!--챕터 등록-->
+    <insert id="createExaminationChapter" parameterType="com.luxury.storyteller.dto.ExaminationDto">
+        INSERT INTO examination_chapter (
+            examination_major_idx, name
+        ) VALUES (
+            #{examinationMajorIdx}, #{name}
+        )
+    </insert>
+
+    <!--문제 등록-->
+    <insert id="createExamination" parameterType="com.luxury.storyteller.dto.ExaminationDto">
+        <selectKey keyProperty="examinationIdx" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO examination (
+            examination_chapter_idx, question, answer
+        ) VALUES (
+            #{examinationChapterIdx}, #{question}, #{answer}
+        )
+    </insert>
+
+    <!--문제 항목 등록-->
+    <insert id="createExaminationSelect" parameterType="com.luxury.storyteller.dto.ExaminationDto">
+        INSERT INTO examination_select (
+            examination_idx, examination_select_num, examination_select_title
+        ) VALUES (
+            #{examinationIdx}, #{examinationSelectNum}, #{examinationSelectTitle}
+        )
+    </insert>
 </mapper>

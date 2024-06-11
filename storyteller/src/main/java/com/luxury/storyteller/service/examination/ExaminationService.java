@@ -50,6 +50,26 @@ public interface ExaminationService {
      */
     ExaminationDto findExaminationChapterByExaminationChapterIdx(int examinationChapterIdx);
 
+    /**
+     * 과목 등록
+     */
+    int createExaminationMajor(ExaminationDto examinationDto);
+
+    /**
+     * 챕터 등록
+     */
+    int createExaminationChapter(ExaminationDto examinationDto);
+
+
+    /**
+     * 문제 등록
+     */
+    int createExamination(ExaminationDto examinationDto);
+
+    /**
+     * 문제 항목 등록
+     */
+    int createExaminationSelect(ExaminationDto examinationDto);
 
 
 
