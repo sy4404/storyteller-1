@@ -2,9 +2,11 @@ package com.luxury.storyteller.web;
 
 import com.luxury.storyteller.dto.CommunityDto;
 import com.luxury.storyteller.dto.EbookDto;
+import com.luxury.storyteller.dto.ExaminationDto;
 import com.luxury.storyteller.dto.UserDto;
 import com.luxury.storyteller.service.community.CommunityService;
 import com.luxury.storyteller.service.ebook.EbookService;
+import com.luxury.storyteller.service.examination.ExaminationService;
 import com.luxury.storyteller.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,6 +26,7 @@ public class AdminController {
     private final UserService userService;
     private final CommunityService communityService;
     private final EbookService ebookService;
+    private final ExaminationService examinationService;
 
     /**
      * 메인페이지
@@ -235,6 +238,8 @@ public class AdminController {
      */
     @GetMapping("/examination")
     public String adminExamination(Model model) {
+        List<ExaminationDto> list = examinationService.findExaminationMajorAll();
+        model.addAttribute("lists", list);
         return "admin/examination";
     }
 

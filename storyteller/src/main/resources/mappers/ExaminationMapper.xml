@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.luxury.storyteller.mapper.ExaminationMapper">
 
-
     <select id="findExaminationChapterAll" resultType="com.luxury.storyteller.dto.ExaminationDto">
         SELECT * FROM examination_chapter;
     </select>
@@ -12,10 +11,34 @@
         SELECT * FROM examination_major;
     </select>
 
+    <!--과목 상세-->
+    <select id="findExaminationMajorByexaminationMajorIdx" parameterType="int" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT * FROM examination_major WHERE examination_major_idx = #{examinationMajorIdx};
+    </select>
+
+    <!-- 과목 수정 -->
+    <update id="modifyExaminationMajor" parameterType="com.luxury.storyteller.dto.ExaminationDto">
+        UPDATE examination_major
+            SET examination_major_title = #{examinationMajorTitle}
+        WHERE examination_major_idx = #{examinationMajorIdx}
+    </update>
+
     <!--과목의 챕터(중분류)-->
     <select id="findExaminationChapterByExaminationMajorIdx" parameterType="int" resultType="com.luxury.storyteller.dto.ExaminationDto">
         SELECT * FROM examination_chapter where examination_major_idx = #{examinationMajorIdx};
     </select>
+
+    <!--챕터 상세-->
+    <select id="findExaminationChapterByExaminationChapterIdx" parameterType="int" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT * FROM examination_chapter where examination_chapter_idx = #{examinationChapterIdx};
+    </select>
+
+    <!-- 챕터 수정 -->
+    <update id="modifyExaminationChapter" parameterType="com.luxury.storyteller.dto.ExaminationDto">
+        UPDATE examination_chapter
+            SET name = #{name}
+        WHERE examination_chapter_idx = #{examinationChapterIdx}
+    </update>
 
     <!--챕터의 번호별 문제-->
     <select id="findExaminationSelectByChapter" parameterType="com.luxury.storyteller.dto.ExaminationDto" resultType="com.luxury.storyteller.dto.ExaminationDto">

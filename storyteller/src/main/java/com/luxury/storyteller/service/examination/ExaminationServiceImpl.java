@@ -36,4 +36,24 @@ public class ExaminationServiceImpl implements ExaminationService{
     public List<ExaminationDto> findExaminationByChapter(int examinationChapterIdx) {
         return examinationMapper.findExaminationByChapter(examinationChapterIdx);
     }
+
+    @Override
+    public int modifyExaminationMajor(ExaminationDto examinationDto) {
+        return examinationMapper.modifyExaminationMajor(examinationDto);
+    }
+
+    @Override
+    public int modifyExaminationChapter(ExaminationDto examinationDto) {
+        return examinationMapper.modifyExaminationChapter(examinationDto);
+    }
+
+    @Override
+    public List<ExaminationDto> findExaminationMajorByexaminationMajorIdx(int examinationMajorIdx) {
+        return examinationMapper.findExaminationMajorByexaminationMajorIdx(examinationMajorIdx);
+    }
+
+    @Override
+    public List<ExaminationDto> findExaminationChapterByExaminationChapterIdx(int examinationChapterIdx) {
+        return examinationMapper.findExaminationChapterByExaminationChapterIdx(examinationChapterIdx);
+    }
 }

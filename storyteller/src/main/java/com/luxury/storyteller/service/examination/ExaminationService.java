@@ -30,6 +30,28 @@ public interface ExaminationService {
      */
     List<ExaminationDto> findExaminationByChapter(int examinationChapterIdx);
 
+    /**
+     * 과목 수정
+     */
+    int modifyExaminationMajor(ExaminationDto examinationDto);
+
+    /**
+     * 챕터 수정
+     */
+    int modifyExaminationChapter(ExaminationDto examinationDto);
+
+    /**
+     * 과목 상세
+     */
+    List<ExaminationDto> findExaminationMajorByexaminationMajorIdx(int examinationMajorIdx);
+
+    /**
+     * 챕터 상세
+     */
+    List<ExaminationDto> findExaminationChapterByExaminationChapterIdx(int examinationChapterIdx);
+
+
+
 
 
 
