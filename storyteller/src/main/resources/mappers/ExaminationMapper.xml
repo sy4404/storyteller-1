@@ -7,4 +7,32 @@
         SELECT * FROM examination_chapter;
     </select>
 
+    <!--과목 목록(대분류)-->
+    <select id="findExaminationMajorAll" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT * FROM examination_major;
+    </select>
+
+    <!--과목의 챕터(중분류)-->
+    <select id="findExaminationChapterByExaminationMajorIdx" parameterType="int" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT * FROM examination_chapter where examination_major_idx = #{examinationMajorIdx};
+    </select>
+
+    <!--챕터의 번호별 문제-->
+    <select id="findExaminationSelectByChapter" parameterType="com.luxury.storyteller.dto.ExaminationDto" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT *
+        FROM
+            examination_chapter AS chapter
+            LEFT JOIN examination AS ex ON ex.examination_chapter_idx = chapter.examination_chapter_idx
+            LEFT JOIN examination_select AS sel ON sel.examination_idx = ex.examination_idx
+        WHERE chapter.examination_chapter_idx = 1 AND sel.examination_idx = 1
+        ORDER BY ex.examination_idx, sel.examination_select_num
+    </select>
+
+    <!--챕터 모든 문제-->
+    <select id="findExaminationByChapter" parameterType="int" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT *
+            , ROW_NUMBER() OVER () AS question_number
+        FROM luxury_storyteller.examination
+        WHERE examination_chapter_idx = 1;
+    </select>
 </mapper>
