@@ -44,10 +44,10 @@ public interface ExaminationMapper {
     /**
      * 과목 상세
      */
-    List<ExaminationDto> findExaminationMajorByexaminationMajorIdx(int examinationMajorIdx);
+    ExaminationDto findExaminationMajorByexaminationMajorIdx(int examinationMajorIdx);
 
     /**
      * 챕터 상세
      */
-    List<ExaminationDto> findExaminationChapterByExaminationChapterIdx(int examinationChapterIdx);
+    ExaminationDto findExaminationChapterByExaminationChapterIdx(int examinationChapterIdx);
 }

@@ -244,7 +244,7 @@ public class AdminController {
     }
 
     /**
-     * 모의고사examination-write
+     * 모의고사 과목 등록
      */
     @GetMapping("/examination-write")
     public String adminExaminationWrite(Model model) {
@@ -252,11 +252,60 @@ public class AdminController {
     }
 
     /**
-     * 교재관리
+     * 모의고사 과목 수정
      */
-    @GetMapping("/examination2")
-    public String adminExamination2(Model model) {
+    @GetMapping("/examination-edit/{examinationMajorIdx}")
+    public String adminExaminationEdit(@PathVariable int examinationMajorIdx, Model model) {
+        ExaminationDto detail = examinationService.findExaminationMajorByexaminationMajorIdx(examinationMajorIdx);
+        model.addAttribute("detail", detail);
+        return "admin/examinationEdit";
+    }
+
+    /**
+     * 모의고사 과목 수정
+     */
+    @PostMapping("/examination-edit")
+    public String adminExaminationPostEdit(ExaminationDto examinationDto, Model model) {
+        examinationService.modifyExaminationMajor(examinationDto);
+        return "redirect:/admin/examination";
+    }
+
+    /**
+     * 챕터관리
+     */
+    @GetMapping("/examination2/{examinationMajorIdx}")
+    public String adminExamination2(@PathVariable int examinationMajorIdx, Model model) {
+        List<ExaminationDto> list = examinationService.findExaminationChapterByExaminationMajorIdx(examinationMajorIdx);
+        model.addAttribute("lists", list);
         return "admin/examination2";
+    }
+
+    /**
+     * 모의고사 챕터 등록
+     */
+    @GetMapping("/examination2-write/{examinationMajorIdx}")
+    public String adminExamination2Write(@PathVariable int examinationMajorIdx, Model model) {
+        model.addAttribute("examinationMajorIdx", examinationMajorIdx);
+        return "admin/examination2Write";
+    }
+
+    /**
+     * 모의고사 챕터 수정
+     */
+    @GetMapping("/examination2-edit/{examinationChapterIdx}")
+    public String adminExamination2Edit(@PathVariable int examinationChapterIdx, Model model) {
+        ExaminationDto detail = examinationService.findExaminationChapterByExaminationChapterIdx(examinationChapterIdx);
+        model.addAttribute("detail", detail);
+        return "admin/examination2Edit";
+    }
+
+    /**
+     * 모의고사 챕터 수정
+     */
+    @PostMapping("/examination2-edit")
+    public String adminExamination2PostEdit(ExaminationDto examinationDto, Model model) {
+        examinationService.modifyExaminationChapter(examinationDto);
+        return "redirect:/admin/examination2/" + examinationDto.getExaminationMajorIdx();
     }
 
     /**

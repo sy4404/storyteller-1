@@ -48,12 +48,12 @@ public class ExaminationServiceImpl implements ExaminationService{
     }
 
     @Override
-    public List<ExaminationDto> findExaminationMajorByexaminationMajorIdx(int examinationMajorIdx) {
+    public ExaminationDto findExaminationMajorByexaminationMajorIdx(int examinationMajorIdx) {
         return examinationMapper.findExaminationMajorByexaminationMajorIdx(examinationMajorIdx);
     }
 
     @Override
-    public List<ExaminationDto> findExaminationChapterByExaminationChapterIdx(int examinationChapterIdx) {
+    public ExaminationDto findExaminationChapterByExaminationChapterIdx(int examinationChapterIdx) {
         return examinationMapper.findExaminationChapterByExaminationChapterIdx(examinationChapterIdx);
     }
 }
