@@ -13,20 +13,10 @@
         <h2>과목 선택</h2>
     </div>
     <div class="py-20">
-        <div class="ebookBeforeBox">
+        <div class="ebookBeforeBox" th:each="item ,list : ${lists}" th:onclick="|location.href='/examination/${item.examinationMajorIdx}'|">
             <div class="d-flex justify-content-between">
                 <div class="ebookTextWrap">
-                    <h3>이순신 교육 모의고사</h3>
-                </div>
-                <div>
-                    <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
-                </div>
-            </div>
-        </div>
-        <div class="ebookBeforeBox mt-3 ">
-            <div class="d-flex justify-content-between">
-                <div class="ebookTextWrap">
-                    <h3>퍼포먼스 교육 모의고사</h3>
+                    <h3 th:text="${item.examinationMajorTitle}">퍼포먼스 교육 모의고사</h3>
                 </div>
                 <div>
                     <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
