@@ -97,4 +97,39 @@
             #{examinationIdx}, #{examinationSelectNum}, #{examinationSelectTitle}
         )
     </insert>
+
+    <!--문제 상세-->
+    <select id="findExaminationByExaminationIdx" parameterType="int" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT * FROM luxury_storyteller.examination WHERE examination_idx = #{examinationIdx};
+    </select>
+
+    <!--문제 상세(항목)-->
+    <select id="findexaminationSelectByExaminationIdx" parameterType="int" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT * FROM luxury_storyteller.examination_select where examination_idx = #{examinationIdx}
+    </select>
+
+    <!--항목 삭제-->
+    <delete id="deleteExaminationSelectByExaminationIdx" parameterType="int" >
+        DELETE FROM examination_select WHERE examination_idx = #{examinationIdx}
+    </delete>
+
+    <!-- 문제 수정 -->
+    <update id="modifyExamination" parameterType="com.luxury.storyteller.dto.ExaminationDto">
+        UPDATE examination
+        SET question = #{question}
+            , answer = #{answer}
+        WHERE examination_idx = #{examinationIdx}
+    </update>
 </mapper>
+
+
+
+
+
+
+
+
+
+
+
+

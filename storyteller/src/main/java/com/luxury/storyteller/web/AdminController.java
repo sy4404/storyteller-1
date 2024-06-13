@@ -335,6 +335,40 @@ public class AdminController {
     /**
      * 문제목록
      */
+    @GetMapping("/question-edit/{examinationIdx}")
+    public String adminQuestionEdit(@PathVariable int examinationIdx, Model model) {
+        ExaminationDto detail = examinationService.findExaminationByExaminationIdx(examinationIdx);
+        List<ExaminationDto> list = examinationService.findexaminationSelectByExaminationIdx(examinationIdx);
+
+        model.addAttribute("detail", detail);
+        model.addAttribute("lists", list);
+
+        return "admin/questionEdit";
+    }
+
+    /**
+     * 문제목록
+     */
+    @PostMapping("/question-edit")
+    public String adminQuestionPostEdit(@RequestParam("selectTitle") String[] titles, ExaminationDto examinationDto, Model model) {
+
+        examinationService.deleteExaminationSelectByExaminationIdx(examinationDto.getExaminationIdx());
+        examinationService.modifyExamination(examinationDto);
+
+        for(int i = 0; i < titles.length; i++){
+            examinationDto.setExaminationSelectTitle(titles[i]);
+            examinationDto.setExaminationSelectNum(i+1);
+            examinationDto.setExaminationIdx(examinationDto.getExaminationIdx());
+            examinationService.createExaminationSelect(examinationDto);
+        }
+
+
+        return "redirect:/admin/question/" + examinationDto.getExaminationChapterIdx();
+    }
+
+    /**
+     * 문제목록
+     */
     @PostMapping("/question-write")
     public String adminQuestionPostWrite(@RequestParam("selectTitle") String[] titles, ExaminationDto examinationDto, Model model) {
         examinationService.createExamination(examinationDto);

@@ -45,9 +45,9 @@
                                     </thead>
                                     <tbody>
                                         <tr th:each="item ,list : ${lists}">
-                                            <td th:text="${item.questionNumber}+'번문제'">1</td>
-                                            <td th:text="${item.question}">System Architect</td>
-                                            <td th:text="${item.answer}+'번'"></td>
+                                            <td th:text="${item.questionNumber}+'번문제'" th:onclick="|location.href='/admin/question-edit/${item.examinationIdx}'|">1</td>
+                                            <td th:text="${item.question}" th:onclick="|location.href='/admin/question-edit/${item.examinationIdx}'|">System Architect</td>
+                                            <td th:text="${item.answer}+'번'" th:onclick="|location.href='/admin/question-edit/${item.examinationIdx}'|"></td>
                                             <td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
                                         </tr>
                                     </tbody>

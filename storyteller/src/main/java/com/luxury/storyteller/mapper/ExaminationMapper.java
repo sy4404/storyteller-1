@@ -70,4 +70,24 @@ public interface ExaminationMapper {
      * 문제 항목 등록
      */
     int createExaminationSelect(ExaminationDto examinationDto);
+
+    /**
+     * 문제 상세
+     */
+    ExaminationDto findExaminationByExaminationIdx(int examinationIdx);
+
+    /**
+     * 문제 상세(항목)
+     */
+    List<ExaminationDto> findexaminationSelectByExaminationIdx(int examinationIdx);
+
+    /**
+     * 항목삭제
+     */
+    int deleteExaminationSelectByExaminationIdx(int examinationIdx);
+
+    /**
+     * 문제 수정
+     */
+    int modifyExamination(ExaminationDto examinationDto);
 }
