@@ -12,6 +12,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 @Controller
@@ -135,4 +140,15 @@ public class UserController {
         return "user/infoModify";
     }
 
+    //checkDuplicateId
+    @ResponseBody
+    @PostMapping("/checkDuplicateId")
+    public Map<String, Boolean> checkDuplicateId(@RequestBody Map<String, String> request) {
+        String id = request.get("id");
+        System.out.println("============" + id);
+        boolean isDuplicate = userService.isDuplicateId(id); // UserService의 메서드로 아이디 중복 여부 확인
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("isDuplicate", isDuplicate);
+        return response;
+    }
 }

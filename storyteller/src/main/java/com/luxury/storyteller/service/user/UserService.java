@@ -35,4 +35,5 @@ public interface UserService {
      */
     List<UserDto> findByUserAll();
 
+    boolean isDuplicateId(String id);
 }

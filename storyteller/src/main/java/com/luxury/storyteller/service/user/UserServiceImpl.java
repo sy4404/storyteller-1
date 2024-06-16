@@ -47,4 +47,10 @@ public class UserServiceImpl implements UserService{
     public List<UserDto> findByUserAll() {
         return userMapper.findByUserAll();
     }
+
+    @Override
+    public boolean isDuplicateId(String id) {
+        int count = userMapper.isDuplicateId(id);
+        return count == 0;
+    }
 }

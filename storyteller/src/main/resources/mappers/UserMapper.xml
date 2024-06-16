@@ -38,4 +38,8 @@
         SELECT * FROM user WHERE role = 'ROLE_USER' ORDER BY user_idx desc;
     </select>
 
+    <select id="isDuplicateId" resultType="com.luxury.storyteller.dto.UserDto" parameterType="int">
+        SELECT count(*) FROM user WHERE id = #{id}
+    </select>
+
 </mapper>

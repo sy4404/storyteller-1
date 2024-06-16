@@ -17,4 +17,6 @@ public interface UserMapper {
      * 회원 목록
      */
     List<UserDto> findByUserAll();
+
+    int isDuplicateId(String id);
 }
