@@ -27,7 +27,7 @@ public class LectureController {
     public String lectureListPage(Model model) {
 
         List<LectureDto> list = lectureService.findLectureListAll();
-        model.addAttribute("list", list);
+        model.addAttribute("lists", list);
 
         return "lecture/list";
     }
@@ -36,8 +36,9 @@ public class LectureController {
      * 동영상 강의 상세 페이지
      */
     @GetMapping("{lectureIdx}")
-    public String lectureInfoPage(@PathVariable int lectureIdx) {
-
+    public String lectureInfoPage(@PathVariable int lectureIdx, Model model) {
+        LectureDto detail = lectureService.findLectureByLectureIdx(lectureIdx);
+        model.addAttribute("detail", detail);
         return "lecture/info";
     }
 }

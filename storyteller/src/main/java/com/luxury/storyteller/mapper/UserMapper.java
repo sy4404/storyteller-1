@@ -19,4 +19,11 @@ public interface UserMapper {
     List<UserDto> findByUserAll();
 
     int isDuplicateId(String id);
+
+    int userModifyUser(UserDto userDto);
+
+    /**
+     * 비밀번호변경
+     */
+    int pwdModify(UserDto userDto);
 }

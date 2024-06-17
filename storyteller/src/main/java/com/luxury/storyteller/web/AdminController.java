@@ -1,19 +1,31 @@
 package com.luxury.storyteller.web;
 
-import com.luxury.storyteller.dto.CommunityDto;
-import com.luxury.storyteller.dto.EbookDto;
-import com.luxury.storyteller.dto.ExaminationDto;
-import com.luxury.storyteller.dto.UserDto;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.Session;
+import com.luxury.storyteller.dto.*;
+import com.luxury.storyteller.service.UploadService;
 import com.luxury.storyteller.service.community.CommunityService;
 import com.luxury.storyteller.service.ebook.EbookService;
 import com.luxury.storyteller.service.examination.ExaminationService;
+import com.luxury.storyteller.service.lecture.LectureService;
 import com.luxury.storyteller.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Properties;
 
 
 @Controller
@@ -24,12 +36,23 @@ public class AdminController {
     private final CommunityService communityService;
     private final EbookService ebookService;
     private final ExaminationService examinationService;
+    private final LectureService lectureService;
+    private final UploadService uploadService;
+
+    @Value("${ftp.ip}")
+    protected String ftpIp;
+
+
+
 
     /**
      * 메인페이지
      */
     @GetMapping("/index")
     public String mainPage(Model model) {
+       // System.out.println(ftpIp);
+
+
         return "admin/index";
     }
 
@@ -61,6 +84,43 @@ public class AdminController {
         model.addAttribute("detail", detail);
 
         return "admin/usersInfo";
+    }
+
+    /**
+     * 회원 수정
+     */
+    @PostMapping("/user-edit")
+    public String adminUsersEdit(@RequestParam("files") MultipartFile files, UserDto userDto) {
+        if (!files.isEmpty()) {
+            String fileUUID = uploadService.uploadFileToServer(files, "/var/lib/tomcat9/webapps/img/storyteller/user");
+            userDto.setProfileUrl(ftpIp + ":8080/img/storyteller/user/" + fileUUID);
+
+//            String videoFilePath = "C:\\file\\test.mp4"; // 동영상 파일 경로
+//            String thumbnailFilePath = "C:\\file\\thumbnail.jpg"; // 썸네일 저장 경로
+//
+//            //String videoFilePath = "/var/lib/tomcat9/webapps/img/storyteller/user/" + fileUUID;
+//            //String thumbnailFilePath = "/var/lib/tomcat9/webapps/img/storyteller/user/thumbnail/thumbnail_" + fileUUID;
+//
+//            userDto.setProfileUrl(ftpIp + ":8080/img/storyteller/user/" + fileUUID);
+//
+//            try {
+//                uploadService.generateThumbnail(videoFilePath, thumbnailFilePath);
+//                String time = uploadService.getVideoDuration(videoFilePath);// 재생시간
+//                System.out.println("재생시간: " + time);
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+
+        }else{
+            userDto.setProfileUrl("null");
+        }
+
+
+
+        userService.modifyUser(userDto);
+
+
+        return "redirect:/admin/users";
     }
 
     /**
@@ -219,6 +279,8 @@ public class AdminController {
      */
     @GetMapping("/lecture")
     public String adminLecture(Model model) {
+        List<LectureDto> list = lectureService.findLectureListAll();
+        model.addAttribute("lists", list);
         return "admin/lecture";
     }
 
@@ -228,6 +290,40 @@ public class AdminController {
     @GetMapping("/lecture-write")
     public String adminLectureWrite(Model model) {
         return "admin/lectureWrite";
+    }
+
+    /**
+     * 교재관리
+     */
+    @PostMapping("/lecture-write")
+    public String adminLecturePostWrite(@RequestParam("files") MultipartFile files, LectureDto lectureDto) {
+
+        if (!files.isEmpty()) {
+            String fileUUID = uploadService.uploadFileToServer(files, "/var/lib/tomcat9/webapps/img/storyteller/lecture");
+            lectureDto.setVideoUrl(ftpIp + ":8080/img/storyteller/lecture/" + fileUUID);
+
+            String videoFilePath = "C:\\file\\test.mp4"; // 동영상 파일 경로
+            String thumbnailFilePath = "C:\\file\\thumbnail.jpg"; // 썸네일 저장 경로
+
+            //String videoFilePath = "/var/lib/tomcat9/webapps/img/storyteller/user/" + fileUUID;
+            //String thumbnailFilePath = "/var/lib/tomcat9/webapps/img/storyteller/user/thumbnail/thumbnail_" + fileUUID;
+
+            lectureDto.setThumbnailUrl(ftpIp + ":8080/img/storyteller/lecture/thumbnail/thumbnail_" + removeExtension(fileUUID)+".jpg");
+
+            try {
+                uploadService.generateThumbnail(videoFilePath, thumbnailFilePath);
+                String time = uploadService.getVideoDuration(videoFilePath);// 재생시간
+                lectureDto.setWatchingTile(time);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+        lectureService.createLecture(lectureDto);
+
+
+        return "redirect:/admin/lecture";
     }
 
     /**
@@ -406,5 +502,13 @@ public class AdminController {
     @GetMapping("/attendance")
     public String adminAttendance(Model model) {
         return "admin/attendance";
+    }
+
+    public static String removeExtension(String filename) {
+        if (filename == null) return null;
+        int lastDotIndex = filename.lastIndexOf('.');
+        if (lastDotIndex == -1) return filename; // 확장자가 없는 경우
+
+        return filename.substring(0, lastDotIndex);
     }
 }

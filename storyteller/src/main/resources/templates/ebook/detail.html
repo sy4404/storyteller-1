@@ -1,6 +1,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
 <link th:href="@{/css/ebook/list.css}" rel="stylesheet" type="text/css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.min.js"></script>
+<style>
+    body, html {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+    }
+    #pdfViewer {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch; /* iOS 스크롤 부드럽게 하기 */
+    }
+    canvas {
+        width: 100%;
+        display: block;
+        margin: 0 auto;
+    }
+</style>
 <body>
 <div class="mainPageBody pb-4">
     <div class="header">
@@ -10,12 +30,51 @@
         <h1 th:text="${lists.ebookTitle}">이순신 강의 교재</h1>
     </div>
     <div class="py-20">
-<!--        <iframe th:src="@{/pdfjs-4.3.136-dist/web/viewer.html?file=http://1.234.5.102:8080/img/storyteller/ebook/pdf/testpdf.pdf}"></iframe>-->
-        <iframe src="/pdfjs-4.3.136-dist/web/viewer.html?file=/img/testpdf1.pdf"></iframe>
+        <div id="pdfViewer"></div>
     </div>
-
-    
 </div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var pdfUrl = [[${lists.ebookUrl}]];
+    var pdfjsLib = window['pdfjs-dist/build/pdf'];
+    pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.8.335/pdf.worker.min.js';
+
+    var loadingTask = pdfjsLib.getDocument(pdfUrl);
+    loadingTask.promise.then(function(pdf) {
+        console.log('PDF loaded');
+
+        var container = document.getElementById('pdfViewer');
+        var renderPage = function(pageNum) {
+            pdf.getPage(pageNum).then(function(page) {
+                var scale = 1.5;
+                var viewport = page.getViewport({ scale: scale });
+
+                var canvas = document.createElement('canvas');
+                var context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                container.appendChild(canvas);
+
+                var renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext).promise.then(function() {
+                    console.log('Page rendered');
+                });
+            });
+        };
+
+        for (var pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+            renderPage(pageNum);
+        }
+    }, function(reason) {
+        console.error(reason);
+    });
+    /*]]>*/
+</script>
+
 </body>
 
 </html>

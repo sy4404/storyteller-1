@@ -47,38 +47,54 @@
         <h1>개인 정보 수정</h1>
     </div>
     <div class="contentWrap">
-        <h2 style="font-size: 18px;">회원 정보 변경</h2>
+        <h2 style="font-size: 18px;">비밀번호 변경</h2>
     </div>
     <div class="formWrap">
-        <form action="/user/edit" method="POST"  enctype="multipart/form-data" onsubmit="return checks()">
-            <div class="profile-container">
-                <div class="profile-wrapper">
-                    <img id="profileImage" th:src="'http://'+${detail.profileUrl}" alt="Profile Image"  onerror="this.onerror=null; this.src='http://1.234.5.102:8080/img/storyteller/noimg.png';">
-                    <input type="file" id="fileInput" name="files">
-                    <div class="edit-icon">
-                        <img th:src="@{/img/icon_select_photo.png}" />
-                    </div>
-                </div>
-            </div>
-            <label class="" for="id">이름</label><br>
-            <input type="text" class="" id="id" name="id" placeholder="아이디" th:value="${detail.name}" disabled>
-            <p class="idSubText">* 개명 등의 사유로 이름 변경이 필요한 경우 관리자에게 연락바랍니다.</p>
+        <form action="/user/pwdEdit" method="POST" onsubmit="return checks()">
 
-            <label class="mt-3" for="phoneNumber">휴대폰번호*</label><br>
-            <input type="text" class="" id="phoneNumber" name="phoneNumber" placeholder="‘-‘(하이픈) 제외 입력" th:value="${detail.phoneNumber}" required>
+            <label class="mt-3" for="pw">비밀번호*</label><br>
+            <input type="password" class="" id="pw" name="password" placeholder="숫자, 영문, 특수문자 조합 최소 8자~20자">
+
+            <label class="mt-3" for="pw2">비밀번호 확인*</label><br>
+            <input type="password" class="" id="pw2" name="" placeholder="비밀번호 재입력">
+
             <input type="hidden" th:value="${detail.userIdx}" name="userIdx">
             <input type="submit" class="submitBtn" value="정보수정">
         </form>
     </div>
 </div>
-
 <script>
     function checks(){
 
-        return confirm("정보를 수정하시겠습니까?");
+        var passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,20}$/;
+
+        if(confirm("비밀번호를 변경하시겠습니까?")){
+            if($("#pw").val() == ""){
+                alert("비밀번호를 입력해주세요.");
+                $("#pw").focus();
+                return false;
+            }
+
+            if (!passwordPattern.test($("#pw").val())) {
+                alert("비밀번호는 숫자, 영문, 특수문자 조합 최소 8자~20자로 입력해주세요.");
+                $("#pw").focus();
+                return false;
+            }
+
+            if($("#pw2").val() == ""){
+                alert("비밀번호 확인을 입력해주세요.");
+                $("#pw2").focus();
+                return false;
+            }
+            return true;
+        }else {
+            return false;
+        }
+
+
+
     }
 </script>
-
 <script>
     const profileWrapper = document.querySelector('.profile-wrapper');
     const profileImage = document.getElementById('profileImage');

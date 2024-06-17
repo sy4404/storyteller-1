@@ -38,13 +38,15 @@
                                     <thead>
                                         <tr>
                                             <th>NO</th>
-                                            <th>교재</th>
+                                            <th>강의명</th>
+                                            <th>설명</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>System Architect</td>
+                                        <tr th:each="item ,list : ${lists}">
+                                            <td th:text="${list.count}">1</td>
+                                            <td th:text="${item.title}">System Architect</td>
+                                            <td th:text="${item.content}">System Architect</td>
                                         </tr>
                                     </tbody>
                                 </table>

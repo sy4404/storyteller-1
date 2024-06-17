@@ -36,6 +36,37 @@
         border: 1px solid #ddd;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     }
+
+    body.loading {
+        overflow: hidden;
+    }
+
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
+
+    .spinner {
+        border: 16px solid #f3f3f3;
+        border-top: 16px solid #3498db;
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
 </style>
 <body id="page-top">
 
@@ -67,34 +98,44 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <form action="/action_page.php" style="width: 500px; margin: 0 auto;">
+                                <form id="uploadForm" action="/admin/user-edit" style="width: 500px; margin: 0 auto;" method="POST" enctype="multipart/form-data">
                                     <div class="profile-container">
                                         <div class="profile-wrapper">
-                                            <img id="profileImage" src="https://via.placeholder.com/150?text=No+Image" alt="Profile Image">
-                                            <input type="file" id="fileInput" accept="image/*">
+                                            <img id="profileImage" th:src="'http://'+${detail.profileUrl}" alt="Profile Image"  onerror="this.onerror=null; this.src='http://1.234.5.102:8080/img/storyteller/noimg.png';">
+                                            <input type="file" id="fileInput" name="files">
                                             <i class="fa-solid fa-camera edit-icon"></i>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label for="id">아이디:</label>
-                                        <input type="text" class="form-control" id="id" placeholder="과목명" name="uname" th:value="${detail.id}" required>
+                                        <input type="text" class="form-control" id="id" placeholder="아이디" name="id" th:value="${detail.id}" required readonly>
                                         <label for="name">이름:</label>
-                                        <input type="text" class="form-control" id="name" placeholder="과목명" name="uname" th:value="${detail.name}" required>
+                                        <input type="text" class="form-control" id="name" placeholder="이름" name="name" th:value="${detail.name}" required>
                                         <label for="phone">연락처:</label>
-                                        <input type="tel" class="form-control" id="phone" placeholder="과목명" name="uname" th:value="${detail.phoneNumber}" required>
+                                        <input type="tel" class="form-control" id="phone" placeholder="연락처" name="phoneNumber" th:value="${detail.phoneNumber}" required>
                                     </div>
+                                    <input type="hidden" name="userIdx" th:value="${detail.userIdx}">
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
+
+                                <div id="overlay" class="overlay" style="display: none;">
+                                    <div class="spinner"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
                 <!-- /.container-fluid -->
-
             </div>
             <!-- End of Main Content -->
 
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            document.body.classList.add('loading');
+            document.getElementById('overlay').style.display = 'flex';
+        });
+    </script>
 
     <script>
         const profileWrapper = document.querySelector('.profile-wrapper');

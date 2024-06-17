@@ -21,6 +21,11 @@ public interface UserService {
     int modifyUser(UserDto userDto);
 
     /**
+     * 해당 회원 정보 수정
+     */
+    int userModifyUser(UserDto userDto);
+
+    /**
      * 아이디, 휴대폰번호로 아이디찾기
      */
     UserDto findUserByIdAndPhoneNumber(UserDto userDto);
@@ -36,4 +41,9 @@ public interface UserService {
     List<UserDto> findByUserAll();
 
     boolean isDuplicateId(String id);
+
+    /**
+     * 비밀번호변경
+     */
+    int pwdModify(UserDto userDto);
 }

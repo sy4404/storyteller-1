@@ -15,7 +15,7 @@
     <div class="py-20">
         <div class="infoBoxWrap">
             <div class="infoBoxImgWrap">
-                <img th:src="@{/img/profile_img1@2x.png}" class="headerBackBtn" alt="프로필">
+                <img th:src="'http://'+${detail.profileUrl}" class="headerBackBtn" alt="프로필">
             </div>
             <div class="infoBoxContentWrap">
                 <h2 th:text="${detail.name}">김요한</h2>
@@ -28,6 +28,16 @@
                 <div class="d-flex justify-content-between">
                     <div class="ebookTextWrap">
                         <h3>개인 정보 수정</h3>
+                    </div>
+                    <div>
+                        <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">
+                    </div>
+                </div>
+            </div>
+            <div class="ebookBeforeBox mt-3" onclick="location.href='/user/infoPwd'" >
+                <div class="d-flex justify-content-between">
+                    <div class="ebookTextWrap">
+                        <h3>비밀번호변경</h3>
                     </div>
                     <div>
                         <img th:src="@{/img/icon_go@2x.png}" class="ebooKListDetailImg" alt="화살표">

@@ -11,13 +11,39 @@
         )
     </insert>
 
+<!--    <update id="modifyUser" parameterType="com.luxury.storyteller.dto.UserDto">-->
+<!--        UPDATE-->
+<!--            user-->
+<!--        SET-->
+<!--            password = #{password},-->
+<!--            phone_number = #{phoneNumber},-->
+<!--            profile_url = #{profileUrl}-->
+<!--        WHERE-->
+<!--            user_idx = #{userIdx}-->
+<!--    </update>-->
+
     <update id="modifyUser" parameterType="com.luxury.storyteller.dto.UserDto">
         UPDATE
             user
         SET
-            password = #{password},
-            phone_number = #{phoneNumber},
-            profile_url = #{profileUrl}
+            id = #{id}
+            , name = #{name}
+            , phone_number = #{phoneNumber}
+            <if test="profileUrl != 'null'">
+                , profile_url = #{profileUrl}
+            </if>
+        WHERE
+            user_idx = #{userIdx}
+    </update>
+
+    <update id="userModifyUser" parameterType="com.luxury.storyteller.dto.UserDto">
+        UPDATE
+            user
+        SET
+            phone_number = #{phoneNumber}
+            <if test="profileUrl != 'null'">
+                , profile_url = #{profileUrl}
+            </if>
         WHERE
             user_idx = #{userIdx}
     </update>
@@ -41,5 +67,15 @@
     <select id="isDuplicateId" resultType="com.luxury.storyteller.dto.UserDto" parameterType="int">
         SELECT count(*) FROM user WHERE id = #{id}
     </select>
+<!--pwdModify-->
+
+    <update id="pwdModify" parameterType="com.luxury.storyteller.dto.UserDto">
+        UPDATE
+            user
+        SET
+            password = #{password}
+        WHERE
+            user_idx = #{userIdx}
+    </update>
 
 </mapper>

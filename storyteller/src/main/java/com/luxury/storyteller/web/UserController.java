@@ -3,17 +3,17 @@ package com.luxury.storyteller.web;
 import com.luxury.storyteller.config.auth.PrincipalDetails;
 import com.luxury.storyteller.dto.CommunityDto;
 import com.luxury.storyteller.dto.UserDto;
+import com.luxury.storyteller.service.UploadService;
 import com.luxury.storyteller.service.community.CommunityService;
 import com.luxury.storyteller.service.user.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,6 +25,11 @@ public class UserController {
 
     private final UserService userService;
     private final CommunityService communityService;
+
+    private final UploadService uploadService;
+
+    @Value("${ftp.ip}")
+    protected String ftpIp;
 
     /**
      * 메인페이지
@@ -138,6 +143,47 @@ public class UserController {
         model.addAttribute("detail", detail);
 
         return "user/infoModify";
+    }
+
+    /**
+     * 개인정보 수정 페이지
+     */
+    @GetMapping("/user/infoPwd")
+    public String userInfoPwd(@AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+
+        UserDto detail = userService.findUserByUserIdx(principalDetails.getUserIdx());
+        model.addAttribute("detail", detail);
+
+        return "user/infoPwd";
+    }
+
+    /**
+     * 개인정보 수정 페이지
+     */
+    @PostMapping("/user/edit")
+    public String userInfoModify(@RequestParam("files") MultipartFile files, UserDto userDto) {
+        if (!files.isEmpty()) {
+            String fileUUID = uploadService.uploadFileToServer(files, "/var/lib/tomcat9/webapps/img/storyteller/user");
+            userDto.setProfileUrl(ftpIp + ":8080/img/storyteller/user/" + fileUUID);
+
+        }else{
+            userDto.setProfileUrl("null");
+        }
+
+        userService.userModifyUser(userDto);
+
+        return "redirect:/user/info";
+    }
+
+    /**
+     * 개인정보 수정 페이지
+     */
+    @PostMapping("/user/pwdEdit")
+    public String userInfoPwdModify(UserDto userDto) {
+
+        userService.pwdModify(userDto);
+
+        return "redirect:/user/info";
     }
 
     //checkDuplicateId

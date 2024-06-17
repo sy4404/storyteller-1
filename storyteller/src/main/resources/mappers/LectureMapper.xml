@@ -12,9 +12,9 @@
 
     <insert id="createLecture" parameterType="com.luxury.storyteller.dto.LectureDto">
         INSERT INTO lecture (
-            title, content, video_url, watching_tile
+            title, content, video_url, watching_tile, thumbnail_url
         ) VALUES (
-            #{title}, #{content}, #{videoUrl}, #{watchingTile}
+            #{title}, #{content}, #{videoUrl}, #{watchingTile}, #{thumbnailUrl}
         )
     </insert>
 

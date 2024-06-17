@@ -29,8 +29,13 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public int modifyUser(UserDto userDto) {
-        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        //userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userMapper.modifyUser(userDto);
+    }
+
+    @Override
+    public int userModifyUser(UserDto userDto) {
+        return userMapper.userModifyUser(userDto);
     }
 
     @Override
@@ -52,5 +57,11 @@ public class UserServiceImpl implements UserService{
     public boolean isDuplicateId(String id) {
         int count = userMapper.isDuplicateId(id);
         return count == 0;
+    }
+
+    @Override
+    public int pwdModify(UserDto userDto) {
+        userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        return userMapper.pwdModify(userDto);
     }
 }

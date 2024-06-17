@@ -13,59 +13,40 @@
         <h2>강의 영상</h2>
     </div>
     <div class="py-20">
-        <div class="lectureListBox">
+        <div class="lectureListBox" th:each="item, list : ${lists}" th:onclick="'location.href=\'/lecture/' + ${item.lectureIdx} + '\''">
             <div class="lectureImgBox">
-                <div class="lectureThumbnail"><img th:src="@{/img/qna_sample_image3@2x.png}" alt="동영상 썸네일" ></div>
+                <div class="lectureThumbnail"><img th:src="'http://'+${item.thumbnailUrl}" alt="동영상 썸네일" ></div>
                 <div class="lecturePlayBtn"><img th:src="@{/img/icon_video_play2@2x.png}" alt="재생버튼" ></div>
             </div>
-            <div class="lectureContentBox">
-                <h2>이순신 교육 영상 -OT</h2>
-                <p>강의 Orientation</p>
+            <div class="lectureContentBox" >
+                <h2 th:text="${item.title}">이순신 교육 영상 -OT</h2>
+                <p th:text="${item.content}">강의 Orientation</p>
                 <div class="lectureBottomContent">
                     <div>
                         <img th:src="@{/img/icon_video_play@2x.png}" alt="재생 화살표">
                         <p>수강하기</p>
                     </div>
-                    <p class="lectureBottomContentTime">00:32:00</p>
-                </div>
-            </div>
-        </div>
-        <div class="lectureListBox">
-            <div class="lectureImgBox">
-                <div class="lectureThumbnail"><img th:src="@{/img/qna_sample_image3@2x.png}" alt="동영상 썸네일" ></div>
-                <div class="lecturePlayBtn"><img th:src="@{/img/icon_video_play2@2x.png}" alt="재생버튼" ></div>
-            </div>
-            <div class="lectureContentBox">
-                <h2>이순신 교육 영상 -OT</h2>
-                <p>강의 Orientation</p>
-                <div class="lectureBottomContent">
-                    <div>
-                        <img th:src="@{/img/icon_video_play@2x.png}" alt="재생 화살표">
-                        <p>수강하기</p>
-                    </div>
-                    <p class="lectureBottomContentTime">00:32:00</p>
-                </div>
-            </div>
-        </div>
-        <div class="lectureListBox">
-            <div class="lectureImgBox">
-                <div class="lectureThumbnail"><img th:src="@{/img/qna_sample_image3@2x.png}" alt="동영상 썸네일" ></div>
-                <div class="lecturePlayBtn"><img th:src="@{/img/icon_video_play2@2x.png}" alt="재생버튼" ></div>
-            </div>
-            <div class="lectureContentBox">
-                <h2>이순신 교육 영상 -OT</h2>
-                <p>강의 Orientation</p>
-                <div class="lectureBottomContent">
-                    <div>
-                        <img th:src="@{/img/icon_video_play@2x.png}" alt="재생 화살표">
-                        <p>수강하기</p>
-                    </div>
-                    <p class="lectureBottomContentTime">00:32:00</p>
+                    <p class="lectureBottomContentTime" th:text="${item.watchingTile}">00:32:00</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script th:inline="javascript">
+    function playVideo(videoUrl) {
+        // 비디오 재생을 위한 코드 추가
+        // 예: 비디오 요소에 소스 설정 후 재생
+        var videoPlayer = document.createElement('video');
+        videoPlayer.src = videoUrl;
+        videoPlayer.controls = true;
+        videoPlayer.autoplay = true;
+        videoPlayer.style.width = '100%'; // 비디오가 꽉 차게 설정
+        videoPlayer.style.height = 'auto';
+
+        // 현재 페이지의 body에 비디오 요소 추가
+        document.body.appendChild(videoPlayer);
+    }
+</script>
 </body>
 
 </html>

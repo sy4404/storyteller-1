@@ -11,4 +11,5 @@ public class LectureDto {
     private String content;
     private String videoUrl;
     private String watchingTile;
+    private String thumbnailUrl;
 }
