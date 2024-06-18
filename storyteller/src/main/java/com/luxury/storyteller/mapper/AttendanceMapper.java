@@ -15,4 +15,8 @@ public interface AttendanceMapper {
     List<AttendanceDto> findAttendanceByAll(String date);
 
     int attendanceInsert(AttendanceDto attendanceDto);
+
+    List<AttendanceDto> findAttendanceByIdxAndDate(AttendanceDto attendanceDto);
+
+    int attendanceModify(AttendanceDto attendanceDto);
 }

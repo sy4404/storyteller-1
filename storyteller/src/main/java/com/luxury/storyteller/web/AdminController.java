@@ -493,6 +493,8 @@ public class AdminController {
         return "admin/question";
     }
 
+
+
     /**
      * 교재관리
      */
@@ -526,6 +528,27 @@ public class AdminController {
 
 
         return "admin/attendance";
+    }
+
+    @GetMapping("/attendance/{idx}/{result}/{today}")
+    public String adminAttendanceUpdate(@PathVariable int idx, @PathVariable String result, @PathVariable String today, AttendanceDto attendanceDto) {
+
+        attendanceDto.setUserIdx(idx);
+        attendanceDto.setResult(result);
+        attendanceDto.setCreatedAt(today);
+
+        List<AttendanceDto> list = attendanceService.findAttendanceByIdxAndDate(attendanceDto);
+
+        if(list.isEmpty()){
+            attendanceService.attendanceInsert(attendanceDto);
+        }else {
+            attendanceDto.setAttendanceIdx(list.get(0).getAttendanceIdx());
+            attendanceService.attendanceModify(attendanceDto);
+        }
+
+        System.out.println(list.size() + "============");
+
+        return "redirect:/admin/attendance";
     }
 
     public static String removeExtension(String filename) {

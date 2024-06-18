@@ -79,7 +79,7 @@
                                     <span id="datepicker-icon" class="ml-3">
                                         <i class="fa-solid fa-calendar"></i>
                                     </span>
-                                    <input type="text" id="datepicker" style="display: none;">
+                                    <input type="text" id="datepicker" style="display: none;" onmousedown="return false;">
                                     <span class="result0 ml-3" th:onclick="'location.href=\''+ @{/admin/attendance} + '\''">오늘</span>
                                 </p>
                             </div>
@@ -94,7 +94,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr th:each="item ,list : ${lists}">
+                                        <tr th:each="item ,list : ${lists}"  th:onclick="showAttendanceModal([[${item.name}]], [[${item.userIdx}]], [[${today}]])">
                                             <td th:text="${list.count}">1</td>
                                             <td th:text="${item.name}">System Architect</td>
                                             <td th:switch="${item.createdAt}">
@@ -160,7 +160,25 @@
         </div>
     </div>
 
-
+    <div class="modal fade" id="attendanceModal" tabindex="-1" role="dialog" aria-labelledby="attendanceModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="attendanceModalLabel">출석/결석 선택</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" value="" id="idxInput">
+                    <input type="hidden" value="" id="todayInput">
+                    <p id="attendanceModalName"></p>
+                    <button class="btn btn-primary" onclick="updateAttendance('0')">출석</button>
+                    <button class="btn btn-danger" onclick="updateAttendance('1')">결석</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
 
@@ -190,6 +208,38 @@
                 }
             });
         });
+    </script>
+
+    <script th:inline="javascript">
+        function showAttendanceModal(name, idx, today) {
+            $('#attendanceModalName').text('이름: ' + name);
+            $('#attendanceModal').modal('show');
+
+            $('#idxInput').val(idx);
+            $('#todayInput').val(today);
+        }
+
+        function updateAttendance(result) {
+            var idx = $('#idxInput').val();
+            var today = $('#todayInput').val();
+
+            $('.modal-body button').removeClass('active');
+
+
+
+            if (result === '0') {
+                if(confirm("출석 처리 하시겠습니까?")){
+                    location.href = `/admin/attendance/${idx}/${result}/${today}`;
+                }
+            } else if (result === '1') {
+                if(confirm("결석 처리 하시겠습니까?")){
+                    location.href = `/admin/attendance/${idx}/${result}/${today}`;
+                }
+            }
+
+            // Close the modal after update
+
+        }
     </script>
 </body>
 

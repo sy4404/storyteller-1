@@ -14,5 +14,9 @@ public interface AttendanceService {
 
     int attendanceInsert(AttendanceDto attendanceDto);
 
+    List<AttendanceDto> findAttendanceByIdxAndDate(AttendanceDto attendanceDto);
+
+    int attendanceModify(AttendanceDto attendanceDto);
+
 
 }

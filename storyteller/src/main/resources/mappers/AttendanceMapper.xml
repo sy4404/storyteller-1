@@ -26,5 +26,19 @@
         )
     </insert>
 
+    <select id="findAttendanceByIdxAndDate" parameterType="com.luxury.storyteller.dto.AttendanceDto" resultType="com.luxury.storyteller.dto.AttendanceDto">
+        SELECT * FROM
+            luxury_storyteller.attendance
+        WHERE user_idx = #{userIdx}
+        AND DATE(created_at) = #{createdAt};
+    </select>
 
+    <update id="attendanceModify" parameterType="com.luxury.storyteller.dto.AttendanceDto">
+        UPDATE
+            attendance
+        SET
+            result = #{result}
+        WHERE
+            attendance_idx = #{attendanceIdx}
+    </update>
 </mapper>

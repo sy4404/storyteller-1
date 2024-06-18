@@ -25,4 +25,14 @@ public class AttendanceServiceImpl implements AttendanceService {
     public int attendanceInsert(AttendanceDto attendanceDto) {
         return attendanceMapper.attendanceInsert(attendanceDto);
     }
+
+    @Override
+    public List<AttendanceDto> findAttendanceByIdxAndDate(AttendanceDto attendanceDto) {
+        return attendanceMapper.findAttendanceByIdxAndDate(attendanceDto);
+    }
+
+    @Override
+    public int attendanceModify(AttendanceDto attendanceDto) {
+        return attendanceMapper.attendanceModify(attendanceDto);
+    }
 }
