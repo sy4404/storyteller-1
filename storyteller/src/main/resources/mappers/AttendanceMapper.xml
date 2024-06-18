@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.luxury.storyteller.mapper.AttendanceMapper">
+
+
+    <select id="findAttendanceByAll" parameterType="String" resultType="com.luxury.storyteller.dto.AttendanceDto">
+        SELECT * FROM
+            user u
+        LEFT JOIN
+            attendance a
+        ON
+            u.user_idx = a.user_idx
+            AND
+            DATE(a.created_at) = #{date}
+        WHERE
+            u.role = 'ROLE_USER'
+        ORDER BY
+            u.name;
+    </select>
+
+    <insert id="attendanceInsert" parameterType="com.luxury.storyteller.dto.AttendanceDto">
+        INSERT INTO attendance (
+            user_idx, result
+        ) VALUES (
+            #{userIdx}, #{result}
+        )
+    </insert>
+
+
+</mapper>

@@ -6,6 +6,7 @@ import com.jcraft.jsch.JSch;
 import com.jcraft.jsch.Session;
 import com.luxury.storyteller.dto.*;
 import com.luxury.storyteller.service.UploadService;
+import com.luxury.storyteller.service.attendance.AttendanceService;
 import com.luxury.storyteller.service.community.CommunityService;
 import com.luxury.storyteller.service.ebook.EbookService;
 import com.luxury.storyteller.service.examination.ExaminationService;
@@ -13,6 +14,7 @@ import com.luxury.storyteller.service.lecture.LectureService;
 import com.luxury.storyteller.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +25,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -38,6 +42,7 @@ public class AdminController {
     private final ExaminationService examinationService;
     private final LectureService lectureService;
     private final UploadService uploadService;
+    private final AttendanceService attendanceService;
 
     @Value("${ftp.ip}")
     protected String ftpIp;
@@ -496,11 +501,30 @@ public class AdminController {
         return "admin/score";
     }
 
-    /**
-     * 교재관리
-     */
+
+
     @GetMapping("/attendance")
-    public String adminAttendance(Model model) {
+    public String adminAttendance(@RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+                                  @RequestParam(required = false) String type, Model model) {
+
+        LocalDate today = (date != null) ? date : LocalDate.now();
+
+        if ("before".equals(type)) {
+            today = today.minusDays(1);
+        } else if ("after".equals(type)) {
+            today = today.plusDays(1);
+        }
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String formattedDate = today.format(formatter);
+
+        model.addAttribute("today", formattedDate);
+
+        // 예를 들어, 출석 데이터를 조회하거나 필요한 처리를 여기에 추가합니다.
+        List<AttendanceDto> list = attendanceService.findAttendanceByAll(formattedDate);
+        model.addAttribute("lists", list);
+
+
         return "admin/attendance";
     }
 

@@ -1,6 +1,43 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/admin/include/head.html :: fragment-head}">
 </head>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
+<style>
+    .result1{
+        border: 1px solid #ddd;
+        padding: 5px 20px;
+        border-radius: 20px;
+        font-size: 14px;
+        text-align: center;
+        color: #000;
+        background-color: #ddd;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    .result0{
+        border: 1px solid #3D83E3;
+        padding: 5px 20px;
+        border-radius: 20px;
+        font-size: 14px;
+        text-align: center;
+        color: #fff;
+        background-color: #3D83E3;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .resultNull{
+        border: 1px solid #ddd;
+        padding: 5px 20px;
+        border-radius: 20px;
+        font-size: 14px;
+        text-align: center;
+        color: #000;
+        background-color: #fff;
+        font-weight: 600;
+        cursor: pointer;
+    }
+</style>
 <body id="page-top">
 
     <!-- Page Wrapper -->
@@ -30,22 +67,46 @@
                             <h6 class="m-0 font-weight-bold text-primary">출석</h6>
                         </div>
                         <div class="card-body">
+                            <div>
+                                <p>
+                                    <span th:onclick="'location.href=\''+ @{/admin/attendance?type=before&date=} + @{${today}} + '\''" onmousedown="return false;">
+                                        <i class="fa-solid fa-arrow-left"></i>
+                                    </span>
+                                    <span th:text="${today}" style="font-size: 20px; font-weight: bold; margin: 0 10px" onmousedown="return false;"></span>
+                                    <span th:onclick="'location.href=\''+ @{/admin/attendance?type=after&date=} + @{${today}} + '\''" onmousedown="return false;">
+                                        <i class="fa-solid fa-arrow-right"></i>
+                                    </span>
+                                    <span id="datepicker-icon" class="ml-3">
+                                        <i class="fa-solid fa-calendar"></i>
+                                    </span>
+                                    <input type="text" id="datepicker" style="display: none;">
+                                    <span class="result0 ml-3" th:onclick="'location.href=\''+ @{/admin/attendance} + '\''">오늘</span>
+                                </p>
+                            </div>
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>NO</th>
-                                            <th>이름</th>
-                                            <th>과제점수</th>
-                                            <th>실기점수</th>
+                                            <th width="20%">이름</th>
+                                            <th width="55%">시간</th>
+                                            <th width="20%">결과</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>System Architect</td>
-                                            <td>100(2024-12-12)</td>
-                                            <td>100(2024-12-12)</td>
+                                        <tr th:each="item ,list : ${lists}">
+                                            <td th:text="${list.count}">1</td>
+                                            <td th:text="${item.name}">System Architect</td>
+                                            <td th:switch="${item.createdAt}">
+                                                <span th:case="null">-</span>
+                                                <span th:case="*">[[${item.createdAt}]]</span>
+                                            </td>
+                                            <td th:switch="${item.result}">
+                                                <span th:case="null" class="resultNull">-</span>
+                                                <span th:case="'0'" class="result0">출석</span>
+                                                <span th:case="'1'" class="result1">결석</span>
+                                                <span th:case="*">[[${item.result}]]</span>
+                                            </td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -99,23 +160,37 @@
         </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script th:src="@{vendor/jquery/jquery.min.js}"></script>
+
+
+
+
+    <!-- jQuery 및 jQuery UI 로드 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <!-- 나머지 스크립트들은 이후에 로드 -->
     <script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-
-    <!-- Core plugin JavaScript-->
     <script th:src="@{vendor/jquery-easing/jquery.easing.min.js}"></script>
-
-    <!-- Custom scripts for all pages-->
     <script th:src="@{js/sb-admin-2.min.js}"></script>
-
-    <!-- Page level plugins -->
     <script th:src="@{vendor/datatables/jquery.dataTables.min.js}"></script>
     <script th:src="@{vendor/datatables/dataTables.bootstrap4.min.js}"></script>
-
-    <!-- Page level custom scripts -->
     <script th:src="@{js/demo/datatables-demo.js}"></script>
 
+    <!-- Datepicker 초기화 스크립트 -->
+    <script th:inline="javascript">
+        $(document).ready(function() {
+            $('#datepicker-icon').click(function() {
+                $('#datepicker').datepicker('show');
+            });
+
+            $('#datepicker').datepicker({
+                dateFormat: 'yy-mm-dd',
+                onSelect: function(dateText, inst) {
+                    window.location.href = '/admin/attendance?type=specific&date=' + dateText;
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
