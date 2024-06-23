@@ -19,4 +19,6 @@ public interface AttendanceMapper {
     List<AttendanceDto> findAttendanceByIdxAndDate(AttendanceDto attendanceDto);
 
     int attendanceModify(AttendanceDto attendanceDto);
+
+    List<AttendanceDto> findAttendanceByUserIdx(AttendanceDto attendanceDto);
 }

@@ -120,6 +120,26 @@
             , answer = #{answer}
         WHERE examination_idx = #{examinationIdx}
     </update>
+
+
+
+    <!--문제 상세(항목)-->
+    <select id="findexaminationSelectByexaminationChapterIdx" parameterType="int" resultType="com.luxury.storyteller.dto.ExaminationDto">
+        SELECT * FROM luxury_storyteller.examination_chapter
+        left join examination on examination_chapter.examination_chapter_idx = examination.examination_chapter_idx
+        left join examination_select on examination.examination_idx = examination_select.examination_idx
+        where examination_chapter.examination_chapter_idx = ${examinationChapterIdx}
+        order by examination.examination_idx, examination_select.examination_select_num
+    </select>
+
+
+    <insert id="createExaminationResult" parameterType="com.luxury.storyteller.dto.ExaminationDto">
+        INSERT INTO user_examination_result (
+            examination_idx, user_idx, score
+        ) VALUES (
+            #{examinationIdx}, #{userIdx}, #{score}
+        )
+    </insert>
 </mapper>
 
 

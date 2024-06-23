@@ -20,9 +20,9 @@
 
     <insert id="attendanceInsert" parameterType="com.luxury.storyteller.dto.AttendanceDto">
         INSERT INTO attendance (
-            user_idx, result
+            user_idx, result, created_at
         ) VALUES (
-            #{userIdx}, #{result}
+            #{userIdx}, #{result}, #{createdAt}
         )
     </insert>
 
@@ -37,8 +37,38 @@
         UPDATE
             attendance
         SET
-            result = #{result}
+            result = #{result},
+            created_at = #{createdAt}
         WHERE
             attendance_idx = #{attendanceIdx}
     </update>
+
+    <select id="findAttendanceByUserIdx" parameterType="com.luxury.storyteller.dto.AttendanceDto" resultType="com.luxury.storyteller.dto.AttendanceDto">
+        <![CDATA[
+            SELECT
+                dates.date,
+                u.user_idx,
+                u.name,
+                a.result,
+                DATE_FORMAT(a.created_at, "%Y-%m-%d") as date1,
+                DATE_FORMAT(a.created_at, "%H:%i:%s") as date2
+            FROM
+                (
+                    SELECT
+                        DATE(CONCAT(#{year}, '-', #{month}, '-01') + INTERVAL (t1.n + t2.m) DAY) AS date
+                    FROM
+                        (SELECT 0 AS n UNION ALL SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4
+                        UNION ALL SELECT 5 UNION ALL SELECT 6 UNION ALL SELECT 7 UNION ALL SELECT 8 UNION ALL SELECT 9) t1,
+                        (SELECT 0 AS m UNION ALL SELECT 10 UNION ALL SELECT 20 UNION ALL SELECT 30) t2
+                    WHERE
+                        DATE(CONCAT(#{year}, '-', #{month}, '-01') + INTERVAL (t1.n + t2.m) DAY) <= LAST_DAY(CONCAT(#{year}, '-', #{month}, '-01'))
+                ) dates
+            LEFT JOIN
+                user u ON u.user_idx = #{userIdx}
+            LEFT JOIN
+                attendance a ON u.user_idx = a.user_idx AND DATE(a.created_at) = dates.date
+            ORDER BY
+            dates.date desc;
+        ]]>
+    </select>
 </mapper>

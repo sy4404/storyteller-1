@@ -92,7 +92,9 @@ public interface ExaminationService {
     int modifyExamination(ExaminationDto examinationDto);
 
 
+    List<ExaminationDto> findexaminationSelectByexaminationChapterIdx(int examinationChapterIdx);
 
+    int createExaminationResult(ExaminationDto examinationDto);
 
 
 

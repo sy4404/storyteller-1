@@ -223,6 +223,18 @@
             var idx = $('#idxInput').val();
             var today = $('#todayInput').val();
 
+            // 현재 시간을 가져오는 함수
+            function getCurrentTime() {
+                var now = new Date();
+                var hours = now.getHours().toString().padStart(2, '0');
+                var minutes = now.getMinutes().toString().padStart(2, '0');
+                var seconds = now.getSeconds().toString().padStart(2, '0');
+                return hours + ':' + minutes + ':' + seconds;
+            }
+
+            // 현재 시간을 today 변수에 추가
+            today += ' ' + getCurrentTime();
+
             $('.modal-body button').removeClass('active');
 
 

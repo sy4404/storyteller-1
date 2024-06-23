@@ -90,4 +90,9 @@ public interface ExaminationMapper {
      * 문제 수정
      */
     int modifyExamination(ExaminationDto examinationDto);
+
+
+    List<ExaminationDto> findexaminationSelectByexaminationChapterIdx(int examinationChapterIdx);
+
+    int createExaminationResult(ExaminationDto examinationDto);
 }

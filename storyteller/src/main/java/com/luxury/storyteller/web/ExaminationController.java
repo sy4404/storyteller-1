@@ -1,15 +1,16 @@
 package com.luxury.storyteller.web;
 
+import com.luxury.storyteller.config.auth.PrincipalDetails;
 import com.luxury.storyteller.dto.CommunityDto;
 import com.luxury.storyteller.dto.ExaminationDto;
 import com.luxury.storyteller.service.community.CommunityService;
 import com.luxury.storyteller.service.examination.ExaminationService;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -43,13 +44,53 @@ public class ExaminationController {
 
     @GetMapping("/ex/{examinationIdx}")
     public String examinationDetail(@PathVariable int examinationIdx, Model model) {
-        ExaminationDto detail = examinationService.findExaminationByExaminationIdx(examinationIdx);
-        List<ExaminationDto> list = examinationService.findexaminationSelectByExaminationIdx(examinationIdx);
 
-        model.addAttribute("detail", detail);
+        List<ExaminationDto> nlist = examinationService.findExaminationByChapter(examinationIdx);
+        model.addAttribute("nlist", nlist);
+
+        List<ExaminationDto> list = examinationService.findexaminationSelectByexaminationChapterIdx(examinationIdx);
+        //List<ExaminationDto> list = examinationService.findexaminationSelectByExaminationIdx(examinationIdx);
+
         model.addAttribute("lists", list);
 
         model.addAttribute("num", examinationIdx);
         return "examination/detail";
+    }
+
+
+    @ResponseBody
+    @PostMapping("/submit-form/{num}")
+    public String handleSubmitForm(@RequestBody List<SelectedValue> selectedValues,
+                                   @PathVariable int num,
+                                   @AuthenticationPrincipal PrincipalDetails principalDetails,
+                                   ExaminationDto examinationDto) {
+
+        List<ExaminationDto> list = examinationService.findExaminationByChapter(num);
+
+        int score = 0;
+
+        for(int i = 0; i < list.size(); i++){
+            if(list.get(i).getAnswer() == selectedValues.get(i).getQuestion()){
+                score += 5;
+            }
+        }
+
+        examinationDto.setScore(score);
+        examinationDto.setUserIdx(principalDetails.getUserIdx());
+        examinationDto.setExaminationIdx(num);
+
+
+        examinationService.createExaminationResult(examinationDto);
+
+        return "redirect:/";
+    }
+
+
+    @Data
+    public static class SelectedValue {
+        private String examinationIdx;
+        private int question;
+
+        // Getter와 Setter는 생략됨 (필요 시 추가)
     }
 }

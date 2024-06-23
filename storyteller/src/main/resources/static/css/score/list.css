@@ -4,7 +4,7 @@
     position: relative;
     max-width: 500px;
     margin: 0 auto;
-    height: 100%;
+    height: auto;
 }
 
 .idPwSearchBtnBox{
@@ -122,6 +122,52 @@
     align-items: end;
     margin-top: 12px;
 }
+
+.attBox{
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    border:1px solid #DFDFDF;
+    padding: 16px;
+}
+
+.attBox2{
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    border:1px solid #DFDFDF;
+    overflow: hidden;
+    text-align: center
+}
+
+.attBoxWrap{
+    padding: 13px 15px;
+}
+
+.attBoxWrapContent{
+    padding: 13px 15px;
+    background-color: #fff;
+
+}
+.attBoxWrapContent:not(:last-child){
+    border-bottom: 1px solid #DFDFDF;
+}
+
+.result0{
+    padding: 3px 11px;
+    color: #fff;
+    background-color: #3D83E3;
+    border-radius: 8px;
+    border: 1px solid #3D83E3;
+}
+
+.result1{
+    padding: 3px 11px;
+    color: #ADADAD;
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #ADADAD;
+}
+
+
 @media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
 
     .mainPageBody{

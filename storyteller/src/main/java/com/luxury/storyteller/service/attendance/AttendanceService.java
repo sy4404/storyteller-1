@@ -18,5 +18,6 @@ public interface AttendanceService {
 
     int attendanceModify(AttendanceDto attendanceDto);
 
+    List<AttendanceDto> findAttendanceByUserIdx(AttendanceDto attendanceDto);
 
 }

@@ -2,6 +2,9 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
 <link th:href="@{/css/ebook/list.css}" rel="stylesheet" type="text/css" />
+<style>
+
+</style>
 <body>
 <div class="mainPageBody pb-4">
     <div class="header">
@@ -10,82 +13,249 @@
         </div>
         <h1>모의고사</h1>
     </div>
-
+    <div class="exNumberWrap">
+        <ul class="tab">
+            <th:block th:each="item, list : ${nlist}">
+                <li th:classappend="${list.index == 0} ? 'on'" th:data-tab="'menu' + ${item.questionNumber}">
+                    <a href="#" th:text="${item.questionNumber}">1</a>
+                </li>
+            </th:block>
+        </ul>
+    </div>
     <div class="py-20">
-        <div class="exFirstTitle">
-            <p class="exFirstTitleName">
-                이순신 교육 1강 모의고사
-            </p>
-            <p class="exFirstSubTitle">문제의 정답을 아래 객관식 답안에서 선택하세요.</p>
+        <form id="myForm" action="/submit-form" method="post" class="mt-4">
+        <div class="tab-content">
+            <th:block th:each="nitem, nlistStat : ${nlist}">
+                <div th:id="'menu' + ${nitem.questionNumber}" class="tabcont mt-4" th:classappend="${nlistStat.index == 0} ? 'on' : ''">
+                    <div class="exFirstTitle">
+                        <p class="exFirstTitleName" th:text="${lists[0].name}">이순신 교육 1강 모의고사</p>
+                        <p class="exFirstSubTitle">문제의 정답을 아래 객관식 답안에서 선택하세요.</p>
+                    </div>
+                    <div class="exTitle">
+                        <p class="exTitleName">
+                            Q<span th:text="${nitem.questionNumber}"></span>. <span th:text="${nitem.question}">여기에 문제 내용이 표시됩니다.</span>
+                        </p>
+                    </div>
+                    <div class="exLine"></div>
+                    <th:block th:each="detail, detailStat : ${lists}" th:if="${nitem.examinationIdx == detail.examinationIdx}">
+                        <div class="radio-option ra" th:each="item, listStat : ${detail.question}" onclick="selectRadioButton(this)">
+                            <input type="radio" th:id="'option' + ${nitem.questionNumber} + '_' + ${detail.examinationSelectNum}" th:name="'question' + ${nitem.questionNumber}"
+                                   th:value="${detail.examinationSelectNum}" style="display: none;">
+                            <label th:for="'option' + ${nitem.questionNumber} + '_' + ${detail.examinationSelectNum}">
+                                <img class="radio-img" src="../../img/icon_check_off.png" alt="라디오 버튼 이미지" id="image_${nitem.questionNumber}_${detail.examinationSelectNum}">
+                                <span th:text="${detail.examinationSelectTitle}">1</span>
+                            </label>
+                        </div>
+                    </th:block>
+                </div>
+            </th:block>
         </div>
 
-        <div class="exTitle">
-            <p class="exTitleName">
-                Q<span th:text="${num}"></span>. <span th:text="${detail.question}"></span>
-            </p>
+
+            <!-- Include any other form fields as needed -->
+            <div class="d-flex mt-4">
+                <input type="hidden" th:value="${num}" id="num">
+                <input type="button" value="취소" id="cancel-btn">
+                <input type="submit" value="제출하기" id="submit-btn">
+            </div>
+
+        </form>
+
+        <div class="py-20">
+            <div>
+
+            </div>
         </div>
-        <div class="exLine"></div>
-        <div class="radio-option" th:each="item, listStat : ${lists}">
-            <input type="radio"
-                   th:id="'option' + ${listStat.index}"
-                   name="options"
-                   th:value="${item.examinationSelectNum}">
-            <label th:for="'option' + ${listStat.index}">
-                <img class="radio-img" src="../../img/icon_check_off.png" alt="라디오 버튼 이미지">
-                <span th:text="${item.examinationSelectTitle}">1</span>
-            </label>
-        </div>
+
+        <script>
+            function selectRadioButton(div) {
+                // Remove 'selected' class from all radio-option divs
+                var allRadioOptions = document.querySelectorAll('.radio-option');
+                allRadioOptions.forEach(function(option) {
+                    option.classList.remove('selected');
+                });
+
+                // Add 'selected' class to the clicked radio-option div
+                div.classList.add('selected');
+
+                // Find the hidden radio button within the clicked div
+                var radioButton = div.querySelector('input[type="radio"]');
+
+                // Check the radio button
+                radioButton.checked = true;
+
+                // Reset all radio buttons within the same group except the checked one
+                var groupName = radioButton.name;
+                var radioButtons = document.querySelectorAll('input[type="radio"][name="' + groupName + '"]');
+                radioButtons.forEach(function(radio) {
+                    var label = radio.parentElement;
+                    var img = label.querySelector('.radio-img');
+                    img.src = '../../img/icon_check_off.png'; // Reset all images to unchecked state
+                });
+
+                // Change the image for the clicked radio button to checked state
+                var label = div.querySelector('label');
+                var img = label.querySelector('.radio-img');
+                img.src = '../../img/icon_check_on.png'; // Change this to the path of your checked image
+            }
+
+            document.getElementById('myForm').addEventListener('submit', function(event) {
+                event.preventDefault(); // 폼 제출을 방지
+
+                var selectedValues = [];
+                var allQuestionsAnswered = true;
+                var questionNumbers = new Set();
+
+                // 선택된 라디오 버튼 값을 수집하고 모든 질문에 답변이 있는지 확인
+                document.querySelectorAll('input[type="radio"]').forEach(function(radio) {
+                    var questionNumber = radio.name.replace('question', '');
+                    questionNumbers.add(questionNumber);
+
+                    if (radio.checked) {
+                        selectedValues.push({
+                            examinationIdx: questionNumber,
+                            question: radio.value
+                        });
+                    }
+                });
+
+                // 모든 질문에 답변이 있는지 확인
+                questionNumbers.forEach(function(questionNumber) {
+                    var isAnswered = selectedValues.some(function(selected) {
+                        return selected.examinationIdx === questionNumber;
+                    });
+                    if (!isAnswered) {
+                        allQuestionsAnswered = false;
+                    }
+                });
+
+                if (!allQuestionsAnswered) {
+                    alert('안 푼 문제가 있습니다. 모든 질문에 답을 해주세요.');
+                    return; // 폼 제출 방지
+                }
+
+                // 선택된 값들을 로깅 (AJAX 제출 또는 추가 처리를 위해)
+                console.log('Selected values:', selectedValues);
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/examination/submit-form/'+document.getElementById('num').value, // 스프링 컨트롤러 URL
+                    contentType: 'application/json',
+                    data: JSON.stringify(selectedValues),
+                    success: function(response) {
+                        console.log('성공적으로 서버에 데이터를 전송했습니다.');
+                        // 성공적으로 데이터를 전송한 후 할 일을 여기에 작성
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        console.error('AJAX 요청 실패: ', textStatus, errorThrown);
+                        // 실패 시 처리할 로직을 여기에 작성
+                    }
+                });
+
+                // 선택적으로, 폼을 프로그래매틱하게 제출
+                // this.submit(); // 이 줄을 주석 해제하면 폼이 프로그래매틱하게 제출됩니다.
+            });
+        </script>
+
     </div>
 </div>
 
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    // 모든 라디오 옵션 컨테이너
-    let radioContainers = document.querySelectorAll('.radio-option');
-
-    // 각 라디오 옵션 컨테이너에 대해 이벤트 리스너 등록
-    radioContainers.forEach(function(container) {
-        container.addEventListener('click', function() {
-            // 클릭된 라디오 버튼을 가져옴
-            let radioBtn = this.querySelector('input[type="radio"]');
-
-            // 현재 라디오 버튼이 이미 선택된 상태 확인
-            let isChecked = radioBtn.checked;
-
-            // 클릭된 라디오 버튼이 이미 선택된 경우에는 아무 동작하지 않음
-            if (!isChecked) {
-                // 모든 라디오 버튼 이미지를 기본 이미지로 설정
-                let radioImgs = document.querySelectorAll('.radio-option .radio-img');
-                radioImgs.forEach(function(img) {
-                    img.src = '../../img/icon_check_off.png';
-                });
-
-                // 선택된 라디오 버튼의 이미지 변경
-                let radioImg = this.querySelector('.radio-img');
-                radioImg.src = '../../img/icon_check_on.png';
-
-                // 모든 라디오 버튼의 체크 상태 해제
-                let allRadioBtns = document.querySelectorAll('.radio-option input[type="radio"]');
-                allRadioBtns.forEach(function(btn) {
-                    btn.checked = false;
-                });
-
-                // 클릭된 라디오 버튼의 체크 상태 설정
-                radioBtn.checked = true;
-
-                // 체크된 라디오 버튼의 부모 요소인 .radio-option의 테두리 색상을 변경
-                radioContainers.forEach(function(radioContainer) {
-                    if (radioContainer.querySelector('input[type="radio"]').checked) {
-                        radioContainer.style.borderColor = '#4B3F24';
-                    } else {
-                        radioContainer.style.borderColor = ''; // 다른 요소의 테두리 색상 초기화
-                    }
-                });
-            }
-
-            // 이미지가 작아지는 동작을 막음
-            return false;
-        });
+    $(function() {
+        $('ul.tab li').click(function() {
+            var activeTab = $(this).attr('data-tab');
+            $('ul.tab li').removeClass('on');
+            $('.tabcont').removeClass('on');
+            $(this).addClass('on');
+            $('#' + activeTab).addClass('on');
+        })
     });
 </script>
+<script>
+    // function resetOtherRadioButtons(radioButton) {
+    //     // Get the name of the radio button group
+    //     var groupName = radioButton.name;
+    //
+    //     // Find all radio buttons in the same group
+    //     var radioButtons = document.querySelectorAll('input[type="radio"][name="' + groupName + '"]');
+    //
+    //     // Reset all radio buttons in the group except the clicked one
+    //     radioButtons.forEach(function(radio) {
+    //         if (radio !== radioButton) {
+    //             // Reset the image for unchecked state
+    //             var label = radio.parentElement;
+    //             var img = label.querySelector('.radio-img');
+    //             img.src = '../../img/icon_check_off.png'; // Change this to the path of your unchecked image
+    //         }
+    //     });
+    //
+    //     // Change the image for the clicked radio button to checked state
+    //     var label = radioButton.parentElement;
+    //     var img = label.querySelector('.radio-img');
+    //     img.src = '../../img/icon_check_on.png'; // Change this to the path of your checked image
+    // }
+</script>
+<script>
+    // document.addEventListener('DOMContentLoaded', function() {
+    //     // 모든 라디오 옵션 컨테이너를 가져옵니다
+    //     let radioContainers = document.querySelectorAll('.radio-option');
+    //
+    //     // 각 라디오 옵션 컨테이너에 클릭 이벤트 리스너를 추가합니다
+    //     radioContainers.forEach(function(container) {
+    //         container.addEventListener('click', function() {
+    //             // 클릭된 라디오 버튼을 가져옵니다
+    //             let radioBtn = this.querySelector('input[type="radio"]');
+    //
+    //             // 현재 라디오 버튼이 이미 선택된 상태인지 확인합니다
+    //             let isChecked = radioBtn.checked;
+    //
+    //             // 클릭된 라디오 버튼이 이미 선택된 경우 아무 동작도 하지 않습니다
+    //             if (!isChecked) {
+    //                 // 해당 그룹의 모든 라디오 버튼을 선택 해제합니다
+    //                 let groupName = radioBtn.getAttribute('name');
+    //                 let allRadioButtonsInGroup = document.querySelectorAll('input[type="radio"][name="' + groupName + '"]');
+    //                 allRadioButtonsInGroup.forEach(function(btn) {
+    //                     btn.checked = false;
+    //                 });
+    //
+    //                 // 클릭된 라디오 버튼을 선택 상태로 변경합니다
+    //                 radioBtn.checked = true;
+    //
+    //                 // 모든 라디오 버튼의 이미지를 기본 이미지로 설정합니다
+    //                 let allRadioImgs = document.querySelectorAll('.radio-option .radio-img');
+    //                 allRadioImgs.forEach(function(img) {
+    //                     img.src = '../../img/icon_check_off.png';
+    //                 });
+    //
+    //                 // 선택된 라디오 버튼의 이미지를 변경합니다
+    //                 let radioImg = this.querySelector('.radio-img');
+    //                 radioImg.src = '../../img/icon_check_on.png';
+    //
+    //                 // 모든 라디오 버튼의 테두리 색상을 초기화합니다
+    //                 radioContainers.forEach(function(radioContainer) {
+    //                     radioContainer.style.borderColor = ''; // 모든 테두리 초기화
+    //                 });
+    //
+    //                 // 선택된 라디오 버튼의 부모 요소인 .radio-option의 테두리 색상을 변경합니다
+    //                 this.style.borderColor = '#4B3F24'; // 선택된 옵션에 대한 테두리 색상 설정
+    //             }
+    //
+    //             // 이미지가 작아지는 동작을 막습니다
+    //             return false;
+    //         });
+    //     });
+    // });
+</script>
+
 </body>
 </html>
+
+
+
+
+
+
+
+

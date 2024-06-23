@@ -96,4 +96,14 @@ public class ExaminationServiceImpl implements ExaminationService{
     public int modifyExamination(ExaminationDto examinationDto) {
         return examinationMapper.modifyExamination(examinationDto);
     }
+
+    @Override
+    public List<ExaminationDto> findexaminationSelectByexaminationChapterIdx(int examinationChapterIdx) {
+        return examinationMapper.findexaminationSelectByexaminationChapterIdx(examinationChapterIdx);
+    }
+
+    @Override
+    public int createExaminationResult(ExaminationDto examinationDto) {
+        return examinationMapper.createExaminationResult(examinationDto);
+    }
 }

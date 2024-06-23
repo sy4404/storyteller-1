@@ -13,4 +13,11 @@ public class AttendanceDto {
     private String name;
     private String phoneNumber;
     private String profileUrl;
+
+    private String date;
+    private String date1;
+    private String date2;
+
+    private String year;
+    private String month;
 }

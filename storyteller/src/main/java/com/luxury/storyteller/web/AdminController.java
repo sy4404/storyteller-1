@@ -522,7 +522,7 @@ public class AdminController {
 
         model.addAttribute("today", formattedDate);
 
-        // 예를 들어, 출석 데이터를 조회하거나 필요한 처리를 여기에 추가합니다.
+
         List<AttendanceDto> list = attendanceService.findAttendanceByAll(formattedDate);
         model.addAttribute("lists", list);
 
@@ -535,20 +535,21 @@ public class AdminController {
 
         attendanceDto.setUserIdx(idx);
         attendanceDto.setResult(result);
-        attendanceDto.setCreatedAt(today);
 
+        attendanceDto.setCreatedAt(today.substring(0,10));
         List<AttendanceDto> list = attendanceService.findAttendanceByIdxAndDate(attendanceDto);
 
         if(list.isEmpty()){
+            attendanceDto.setCreatedAt(today);
             attendanceService.attendanceInsert(attendanceDto);
         }else {
+            attendanceDto.setCreatedAt(today);
             attendanceDto.setAttendanceIdx(list.get(0).getAttendanceIdx());
             attendanceService.attendanceModify(attendanceDto);
         }
 
-        System.out.println(list.size() + "============");
 
-        return "redirect:/admin/attendance";
+        return "redirect:/admin/attendance?date="+today.substring(0,10);
     }
 
     public static String removeExtension(String filename) {
