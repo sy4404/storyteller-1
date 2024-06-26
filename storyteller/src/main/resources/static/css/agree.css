@@ -4,7 +4,7 @@
     position: relative;
     max-width: 500px;
     margin: 0 auto;
-    height: 100%;
+    height: auto;
 }
 
 .allCheckWrap{
@@ -61,7 +61,7 @@
 @media (min-width: 180px) and (max-width: 480px) {/***********************************************321-480***********************************************/
 
     .mainPageBody{
-        height: 100%;
+        height: auto;
     }
 
 }

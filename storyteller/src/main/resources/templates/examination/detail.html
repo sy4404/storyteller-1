@@ -9,7 +9,7 @@
 <div class="mainPageBody pb-4">
     <div class="header">
         <div>
-            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표"  onclick="if(confirm('이 페이지를 벗어나면 문제가 저장되지 않습니다. 나가시겠습니까?')){history.back()}">
         </div>
         <h1>모의고사</h1>
     </div>
@@ -55,7 +55,7 @@
             <!-- Include any other form fields as needed -->
             <div class="d-flex mt-4">
                 <input type="hidden" th:value="${num}" id="num">
-                <input type="button" value="취소" id="cancel-btn">
+                <input type="button" value="취소" id="cancel-btn" th:onclick="cancelBtn()">
                 <input type="submit" value="제출하기" id="submit-btn">
             </div>
 
@@ -68,6 +68,11 @@
         </div>
 
         <script>
+            function cancelBtn(){
+                if(confirm('이 페이지를 벗어나면 문제가 저장되지 않습니다. 나가시겠습니까?')){
+                    location.href = '/'
+                }
+            }
             function selectRadioButton(div) {
                 // Remove 'selected' class from all radio-option divs
                 var allRadioOptions = document.querySelectorAll('.radio-option');

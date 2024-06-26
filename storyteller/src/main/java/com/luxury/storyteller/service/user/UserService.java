@@ -40,10 +40,12 @@ public interface UserService {
      */
     List<UserDto> findByUserAll();
 
-    boolean isDuplicateId(String id);
+    List<UserDto> isDuplicateId(String id);
 
     /**
      * 비밀번호변경
      */
     int pwdModify(UserDto userDto);
+
+    UserDto findUserByIdAndPhoneNumbeAndName(UserDto userDto);
 }

@@ -10,12 +10,26 @@
         <h1>아이디·비밀번호 찾기</h1>
     </div>
     <div class="formWrap mt-3">
-        <div class="resultImgWrap">
-            <img th:src="@{/img/img_id-found@2x.png}" class="resultImg" alt="돋보기">
-        </div>
-        <p class="idResultText">아이디를 찾았어요!</p>
-        <p class="idResult" th:text="${detail.getId()}">honghong123</p>
-        <input type="button" class="submitBtn mt-5" value="로그인 하러 가기" onclick="location.href='/login'">
+        <th:block th:if="${detail != null}">
+            <div class="resultImgWrap">
+                <img th:src="@{/img/img_id-found@2x.png}" class="resultImg" alt="돋보기">
+            </div>
+            <p class="idResultText">아이디를 찾았어요!</p>
+            <p class="idResult" th:text="${detail.getId()}">honghong123</p>
+            <input type="button" class="submitBtn mt-5" value="로그인 하러 가기" onclick="location.href='/login'">
+        </th:block>
+
+        <th:block th:if="${detail == null}">
+            <div class="resultImgWrap">
+                <img th:src="@{/img/img_id-notfound@2x.png}" class="resultImg" alt="돋보기">
+            </div>
+            <p class="idResultText">등록된 아이디가 없어요.</p>
+            <p class="idResult" style="color: #999999;">
+                입력한 정보를 다시 확인하거나<br>
+                회원가입을 진행해 주세요
+            </p>
+            <input type="button" class="submitBtn mt-5" value="로그인 하러 가기" onclick="location.href='/login'">
+        </th:block>
     </div>
 </div>
 </body>

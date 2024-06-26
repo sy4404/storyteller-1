@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -106,7 +107,9 @@ public class UserController {
      * 비밀번호 찾기 페이지(정보입력)
      */
     @GetMapping("/pwinquiry")
-    public String pwInquiry(UserDto userDto) {
+    public String pwInquiry(UserDto userDto, Model model) {
+
+
 
         return "pwInquiry";
     }
@@ -114,11 +117,19 @@ public class UserController {
     /**
      * 비밀번호 찾기 완료 페이지
      */
-    @GetMapping("/pwinquiry/result")
-    public String pwInquiry_result(UserDto userDto) {
-
+    @PostMapping("/pwinquiry/result")
+    public String pwInquiry_result(UserDto userDto, Model model) {
+        UserDto detail = userService.findUserByIdAndPhoneNumbeAndName(userDto);
+        model.addAttribute("detail", detail);
         return "pwResult";
     }
+
+    @PostMapping("/pwinquiry/change")
+    public String pwchange(UserDto userDto, Model model) {
+        userService.pwdModify(userDto);
+        return "pwChangeResult";
+    }
+
 
     /**
      * 개인정보 설정 페이지
@@ -189,12 +200,12 @@ public class UserController {
     //checkDuplicateId
     @ResponseBody
     @PostMapping("/checkDuplicateId")
-    public Map<String, Boolean> checkDuplicateId(@RequestBody Map<String, String> request) {
+    public boolean checkDuplicateId(@RequestBody Map<String, String> request) {
         String id = request.get("id");
         System.out.println("============" + id);
-        boolean isDuplicate = userService.isDuplicateId(id); // UserService의 메서드로 아이디 중복 여부 확인
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("isDuplicate", isDuplicate);
-        return response;
+        List<UserDto> list = userService.isDuplicateId(id); // UserService의 메서드로 아이디 중복 여부 확인
+
+
+        return list.isEmpty();
     }
 }

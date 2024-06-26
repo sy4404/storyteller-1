@@ -18,7 +18,7 @@ public interface UserMapper {
      */
     List<UserDto> findByUserAll();
 
-    int isDuplicateId(String id);
+    List<UserDto> isDuplicateId(String id);
 
     int userModifyUser(UserDto userDto);
 
@@ -26,4 +26,7 @@ public interface UserMapper {
      * 비밀번호변경
      */
     int pwdModify(UserDto userDto);
+
+    UserDto findUserByIdAndPhoneNumbeAndName(UserDto userDto);
+
 }

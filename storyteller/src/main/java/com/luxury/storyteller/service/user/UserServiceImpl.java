@@ -54,9 +54,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public boolean isDuplicateId(String id) {
-        int count = userMapper.isDuplicateId(id);
-        return count == 0;
+    public List<UserDto> isDuplicateId(String id) {
+        return userMapper.isDuplicateId(id);
     }
 
     @Override
@@ -64,4 +63,10 @@ public class UserServiceImpl implements UserService{
         userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
         return userMapper.pwdModify(userDto);
     }
+
+    @Override
+    public UserDto findUserByIdAndPhoneNumbeAndName(UserDto userDto) {
+        return userMapper.findUserByIdAndPhoneNumbeAndName(userDto);
+    }
+
 }

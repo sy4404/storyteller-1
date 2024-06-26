@@ -37,7 +37,7 @@
 <script>
     function checks(){
 
-        var idPattern = /^[a-zA-Z]+$/;
+        var idPattern = /^[a-zA-Z0-9]+$/;
         var passwordPattern = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,20}$/;
 
         if($("#id").val() == ""){
@@ -47,7 +47,7 @@
         }
 
         if (!idPattern.test($("#id").val())) {
-            alert("아이디는 영문자로만 입력해주세요.");
+            alert("아이디는 영문/숫자로만 입력해주세요.");
             $("#id").focus();
             return false;
         }
@@ -55,24 +55,26 @@
         // 아이디 중복 검사
         var isDuplicate = false;
         $.ajax({
-            url: '/checkDuplicateId', // 서버의 중복 검사 API 엔드포인트
-            type: 'POST',
-            contentType: 'application/json', // 요청의 Content-Type을 application/json으로 설정
-            data: JSON.stringify({ id: $("#id").val() }), // JSON 문자열로 변환
-            async: false, // 동기 요청을 사용하여 순차적으로 실행되도록 함
-            success: function(response) {
-                alert(response.isDuplicate)
-                if (response.isDuplicate) {
-                    alert("아이디가 중복됩니다. 다른 아이디를 입력해주세요.");
-                    $("#id").focus();
-                    isDuplicate = true;
+            url: "/checkDuplicateId",
+            type:"POST",
+            data: JSON.stringify({id : $("#id").val()}),
+            contentType: "application/json",
+            async: false,
+            success:function(data){
+                if (data) {
+                    isDuplicate = data
                 }
             },
-            error: function() {
-                alert("아이디 중복 검사에 실패했습니다. 나중에 다시 시도해주세요.");
-                isDuplicate = true;
+            error: function(request,status,error) {
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
             }
-        });
+        })
+
+        if (!isDuplicate) {
+            alert("아이디가 중복됩니다. 다른 아이디를 입력해주세요.");
+            $("#id").focus();
+            return false;
+        }
 
         if($("#pw").val() == ""){
             alert("비밀번호를 입력해주세요.");
@@ -111,7 +113,7 @@
         }
 
 
-        return false;
+        return true;
     }
 </script>
 </html>
