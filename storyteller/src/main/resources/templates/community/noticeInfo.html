@@ -35,7 +35,7 @@
                 <div class="noticeInfoCommentContentWrap" th:each="list : ${lists}">
                     <div class="noticeInfoCommentContentWrap2">
                         <div>
-                            <img th:src="@{/img/profile_img1@2x.png}">
+                            <img th:src="'http://'+${list.profileUrl}" style="height: 100%; border-radius: 8px;">
                         </div>
                         <div class="noticeInfoCommentTxtWrap">
                             <p class="noticeInfoCommentWrite" th:text="${list.name}">김요한</p>
@@ -48,11 +48,19 @@
                 </div>
 
 
+                <form id="commentForm" action="/community/notice-comment-write" method="POST">
+                    <div class="commentWriteInputWrap">
+                        <input type="text" class="commentWriteInput" placeholder="댓글을 입력하세요." name="comment">
+                        <input type="hidden" name="communityIdx" th:value="${dedail.communityIdx}">
+                        <img id="commentSubmitBtn" src="/img/icon_send@2x.png" alt="수정아이콘" class="commentSubmitBtn">
+                    </div>
+                </form>
 
-                <div class="commentWriteInputWrap">
-                    <input type="text" class="commentWriteInput" placeholder="댓글을 입력하세요.">
-                    <img th:src="@{/img/icon_send@2x.png}" alt="수정아이콘" class="commentSubmitBtn">
-                </div>
+                <script>
+                    document.getElementById('commentSubmitBtn').addEventListener('click', function() {
+                        document.getElementById('commentForm').submit();
+                    });
+                </script>
             </div>
         </div>
     </div>

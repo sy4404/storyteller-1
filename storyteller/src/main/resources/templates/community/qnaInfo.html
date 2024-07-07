@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/include/head.html :: fragment-head}"></head>
+<link th:href="@{/css/community/community.css}" rel="stylesheet" type="text/css" />
 <body>
-qnaInfo
+<div class="mainPageBody">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
+        </div>
+        <h1>공지사항</h1>
+    </div>
+    <div class="py-20">
+        <div>
+            <div class="noticeInfoTitleWrap">
+                <p class="noticeInfoTitle" th:text="${dedail.title}">출석 오류에 관한 공지사항</p>
+                <div class="noticeInfoEditBtnWrap">
+                    <div class="noticeInfoEditTxt">
+                        수정
+                        <img th:src="@{/img/icon_edit@2x.png}" alt="수정아이콘" class="noticeInfoEditIcon">
+                    </div>
+                </div>
+            </div>
+            <div class="noticeInfoWriteInfo">
+                <span class="noticeInfoWriter">관리자</span>
+                <span th:text="${#temporals.format(#temporals.createDate(dedail.createdAt, 'yyyy-MM-dd HH:mm:ss'), 'yyyy.MM.dd')}">24.04.01</span>
+            </div>
+            <div class="noticeInfoBorderTop"></div>
+            <div class="noticeInfoContent" th:utext="${dedail.content}">
+                sdkfjlskdjf
+            </div>
+            <div class="noticeInfoBorderTop"></div>
+            <div class="noticeInfoCommentWrap">
+                <p class="noticeInfoCommentCount">댓글 <span th:text="${commentCount}"></span>개</p>
+
+                <div class="noticeInfoCommentContentWrap" th:each="list : ${lists}">
+                    <div class="noticeInfoCommentContentWrap2">
+                        <div>
+                            <img th:src="@{/img/profile_img1@2x.png}">
+                        </div>
+                        <div class="noticeInfoCommentTxtWrap">
+                            <p class="noticeInfoCommentWrite" th:text="${list.name}">김요한</p>
+                            <p class="noticeInfoCommentContent" th:text="${list.comment}">정보 감사합니다.</p>
+                        </div>
+                    </div>
+                    <div class="commentDeleteIcon">
+                        <img th:src="@{/img/icon_delete@2x.png}" alt="수정아이콘" class="commentDeleteIconImg">
+                    </div>
+                </div>
+
+
+
+                <div class="commentWriteInputWrap">
+                    <input type="text" class="commentWriteInput" placeholder="댓글을 입력하세요.">
+                    <img th:src="@{/img/icon_send@2x.png}" alt="수정아이콘" class="commentSubmitBtn">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
+
 </html>

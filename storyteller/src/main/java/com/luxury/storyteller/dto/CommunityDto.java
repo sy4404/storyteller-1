@@ -7,8 +7,11 @@ public class CommunityDto {
     private int communityIdx;
     private String title;
     private String content;
-    private String userIdx;
+    private int userIdx;
     private int deleted;
     private int disclosure;
     private String createdAt;
+    private int division;
+
+    private String name;
 }

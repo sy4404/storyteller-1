@@ -2,6 +2,7 @@ package com.luxury.storyteller.mapper;
 
 import com.luxury.storyteller.dto.CommentDto;
 import com.luxury.storyteller.dto.CommunityDto;
+import com.luxury.storyteller.dto.CommunityImgDto;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,4 +28,10 @@ public interface CommunityMapper {
      * 댓글 목록
      */
     List<CommentDto> findCommunityCommentByCommunityIdx(int communityIdx);
+
+    int createQna(CommunityDto communityDto);
+
+    int createImgQna(CommunityImgDto communityImgDto);
+
+    int createComment(CommentDto commentDto);
 }

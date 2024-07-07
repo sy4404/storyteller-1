@@ -178,9 +178,46 @@ public class AdminController {
      */
     @GetMapping("/qna")
     public String adminQna(Model model) {
+        List<CommunityDto> list = communityService.findCommunityQnAListAll();
+        model.addAttribute("lists", list);
         return "admin/qna";
     }
 
+    /**
+     * 공지사항 등록 페이지
+     */
+    @GetMapping("/qna-write")
+    public String adminqnaWrite(Model model) {
+        return "admin/qnaWrite";
+    }
+
+    /**
+     * 공지사항 수정 페이지
+     */
+    @GetMapping("/qna-edit/{communityIdx}")
+    public String qnaEdit(@PathVariable int communityIdx, Model model) {
+        CommunityDto detail = communityService.findCommunityByCommunityIdx(communityIdx);
+        model.addAttribute("detail", detail);
+        return "admin/qnaEdit";
+    }
+
+    /**
+     * 공지사항 수정
+     */
+    @PostMapping("/qna-edit")
+    public String qnaPostEdit(CommunityDto communityDto, Model model) {
+        communityService.modifyCommunity(communityDto);
+        return "redirect:/admin/qna";
+    }
+
+    /**
+     * 공지사항 등록
+     */
+    @PostMapping("/qna-write")
+    public String adminqnaPostWrite(CommunityDto communityDto) {
+        communityService.createCommunity(communityDto);
+        return "redirect:/admin/qna";
+    }
     /**
      * 교재관리
      */

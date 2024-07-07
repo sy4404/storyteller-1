@@ -82,4 +82,8 @@
         SELECT * FROM user WHERE id = #{id} AND name = #{name} AND phone_number = #{phoneNumber};
     </select>
 
+    <delete id="deleteLecture" parameterType="int">
+        DELETE FROM lecture WHERE lecture_idx = #{lectureIdx}
+    </delete>
+
 </mapper>

@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class AttendanceDto {
-    private int attendanceIdx;
+    private Long attendanceIdx;
     private String result;
     private String createdAt;
 

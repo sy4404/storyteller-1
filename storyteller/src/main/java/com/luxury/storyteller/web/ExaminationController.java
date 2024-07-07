@@ -91,6 +91,5 @@ public class ExaminationController {
         private String examinationIdx;
         private int question;
 
-        // Getter와 Setter는 생략됨 (필요 시 추가)
     }
 }

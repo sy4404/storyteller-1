@@ -215,6 +215,14 @@ input::placeholder {
     padding: 0px 20px;
 }
 
+.formWrap textarea{
+    width: 100%;
+    padding: 15px;
+    background-color: #F5F5F5;
+    border-radius: 8px;
+    border: 0px;
+    height: 280px;
+}
 .formWrap label{
     font-size: 13px;
     margin-bottom: 0px;

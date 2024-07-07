@@ -19,40 +19,34 @@
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">QnA</h1>
-
-                    <!-- DataTales Example -->
-                    <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">QnA</h6>
-                        </div>
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                                    <thead>
-                                        <tr>
-                                            <th>NO</th>
-                                            <th>제목</th>
-                                            <th>작성자</th>
-                                            <th>작성일</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>2024-12-12 12:12:12</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3 d-flex align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">QnA 목록</h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" id="dataTable" width="100%" cellspacing="0" >
+                                <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>작성일</th>
+                                    <th>삭제</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="item, list : ${lists}"  style="cursor: pointer">
+                                    <td th:text="${list.count}" th:onclick="|location.href='/admin/notice-edit/${item.communityIdx}'|">1</td>
+                                    <td th:text="${item.title}" th:onclick="|location.href='/admin/notice-edit/${item.communityIdx}'|">System Architect</td>
+                                    <td th:onclick="|location.href='/admin/notice-edit/${item.communityIdx}'|" th:text="${item.name}">관리자</td>
+                                    <td th:text="${#temporals.format(#temporals.createDate(item.createdAt, 'yyyy-MM-dd HH:mm:ss'), 'yyyy.MM.dd')}" th:onclick="|location.href='/admin/notice-edit/${item.communityIdx}'|">2024-12-12 12:12:12</td>
+                                    <td><button type="button" class="btn btn-danger btn-sm" th:onclick="deleteBtn([[${item.userIdx}]])">삭제</button></td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
                 </div>
                 <!-- /.container-fluid -->
 

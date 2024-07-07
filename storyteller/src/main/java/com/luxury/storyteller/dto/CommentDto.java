@@ -14,4 +14,6 @@ public class CommentDto {
     private String name;
     private String communityCommentIdx;
     private String comment;
+    private int userIdx;
+    private String profileUrl;
 }

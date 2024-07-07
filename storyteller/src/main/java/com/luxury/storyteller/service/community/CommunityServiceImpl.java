@@ -2,6 +2,7 @@ package com.luxury.storyteller.service.community;
 
 import com.luxury.storyteller.dto.CommentDto;
 import com.luxury.storyteller.dto.CommunityDto;
+import com.luxury.storyteller.dto.CommunityImgDto;
 import com.luxury.storyteller.mapper.CommunityMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -52,5 +53,20 @@ public class CommunityServiceImpl implements CommunityService{
     @Override
     public List<CommentDto> findCommunityCommentByCommunityIdx(int communityIdx) {
         return communityMapper.findCommunityCommentByCommunityIdx(communityIdx);
+    }
+
+    @Override
+    public int createQna(CommunityDto communityDto) {
+        return communityMapper.createQna(communityDto);
+    }
+
+    @Override
+    public int createImgQna(CommunityImgDto communityImgDto) {
+        return communityMapper.createImgQna(communityImgDto);
+    }
+
+    @Override
+    public int createComment(CommentDto commentDto) {
+        return communityMapper.createComment(commentDto);
     }
 }

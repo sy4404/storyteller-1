@@ -43,7 +43,9 @@
     </select>
 
     <select id="findCommunityQnAListAll" resultType="com.luxury.storyteller.dto.CommunityDto">
-        SELECT * FROM community WHERE deleted = 0 AND division = 1 ORDER BY created_at DESC;
+        SELECT * FROM community
+        LEFT JOIN user ON community.user_idx = user.user_idx
+        WHERE deleted = 0 AND division = 1 ORDER BY created_at DESC;
     </select>
 
     <select id="findCommunityCommentByCommunityIdx" resultType="com.luxury.storyteller.dto.CommentDto"  parameterType="int">
@@ -57,4 +59,31 @@
             AND community_comment.deleted = 0
         ORDER BY community_comment.created_at DESC
     </select>
+
+    <insert id="createQna" parameterType="com.luxury.storyteller.dto.CommunityDto">
+        <selectKey keyProperty="communityIdx" order="AFTER" resultType="int">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        INSERT INTO community (
+            title, content, user_idx, disclosure, division
+        ) VALUES (
+            #{title}, #{content}, #{userIdx}, #{disclosure}, #{division}
+        )
+    </insert>
+
+    <insert id="createImgQna" parameterType="com.luxury.storyteller.dto.CommunityImgDto">
+        INSERT INTO community_image (
+            community_idx, image_url
+        ) VALUES (
+            #{communityIdx}, #{imageUrl}
+        )
+    </insert>
+
+    <insert id="createComment" parameterType="com.luxury.storyteller.dto.CommentDto">
+        INSERT INTO community_comment (
+            user_idx, community_idx, comment
+        ) VALUES (
+            #{userIdx}, #{communityIdx}, #{comment}
+        )
+    </insert>
 </mapper>

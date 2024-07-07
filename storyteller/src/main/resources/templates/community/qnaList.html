@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head th:replace="~{/include/head.html :: fragment-head}"></head>
 <link th:href="@{/css/community/community.css}" rel="stylesheet" type="text/css" />
@@ -16,16 +17,17 @@
         </div>
     </div>
     <div class="contentWrap mt-4">
-        <h2>Q&N</h2>
-        <p>자유롭게 질문이 가능한 문의 게시판이에요.</p>
+        <h2>공지사항</h2>
+        <p>자유롭게 질문이 가능한 문의 게시판이예요.</p>
     </div>
 
     <div class="formWrap pb-5">
         <input type="text" class="" id="name" name="name" placeholder="검색">
 
-        <div class="communityWrap" th:each="list : ${lists}">
+        <div class="communityWrap" th:each="list : ${lists}" th:onclick="|location.href='/community/qna/${list.communityIdx}'|">
+            <!-- Iterate through list items -->
             <div class="firstLineWrap">
-                <p th:text="${list.title}" class="ellipsis communityTitle">
+                <p th:utext="'<span class=&quot;noticeLabel&quot;>공지</span>' + ${list.title}" class="ellipsis communityTitle">
                     출석 오류에 관한 공지사항
                 </p>
                 <p class="communityDate" th:text="${#temporals.format(#temporals.createDate(list.createdAt, 'yyyy-MM-dd HH:mm:ss'), 'yyyy.MM.dd')}">2024.04.01</p>
@@ -34,8 +36,15 @@
                 출석 오류 발생시 명품 이야기꾼 고객센터로 문의하세요
             </p>
         </div>
+
+    </div>
+    <div style="position: fixed;
+                bottom: 40px;
+                right: 20px;">
+        <img th:src="@{/img/bt_write.png}" class="" alt="돋보기">
     </div>
 </div>
+
 </body>
 
 </html>

@@ -1,0 +1,146 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{/include/head.html :: fragment-head}"></head>
+<link th:href="@{/css/community/community.css}" rel="stylesheet" type="text/css" />
+<style>
+    /* 라디오 버트 커스텀 */
+    input[type=radio]{
+        width: 0;
+        height: 0;
+        position: absolute;
+        left: -9999px;
+    }
+    input[type=radio] + label{
+        margin: 0;
+        width: 49%;
+        padding: 14px 0px;
+        box-sizing: border-box;
+        position: relative;
+        display: inline-block;
+        border: solid 1px #DFDFDF;
+        background-color: #FFF;
+        line-height: 140%;
+        text-align: center;
+        transition: border-color .15s ease-out,  color .25s ease-out,  background-color .15s ease-out, box-shadow .15s ease-out;
+        cursor: pointer;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #999999;
+    }
+    input[type=radio]:checked + label{
+        background-color: #4B3F24;
+        color: #fff;
+        border-color: #4B3F24;
+        z-index: 1;
+    }
+
+
+    .file-input-container {
+        position: relative;
+        width: 80px;
+        height: 80px;
+        min-width: 80px;
+        background-color: #F5F5F5;
+        border-radius: 10px;
+        text-align: center;
+        cursor: pointer;
+    }
+    .file-input-container input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        cursor: pointer;
+    }
+    .file-input-container .icon {
+        font-size: 50px;
+        color: #aaa;
+    }
+    .file-input-container .text {
+        font-size: 14px;
+        color: #666;
+    }
+    .preview-container {
+        white-space:nowrap;
+        overflow-y: scroll;
+    }
+    .preview-container img {
+        width: 80px;
+        height: 80px;
+        border-radius: 10px;
+        margin-right: 10px;
+    }
+
+</style>
+<body>
+<div class="mainPageBody">
+    <div class="header">
+        <div>
+            <img th:src="@{/img/icon_back-bt@2x.png}" class="headerBackBtn" alt="화살표" onclick="history.back()">
+        </div>
+        <h1>Q&A 등록</h1>
+    </div>
+
+    <div class="formWrap pb-5">
+        <form action="/community/qna-write" method="POST" enctype="multipart/form-data">
+            <div class="form-group mt-3">
+                <label for="title" style="color: #7A7A7A; font-weight: bold; margin-bottom: 5px">제목</label>
+                <input type="text" class="" id="title" name="title" placeholder="글 제목을 입력해 주세요." required>
+            </div>
+
+            <div class="form-group mt-3">
+                <label for="img" style="color: #7A7A7A; font-weight: bold; margin-bottom: 5px">이미지</label><br>
+                <div class="d-flex">
+                    <label class="file-input-container" style="margin-right: 10px">
+                        <input type="file" id="image-input" name="files" multiple>
+                        <img src="/img/icon_add_photo.png" class="resultImg" alt="돋보기" style="margin-top: 16px">
+                        <div class="text">사진 추가</div>
+                    </label>
+                    <div class="preview-container" id="preview-container"></div>
+                </div>
+            </div>
+
+            <script>
+                document.getElementById('image-input').addEventListener('change', function(event) {
+                    const files = event.target.files;
+                    const previewContainer = document.getElementById('preview-container');
+                    previewContainer.innerHTML = '';  // 기존 이미지를 지워서 새 이미지를 추가할 수 있도록 초기화
+
+                    Array.from(files).forEach((file, index) => {
+                        const reader = new FileReader();
+
+                        reader.onload = function(e) {
+                            const img = document.createElement('img');
+                            img.src = e.target.result;
+                            img.setAttribute('data-index', index);  // 각 이미지를 식별할 수 있도록 data-index 속성 추가
+                            previewContainer.appendChild(img);
+                        };
+
+                        reader.readAsDataURL(file);
+                    });
+                });
+            </script>
+
+
+            <div class="form-group mt-3">
+                <label style="color: #7A7A7A; font-weight: bold; margin-bottom: 5px">공개여부</label><br>
+
+                <input type="radio" id="option1" value="0" name="disclosure" checked>
+                <label for="option1">전체 공개</label>
+                <input type="radio" id="option2" name="disclosure" value="1">
+                <label for="option2" >비공개</label>
+            </div>
+            <input type="hidden" name="division" value="1">
+            <div class="form-group mt-3">
+                <label for="content" style="color: #7A7A7A; font-weight: bold; margin-bottom: 5px">내용</label>
+                <textarea type="text" class="" id="content" name="content" placeholder="글 내용을 입력해 주세요." required></textarea>
+            </div>
+            <input type='submit' class="submitBtn mt-1" value="등록">
+        </form>
+    </div>
+
+</div>
+
+</body>
+
+</html>
